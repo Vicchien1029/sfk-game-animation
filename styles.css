@@ -314,6 +314,54 @@ img { display: block; max-width: 100%; }
     background: var(--orange);
 }
 
+/* 维度切换按钮 */
+.results-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+}
+
+.results-tab {
+    padding: 10px 20px;
+    border: 1px solid var(--gray-700);
+    border-radius: var(--radius-full);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--gray-400);
+    background: transparent;
+    cursor: pointer;
+    transition: all .25s var(--ease);
+    font-family: var(--font);
+}
+
+.results-tab:hover {
+    border-color: var(--orange);
+    color: var(--white);
+}
+
+.results-tab.active {
+    background: var(--orange);
+    color: var(--white);
+    border-color: var(--orange);
+}
+
+.tab-count {
+    font-size: 12px;
+    opacity: 0.8;
+}
+
+/* 录取面板 */
+.results-panel {
+    display: none;
+    animation: fadeIn .3s var(--ease);
+}
+
+.results-panel.active {
+    display: block;
+}
+
 .results-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -321,7 +369,7 @@ img { display: block; max-width: 100%; }
 }
 
 .result-card {
-    background: var(--dark);
+    background: var(--black);
     border: 1px solid var(--gray-800);
     border-radius: var(--radius-lg);
     padding: 22px 18px;
@@ -1241,6 +1289,20 @@ img { display: block; max-width: 100%; }
     .major-card:hover {
         flex: 1;
         height: 320px;
+    }
+
+    .results-tabs {
+        gap: 8px;
+    }
+
+    .results-tab {
+        padding: 8px 14px;
+        font-size: 13px;
+    }
+
+    .results-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
     }
 
     .video-tab {

@@ -66,46 +66,77 @@
                 <h2 class="section-title">26申请季 · 院校录取亮点</h2>
                 <div class="title-line"></div>
             </div>
-            <div class="results-grid">
-                <div class="result-card">
-                    <div class="result-school">CalArts</div>
-                    <div class="result-count"><span class="rc-num" data-target="11">0</span><span class="rc-unit">枚</span></div>
-                    <div class="result-tag">加州艺术学院</div>
+            <!-- 维度切换按钮 -->
+            <div class="results-tabs">
+                <button class="results-tab active" data-tab="uk-undergrad">英本 <span class="tab-count">525枚</span></button>
+                <button class="results-tab" data-tab="us-undergrad">美本 <span class="tab-count">366枚</span></button>
+                <button class="results-tab" data-tab="uk-grad">英研 <span class="tab-count">617枚</span></button>
+                <button class="results-tab" data-tab="us-grad">美研 <span class="tab-count">181枚</span></button>
+                <button class="results-tab" data-tab="other">其他 <span class="tab-count">158枚</span></button>
+            </div>
+            <!-- 英本 -->
+            <div class="results-panel active" id="panel-uk-undergrad">
+                <div class="results-grid">
+                    <div class="result-card"><div class="result-school">提赛德大学</div><div class="result-count"><span class="rc-num">109</span><span class="rc-unit">枚</span></div><div class="result-tag">Teesside</div></div>
+                    <div class="result-card"><div class="result-school">伦艺-LCC</div><div class="result-count"><span class="rc-num">88</span><span class="rc-unit">枚</span></div><div class="result-tag">伦敦传媒学院</div></div>
+                    <div class="result-card"><div class="result-school">伯恩茅斯大学</div><div class="result-count"><span class="rc-num">63</span><span class="rc-unit">枚</span></div><div class="result-tag">Bournemouth</div></div>
+                    <div class="result-card"><div class="result-school">伦艺-温布尔登</div><div class="result-count"><span class="rc-num">56</span><span class="rc-unit">枚</span></div><div class="result-tag">Wimbledon</div></div>
+                    <div class="result-card"><div class="result-school">金史密斯学院</div><div class="result-count"><span class="rc-num">29</span><span class="rc-unit">枚</span></div><div class="result-tag">Goldsmiths</div></div>
+                    <div class="result-card"><div class="result-school">赫特福德大学</div><div class="result-count"><span class="rc-num">29</span><span class="rc-unit">枚</span></div><div class="result-tag">Hertfordshire</div></div>
+                    <div class="result-card"><div class="result-school">金斯顿大学</div><div class="result-count"><span class="rc-num">19</span><span class="rc-unit">枚</span></div><div class="result-tag">Kingston</div></div>
+                    <div class="result-card"><div class="result-school">UCL</div><div class="result-count"><span class="rc-num">18</span><span class="rc-unit">枚</span></div><div class="result-tag">伦敦大学学院</div></div>
                 </div>
-                <div class="result-card">
-                    <div class="result-school">NYU</div>
-                    <div class="result-count"><span class="rc-num" data-target="29">0</span><span class="rc-unit">枚</span></div>
-                    <div class="result-tag">纽约大学</div>
+            </div>
+            <!-- 美本 -->
+            <div class="results-panel" id="panel-us-undergrad">
+                <div class="results-grid">
+                    <div class="result-card"><div class="result-school">ACCD</div><div class="result-count"><span class="rc-num">43</span><span class="rc-unit">枚</span></div><div class="result-tag">艺术中心设计学院</div></div>
+                    <div class="result-card"><div class="result-school">SCAD</div><div class="result-count"><span class="rc-num">41</span><span class="rc-unit">枚</span></div><div class="result-tag">萨凡纳艺术与设计学院</div></div>
+                    <div class="result-card"><div class="result-school">Ringling</div><div class="result-count"><span class="rc-num">35</span><span class="rc-unit">枚</span></div><div class="result-tag">瑞林艺术设计学院</div></div>
+                    <div class="result-card"><div class="result-school">犹他大学</div><div class="result-count"><span class="rc-num">26</span><span class="rc-unit">枚</span></div><div class="result-tag">University of Utah</div></div>
+                    <div class="result-card"><div class="result-school">USC</div><div class="result-count"><span class="rc-num">22</span><span class="rc-unit">枚</span></div><div class="result-tag">南加州大学</div></div>
+                    <div class="result-card"><div class="result-school">SVA</div><div class="result-count"><span class="rc-num">21</span><span class="rc-unit">枚</span></div><div class="result-tag">纽约视觉艺术学院</div></div>
+                    <div class="result-card"><div class="result-school">RIT</div><div class="result-count"><span class="rc-num">18</span><span class="rc-unit">枚</span></div><div class="result-tag">罗彻斯特理工大学</div></div>
+                    <div class="result-card"><div class="result-school">Pratt</div><div class="result-count"><span class="rc-num">15</span><span class="rc-unit">枚</span></div><div class="result-tag">普瑞特艺术学院</div></div>
                 </div>
-                <div class="result-card">
-                    <div class="result-school">USC</div>
-                    <div class="result-count"><span class="rc-num" data-target="27">0</span><span class="rc-unit">枚</span></div>
-                    <div class="result-tag">南加州大学</div>
+            </div>
+            <!-- 英研 -->
+            <div class="results-panel" id="panel-uk-grad">
+                <div class="results-grid">
+                    <div class="result-card"><div class="result-school">提赛德大学</div><div class="result-count"><span class="rc-num">106</span><span class="rc-unit">枚</span></div><div class="result-tag">Teesside</div></div>
+                    <div class="result-card"><div class="result-school">金史密斯学院</div><div class="result-count"><span class="rc-num">86</span><span class="rc-unit">枚</span></div><div class="result-tag">Goldsmiths</div></div>
+                    <div class="result-card"><div class="result-school">金斯顿大学</div><div class="result-count"><span class="rc-num">78</span><span class="rc-unit">枚</span></div><div class="result-tag">Kingston</div></div>
+                    <div class="result-card"><div class="result-school">伦艺-LCC</div><div class="result-count"><span class="rc-num">73</span><span class="rc-unit">枚</span></div><div class="result-tag">伦敦传媒学院</div></div>
+                    <div class="result-card"><div class="result-school">伦艺-CSM</div><div class="result-count"><span class="rc-num">39</span><span class="rc-unit">枚</span></div><div class="result-tag">中央圣马丁</div></div>
+                    <div class="result-card"><div class="result-school">RCA</div><div class="result-count"><span class="rc-num">39</span><span class="rc-unit">枚</span></div><div class="result-tag">皇家艺术学院</div></div>
+                    <div class="result-card"><div class="result-school">伯恩茅斯大学</div><div class="result-count"><span class="rc-num">36</span><span class="rc-unit">枚</span></div><div class="result-tag">Bournemouth</div></div>
+                    <div class="result-card"><div class="result-school">格拉斯哥艺术学院</div><div class="result-count"><span class="rc-num">31</span><span class="rc-unit">枚</span></div><div class="result-tag">GSA</div></div>
                 </div>
-                <div class="result-card">
-                    <div class="result-school">CMU</div>
-                    <div class="result-count"><span class="rc-num" data-target="7">0</span><span class="rc-unit">枚</span></div>
-                    <div class="result-tag">卡内基梅隆大学</div>
+            </div>
+            <!-- 美研 -->
+            <div class="results-panel" id="panel-us-grad">
+                <div class="results-grid">
+                    <div class="result-card"><div class="result-school">SCAD</div><div class="result-count"><span class="rc-num">29</span><span class="rc-unit">枚</span></div><div class="result-tag">萨凡纳艺术与设计学院</div></div>
+                    <div class="result-card"><div class="result-school">东北大学</div><div class="result-count"><span class="rc-num">24</span><span class="rc-unit">枚</span></div><div class="result-tag">Northeastern</div></div>
+                    <div class="result-card"><div class="result-school">SMU</div><div class="result-count"><span class="rc-num">22</span><span class="rc-unit">枚</span></div><div class="result-tag">南卫理公会大学</div></div>
+                    <div class="result-card"><div class="result-school">NYU</div><div class="result-count"><span class="rc-num">22</span><span class="rc-unit">枚</span></div><div class="result-tag">纽约大学</div></div>
+                    <div class="result-card"><div class="result-school">RIT</div><div class="result-count"><span class="rc-num">15</span><span class="rc-unit">枚</span></div><div class="result-tag">罗彻斯特理工大学</div></div>
+                    <div class="result-card"><div class="result-school">SVA</div><div class="result-count"><span class="rc-num">11</span><span class="rc-unit">枚</span></div><div class="result-tag">纽约视觉艺术学院</div></div>
+                    <div class="result-card"><div class="result-school">犹他大学</div><div class="result-count"><span class="rc-num">10</span><span class="rc-unit">枚</span></div><div class="result-tag">University of Utah</div></div>
+                    <div class="result-card"><div class="result-school">USC</div><div class="result-count"><span class="rc-num">9</span><span class="rc-unit">枚</span></div><div class="result-tag">南加州大学</div></div>
                 </div>
-                <div class="result-card">
-                    <div class="result-school">NTU</div>
-                    <div class="result-count"><span class="rc-num" data-target="5">0</span><span class="rc-unit">枚</span></div>
-                    <div class="result-tag">南洋理工大学</div>
-                </div>
-                <div class="result-card">
-                    <div class="result-school">京都精華</div>
-                    <div class="result-count"><span class="rc-num" data-target="16">0</span><span class="rc-unit">枚</span></div>
-                    <div class="result-tag">京都精华大学</div>
-                </div>
-                <div class="result-card result-card-wide">
-                    <div class="result-school">RCA</div>
-                    <div class="result-count"><span class="rc-num" data-target="40">0</span><span class="rc-unit">枚+</span></div>
-                    <div class="result-tag">皇家艺术学院</div>
-                </div>
-                <div class="result-card result-card-wide">
-                    <div class="result-school">UAL</div>
-                    <div class="result-count"><span class="rc-num" data-target="240">0</span><span class="rc-unit">枚+</span></div>
-                    <div class="result-tag">伦敦艺术大学</div>
+            </div>
+            <!-- 其他 -->
+            <div class="results-panel" id="panel-other">
+                <div class="results-grid">
+                    <div class="result-card"><div class="result-school">谢尔丹学院</div><div class="result-count"><span class="rc-num">18</span><span class="rc-unit">枚</span></div><div class="result-tag">Sheridan</div></div>
+                    <div class="result-card"><div class="result-school">OCAD</div><div class="result-count"><span class="rc-num">15</span><span class="rc-unit">枚</span></div><div class="result-tag">安大略艺术设计学院</div></div>
+                    <div class="result-card"><div class="result-school">RMIT</div><div class="result-count"><span class="rc-num">14</span><span class="rc-unit">枚</span></div><div class="result-tag">皇家墨尔本理工大学</div></div>
+                    <div class="result-card"><div class="result-school">艾米丽卡尔</div><div class="result-count"><span class="rc-num">9</span><span class="rc-unit">枚</span></div><div class="result-tag">Emily Carr</div></div>
+                    <div class="result-card"><div class="result-school">悉尼科技大学</div><div class="result-count"><span class="rc-num">6</span><span class="rc-unit">枚</span></div><div class="result-tag">UTS</div></div>
+                    <div class="result-card"><div class="result-school">NTU</div><div class="result-count"><span class="rc-num">6</span><span class="rc-unit">枚</span></div><div class="result-tag">南洋理工大学</div></div>
+                    <div class="result-card"><div class="result-school">阿德莱德大学</div><div class="result-count"><span class="rc-num">5</span><span class="rc-unit">枚</span></div><div class="result-tag">Adelaide</div></div>
+                    <div class="result-card"><div class="result-school">香港理工大学</div><div class="result-count"><span class="rc-num">5</span><span class="rc-unit">枚</span></div><div class="result-tag">PolyU</div></div>
                 </div>
             </div>
         </div>

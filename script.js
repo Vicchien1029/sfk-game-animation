@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initCounterAnimation();
     initCaseTabs();
     initDataTabs();
+    initResultsTabs();
     initBackToTop();
     initExternalLinks();
     initPosterCarousel();
@@ -133,7 +134,33 @@ function initCaseTabs() {
     });
 }
 
-/* ---------- 录取数据Tab切换 ---------- */
+/* ---------- 录取亮点维度切换 ---------- */
+function initResultsTabs() {
+    const tabs = document.querySelectorAll('.results-tab');
+    const panels = document.querySelectorAll('.results-panel');
+    
+    if (tabs.length === 0) return;
+    
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            const targetTab = tab.dataset.tab;
+            
+            // 更新按钮状态
+            tabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            
+            // 更新面板显示
+            panels.forEach(panel => {
+                panel.classList.remove('active');
+                if (panel.id === `panel-${targetTab}`) {
+                    panel.classList.add('active');
+                }
+            });
+        });
+    });
+}
+
+/* ---------- 数据Tab切换 ---------- */
 function initDataTabs() {
     const tabs = document.querySelectorAll('.data-tab');
     const panels = document.querySelectorAll('.data-panel');
