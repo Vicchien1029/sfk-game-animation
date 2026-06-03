@@ -817,76 +817,87 @@ img { display: block; max-width: 100%; }
     background: var(--orange);
 }
 
-.data-tabs {
+/* ---------- 录取数据 - 顶部按钮 ---------- */
+.data-tabs-wrapper {
     display: flex;
-    gap: 8px;
+    gap: 16px;
     justify-content: center;
-    margin-bottom: 40px;
-}
-
-.data-tab {
-    padding: 12px 28px;
-    border: 1px solid var(--gray-700);
-    border-radius: var(--radius-full);
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--gray-400);
-    background: var(--dark);
-    cursor: pointer;
-    transition: all .25s var(--ease);
-    font-family: var(--font);
-}
-
-.data-tab:hover {
-    border-color: var(--orange);
-    color: var(--white);
-}
-
-.data-tab.active {
-    background: var(--orange);
-    color: var(--white);
-    border-color: var(--orange);
-}
-
-.data-panel {
-    display: none;
-    animation: fadeInUp .4s var(--ease);
-}
-
-.data-panel.active { display: block; }
-
-.data-summary {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-    margin-bottom: 32px;
-}
-
-.data-stat {
-    background: var(--dark);
-    border: 1px solid var(--gray-800);
-    border-radius: var(--radius-lg);
-    padding: 32px 24px;
-    text-align: center;
-}
-
-.ds-num {
-    display: block;
-    font-size: 42px;
-    font-weight: 900;
-    color: var(--orange);
-    line-height: 1;
+    margin-top: 32px;
     margin-bottom: 8px;
 }
 
-.ds-label {
-    font-size: 14px;
+.data-tab-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 16px 36px;
+    font-size: 15px;
+    font-weight: 600;
     color: var(--gray-400);
+    background: linear-gradient(135deg, var(--gray-900) 0%, var(--gray-800) 100%);
+    border: 1px solid var(--gray-700);
+    border-radius: var(--radius-lg);
+    text-decoration: none;
+    transition: all .35s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.data-tab-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,79,0,.15) 0%, rgba(255,79,0,.05) 100%);
+    opacity: 0;
+    transition: opacity .35s ease;
+}
+
+.data-tab-btn:hover::before,
+.data-tab-btn.active::before {
+    opacity: 1;
+}
+
+.data-tab-btn:hover,
+.data-tab-btn.active {
+    color: var(--white);
+    border-color: rgba(255,79,0,.5);
+    box-shadow: 0 4px 20px rgba(255,79,0,.15);
+    transform: translateY(-2px);
+}
+
+.data-tab-btn .dtb-text {
+    position: relative;
+    z-index: 1;
+}
+
+.data-tab-btn .dtb-arrow {
+    position: relative;
+    z-index: 1;
+    font-size: 13px;
+    color: var(--gray-500);
+    transition: color .3s ease, transform .3s ease;
+}
+
+.data-tab-btn:hover .dtb-arrow,
+.data-tab-btn.active .dtb-arrow {
+    color: var(--orange);
+    transform: translateX(3px);
+}
+
+/* ---------- 录取数据 - 内容面板 ---------- */
+.data-content {
+    display: none;
+    margin-top: 24px;
+}
+
+.data-content.active {
+    display: block;
 }
 
 /* ---------- 26F 悬停数据卡片 ---------- */
 .data-hover-card {
-    margin-top: 24px;
     padding: 24px 28px;
     background: linear-gradient(135deg, rgba(255,79,0,.08) 0%, rgba(255,79,0,.03) 100%);
     border: 1px solid rgba(255,79,0,.2);
@@ -899,11 +910,10 @@ img { display: block; max-width: 100%; }
     padding: 0 28px;
 }
 
-.data-panel.active:hover .data-hover-card,
-.data-panel.active .data-hover-card.show {
+.data-hover-card.show {
     opacity: 1;
     max-height: 300px;
-    margin-top: 24px;
+    margin-top: 0;
     padding: 24px 28px;
 }
 

@@ -160,22 +160,32 @@ function initResultsTabs() {
     });
 }
 
-/* ---------- 数据Tab切换 ---------- */
+/* ---------- 数据Tab切换（悬停） ---------- */
 function initDataTabs() {
-    const tabs = document.querySelectorAll('.data-tab');
-    const panels = document.querySelectorAll('.data-panel');
+    const tabs = document.querySelectorAll('.data-tab-btn');
+    const contents = document.querySelectorAll('.data-content');
 
     tabs.forEach(tab => {
-        tab.addEventListener('click', () => {
+        tab.addEventListener('mouseenter', () => {
             const target = tab.dataset.tab;
 
             tabs.forEach(t => t.classList.remove('active'));
             tab.classList.add('active');
 
-            panels.forEach(p => {
-                p.classList.remove('active');
-                if (p.id === `tab-${target}`) {
-                    p.classList.add('active');
+            contents.forEach(c => {
+                c.classList.remove('active');
+                if (c.id === `tab-${target}`) {
+                    c.classList.add('active');
+                    // 触发内部数据卡片动画
+                    const card = c.querySelector('.data-hover-card');
+                    if (card) {
+                        card.classList.remove('show');
+                        requestAnimationFrame(() => {
+                            requestAnimationFrame(() => {
+                                card.classList.add('show');
+                            });
+                        });
+                    }
                 }
             });
         });
