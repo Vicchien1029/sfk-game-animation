@@ -153,7 +153,7 @@ select:focus,.btn:focus{outline:none;border-color:var(--brand)}
   <main class="main">
     <section class="timelineWrap">
       <!-- Y1 -->
-      <div class="yearBlock" data-path="all ug">
+      <div class="yearBlock" data-path="all ug" data-year="y1">
         <div class="yearHead"><div><div class="yearTitle">大一｜认知建立与专业基础启动</div><div class="yearDesc">重点：方向认知、基础能力、项目归档习惯</div></div></div>
         <div class="monthNums">
           <div class="label">月份</div>
@@ -194,7 +194,7 @@ select:focus,.btn:focus{outline:none;border-color:var(--brand)}
         </div>
       </div>
       <!-- Y2 -->
-      <div class="yearBlock" data-path="all ug">
+      <div class="yearBlock" data-path="all ug" data-year="y2">
         <div class="yearHead"><div><div class="yearTitle">大二｜方向确认与第一段行业经历</div><div class="yearDesc">重点：商业实践、作品集项目、大二暑假第一段实习</div></div></div>
         <div class="monthNums">
           <div class="label">月份</div>
@@ -236,7 +236,7 @@ select:focus,.btn:focus{outline:none;border-color:var(--brand)}
         </div>
       </div>
       <!-- Y3 -->
-      <div class="yearBlock" data-path="all ug">
+      <div class="yearBlock" data-path="all ug" data-year="y3">
         <div class="yearHead"><div><div class="yearTitle">大三｜研究生申请递交与求职作品集转译</div><div class="yearDesc">重点：大三秋季递交研究生申请；本科毕业前完成求职作品集基础版</div></div></div>
         <div class="monthNums">
           <div class="label">月份</div>
@@ -277,7 +277,7 @@ select:focus,.btn:focus{outline:none;border-color:var(--brand)}
         </div>
       </div>
       <!-- M1 -->
-      <div class="yearBlock" data-path="all master">
+      <div class="yearBlock" data-path="all master" data-year="m1">
         <div class="yearHead"><div><div class="yearTitle">一年制硕士｜秋招主战场与春招补录</div><div class="yearDesc">重点：开学即秋招；求职节奏必须早于课程节奏</div></div></div>
         <div class="monthNums">
           <div class="label">月份</div>
@@ -336,17 +336,27 @@ const recs={
   y3:'当前重点：申研递交、毕业衔接，以及把项目转译为求职作品集基础版。',
   m1:'当前重点：以秋招为中心组织整个硕士学年的学习和求职节奏。'
 };
+// 年级顺序映射：当前阶段 → 应显示的起始年级
+const yearOrder=['y1','y2','y3','m1'];
+const entryStartYear={y1:'y1',y2:'y2',y3:'y3',m1:'y3'};
 function renderSummary(){document.getElementById('summary').innerHTML=recs[document.getElementById('entry').value];}
 function applyFilters(){
   const active=[...document.querySelectorAll('.chip.active')].map(n=>n.dataset.filter);
   document.querySelectorAll('.lane').forEach(lane=>{lane.style.display=active.includes(lane.dataset.lane)?'grid':'none';});
   document.querySelectorAll('.bar').forEach(bar=>bar.classList.toggle('faded',!active.includes(bar.dataset.type)));
   const path=document.getElementById('path').value;
-  document.querySelectorAll('.yearBlock').forEach(block=>{const show=path==='all'||(block.dataset.path||'').includes(path);block.style.display=show?'block':'none';});
+  const entry=document.getElementById('entry').value;
+  const startIdx=yearOrder.indexOf(entryStartYear[entry]);
+  document.querySelectorAll('.yearBlock').forEach(block=>{
+    const year=block.dataset.year;
+    const pathOk=path==='all'||(block.dataset.path||'').includes(path);
+    const yearOk=!year||yearOrder.indexOf(year)>=startIdx;
+    block.style.display=(pathOk&&yearOk)?'block':'none';
+  });
 }
 function closeDrawer(){document.getElementById('drawer').classList.remove('show');}
 window.closeDrawer=closeDrawer;
-document.getElementById('entry').addEventListener('change',renderSummary);
+document.getElementById('entry').addEventListener('change',function(){renderSummary();applyFilters();});
 document.getElementById('path').addEventListener('change',applyFilters);
 document.querySelectorAll('.chip').forEach(chip=>chip.addEventListener('click',()=>{chip.classList.toggle('active');applyFilters();}));
 document.querySelectorAll('.bar').forEach(el=>el.addEventListener('click',()=>{
