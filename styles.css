@@ -1388,14 +1388,66 @@ img { display: block; max-width: 100%; }
     gap: 32px;
 }
 
-.footer-links a {
+/* 二维码弹窗 */
+.qr-trigger {
+    position: relative;
+    cursor: pointer;
+}
+
+.qr-link {
     font-size: 14px;
     color: var(--gray-500);
     transition: color .2s var(--ease);
 }
 
-.footer-links a:hover {
+.qr-trigger:hover .qr-link {
     color: var(--orange);
+}
+
+.qr-popup {
+    position: absolute;
+    bottom: calc(100% + 12px);
+    left: 50%;
+    transform: translateX(-50%) scale(0.9);
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    padding: 12px;
+    box-shadow: var(--shadow-xl);
+    opacity: 0;
+    visibility: hidden;
+    transition: all .3s var(--ease);
+    z-index: 100;
+    width: 160px;
+    text-align: center;
+}
+
+.qr-popup::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: var(--white);
+}
+
+.qr-trigger:hover .qr-popup {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) scale(1);
+}
+
+.qr-popup img {
+    width: 120px;
+    height: 120px;
+    border-radius: var(--radius-sm);
+    margin-bottom: 8px;
+}
+
+.qr-popup p {
+    font-size: 12px;
+    color: var(--gray-700);
+    font-weight: 500;
 }
 
 .footer-bottom {
