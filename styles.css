@@ -884,6 +884,94 @@ img { display: block; max-width: 100%; }
     color: var(--gray-400);
 }
 
+/* ---------- 26F 悬停数据卡片 ---------- */
+.data-hover-card {
+    margin-top: 24px;
+    padding: 24px 28px;
+    background: linear-gradient(135deg, rgba(255,79,0,.08) 0%, rgba(255,79,0,.03) 100%);
+    border: 1px solid rgba(255,79,0,.2);
+    border-radius: var(--radius-lg);
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: opacity .4s ease, max-height .4s ease, margin .4s ease, padding .4s ease;
+    margin-top: 0;
+    padding: 0 28px;
+}
+
+.data-panel.active:hover .data-hover-card,
+.data-panel.active .data-hover-card.show {
+    opacity: 1;
+    max-height: 300px;
+    margin-top: 24px;
+    padding: 24px 28px;
+}
+
+.data-hover-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.data-hover-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--white);
+    background: var(--orange);
+    border-radius: 20px;
+    letter-spacing: .05em;
+}
+
+.data-hover-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--white);
+}
+
+.data-hover-stats {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+}
+
+.data-hover-stat {
+    text-align: center;
+    padding: 12px 8px;
+    background: rgba(255,255,255,.04);
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(255,255,255,.06);
+}
+
+.dhs-num {
+    display: block;
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--orange);
+    line-height: 1;
+    margin-bottom: 6px;
+}
+
+.dhs-label {
+    font-size: 12px;
+    color: var(--gray-400);
+    white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+    .data-hover-stats {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .data-hover-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
 /* ---------- 短期项目 - 海报轮播 (Coverflow) ---------- */
 .programs-section {
     background: var(--black);
