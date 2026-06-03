@@ -1411,14 +1411,15 @@ img { display: block; max-width: 100%; }
     transform: translateX(-50%) scale(0.9);
     background: var(--white);
     border-radius: var(--radius-lg);
-    padding: 12px;
+    padding: 16px;
     box-shadow: var(--shadow-xl);
     opacity: 0;
     visibility: hidden;
     transition: all .3s var(--ease);
     z-index: 100;
-    width: 160px;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .qr-popup::after {
@@ -1438,16 +1439,10 @@ img { display: block; max-width: 100%; }
 }
 
 .qr-popup img {
-    width: 120px;
-    height: 120px;
+    width: 130px;
+    height: 130px;
     border-radius: var(--radius-sm);
-    margin-bottom: 8px;
-}
-
-.qr-popup p {
-    font-size: 12px;
-    color: var(--gray-700);
-    font-weight: 500;
+    display: block;
 }
 
 .footer-bottom {
