@@ -1411,15 +1411,15 @@ img { display: block; max-width: 100%; }
     transform: translateX(-50%) scale(0.9);
     background: var(--white);
     border-radius: var(--radius-lg);
-    padding: 16px;
+    padding: 12px;
     box-shadow: var(--shadow-xl);
     opacity: 0;
     pointer-events: none;
     transition: all .3s var(--ease);
     z-index: 100;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    width: 154px;
+    height: 154px;
+    box-sizing: border-box;
 }
 
 .qr-popup::after {
