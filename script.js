@@ -292,7 +292,7 @@ function initPosterCarousel() {
     function updateSlides() {
         slides.forEach((slide, i) => {
             // 清除所有位置类
-            slide.classList.remove('active', 'prev', 'next', 'far-prev', 'far-next');
+            slide.classList.remove('active', 'prev', 'next', 'far-prev', 'far-next', 'extra-prev', 'extra-next');
 
             const diff = ((i - current) % total + total) % total;
 
@@ -306,10 +306,14 @@ function initPosterCarousel() {
                 slide.classList.add('far-next');
             } else if (diff === total - 2) {
                 slide.classList.add('far-prev');
+            } else if (diff === 3) {
+                slide.classList.add('extra-next');
+            } else if (diff === total - 3) {
+                slide.classList.add('extra-prev');
             } else {
                 slide.style.opacity = '0';
                 slide.style.pointerEvents = 'none';
-                slide.classList.remove('far-prev', 'far-next');
+                slide.classList.remove('far-prev', 'far-next', 'extra-prev', 'extra-next');
                 return;
             }
             // 清除内联样式（由else分支设置的）
