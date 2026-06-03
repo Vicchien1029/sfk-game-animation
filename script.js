@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initBackToTop();
     initExternalLinks();
     initPosterCarousel();
+    initJobCarousel();
     initVideoAutoplay();
 });
 
@@ -160,22 +161,32 @@ function initResultsTabs() {
     });
 }
 
-/* ---------- 数据Tab切换 ---------- */
+/* ---------- 数据Tab切换（悬停） ---------- */
 function initDataTabs() {
-    const tabs = document.querySelectorAll('.data-tab');
-    const panels = document.querySelectorAll('.data-panel');
+    const tabs = document.querySelectorAll('.data-tab-btn');
+    const contents = document.querySelectorAll('.data-content');
 
     tabs.forEach(tab => {
-        tab.addEventListener('click', () => {
+        tab.addEventListener('mouseenter', () => {
             const target = tab.dataset.tab;
 
             tabs.forEach(t => t.classList.remove('active'));
             tab.classList.add('active');
 
-            panels.forEach(p => {
-                p.classList.remove('active');
-                if (p.id === `tab-${target}`) {
-                    p.classList.add('active');
+            contents.forEach(c => {
+                c.classList.remove('active');
+                if (c.id === `tab-${target}`) {
+                    c.classList.add('active');
+                    // 触发内部数据卡片动画
+                    const card = c.querySelector('.data-hover-card');
+                    if (card) {
+                        card.classList.remove('show');
+                        requestAnimationFrame(() => {
+                            requestAnimationFrame(() => {
+                                card.classList.add('show');
+                            });
+                        });
+                    }
                 }
             });
         });
@@ -263,12 +274,13 @@ function showToast(message) {
     }, 3000);
 }
 
-/* ---------- 海报轮播 (Coverflow) ---------- */
-function initPosterCarousel() {
-    const track = document.getElementById('carouselTrack');
-    const dotsContainer = document.getElementById('carouselDots');
-    const prevBtn = document.getElementById('carouselPrev');
-    const nextBtn = document.getElementById('carouselNext');
+/* ---------- 通用轮播组件 ---------- */
+function initCarousel({ trackId, dotsId, prevId, nextId, carouselId }) {
+    const track = document.getElementById(trackId);
+    const dotsContainer = document.getElementById(dotsId);
+    const prevBtn = document.getElementById(prevId);
+    const nextBtn = document.getElementById(nextId);
+    const carousel = document.getElementById(carouselId);
 
     if (!track) return;
 
@@ -291,8 +303,7 @@ function initPosterCarousel() {
 
     function updateSlides() {
         slides.forEach((slide, i) => {
-            // 清除所有位置类
-            slide.classList.remove('active', 'prev', 'next', 'far-prev', 'far-next');
+            slide.classList.remove('active', 'prev', 'next', 'far-prev', 'far-next', 'extra-prev', 'extra-next');
 
             const diff = ((i - current) % total + total) % total;
 
@@ -306,13 +317,16 @@ function initPosterCarousel() {
                 slide.classList.add('far-next');
             } else if (diff === total - 2) {
                 slide.classList.add('far-prev');
+            } else if (diff === 3) {
+                slide.classList.add('extra-next');
+            } else if (diff === total - 3) {
+                slide.classList.add('extra-prev');
             } else {
                 slide.style.opacity = '0';
                 slide.style.pointerEvents = 'none';
-                slide.classList.remove('far-prev', 'far-next');
+                slide.classList.remove('far-prev', 'far-next', 'extra-prev', 'extra-next');
                 return;
             }
-            // 清除内联样式（由else分支设置的）
             slide.style.opacity = '';
             slide.style.pointerEvents = '';
         });
@@ -331,19 +345,17 @@ function initPosterCarousel() {
     prevBtn.addEventListener('click', () => { prev(); resetAutoplay(); });
     nextBtn.addEventListener('click', () => { next(); resetAutoplay(); });
 
-    // 点击两侧海报直接跳转
     slides.forEach((slide, i) => {
         slide.addEventListener('click', () => {
             if (i !== current) { goTo(i); resetAutoplay(); }
         });
     });
 
-    // 鼠标悬停暂停
-    const carousel = document.getElementById('posterCarousel');
-    carousel.addEventListener('mouseenter', () => clearTimeout(autoplayTimer));
-    carousel.addEventListener('mouseleave', startAutoplay);
+    if (carousel) {
+        carousel.addEventListener('mouseenter', () => clearTimeout(autoplayTimer));
+        carousel.addEventListener('mouseleave', startAutoplay);
+    }
 
-    // 触摸滑动支持
     let touchStartX = 0;
     track.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
     track.addEventListener('touchend', e => {
@@ -360,9 +372,30 @@ function initPosterCarousel() {
         startAutoplay();
     }
 
-    // 初始化
     updateSlides();
     startAutoplay();
+}
+
+/* ---------- 海报轮播 (Coverflow) ---------- */
+function initPosterCarousel() {
+    initCarousel({
+        trackId: 'carouselTrack',
+        dotsId: 'carouselDots',
+        prevId: 'carouselPrev',
+        nextId: 'carouselNext',
+        carouselId: 'posterCarousel'
+    });
+}
+
+/* ---------- 就业项目轮播 ---------- */
+function initJobCarousel() {
+    initCarousel({
+        trackId: 'jobTrack',
+        dotsId: 'jobDots',
+        prevId: 'jobPrev',
+        nextId: 'jobNext',
+        carouselId: 'jobCarousel'
+    });
 }
 
 /* ---------- 视频播放器切换 ---------- */

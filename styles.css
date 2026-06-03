@@ -817,71 +817,169 @@ img { display: block; max-width: 100%; }
     background: var(--orange);
 }
 
-.data-tabs {
+/* ---------- 录取数据 - 顶部按钮 ---------- */
+.data-tabs-wrapper {
     display: flex;
-    gap: 8px;
+    gap: 16px;
     justify-content: center;
-    margin-bottom: 40px;
-}
-
-.data-tab {
-    padding: 12px 28px;
-    border: 1px solid var(--gray-700);
-    border-radius: var(--radius-full);
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--gray-400);
-    background: var(--dark);
-    cursor: pointer;
-    transition: all .25s var(--ease);
-    font-family: var(--font);
-}
-
-.data-tab:hover {
-    border-color: var(--orange);
-    color: var(--white);
-}
-
-.data-tab.active {
-    background: var(--orange);
-    color: var(--white);
-    border-color: var(--orange);
-}
-
-.data-panel {
-    display: none;
-    animation: fadeInUp .4s var(--ease);
-}
-
-.data-panel.active { display: block; }
-
-.data-summary {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-    margin-bottom: 32px;
-}
-
-.data-stat {
-    background: var(--dark);
-    border: 1px solid var(--gray-800);
-    border-radius: var(--radius-lg);
-    padding: 32px 24px;
-    text-align: center;
-}
-
-.ds-num {
-    display: block;
-    font-size: 42px;
-    font-weight: 900;
-    color: var(--orange);
-    line-height: 1;
+    margin-top: 32px;
     margin-bottom: 8px;
 }
 
-.ds-label {
-    font-size: 14px;
+.data-tab-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 16px 36px;
+    font-size: 15px;
+    font-weight: 600;
     color: var(--gray-400);
+    background: linear-gradient(135deg, var(--gray-900) 0%, var(--gray-800) 100%);
+    border: 1px solid var(--gray-700);
+    border-radius: var(--radius-lg);
+    text-decoration: none;
+    transition: all .35s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.data-tab-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,79,0,.15) 0%, rgba(255,79,0,.05) 100%);
+    opacity: 0;
+    transition: opacity .35s ease;
+}
+
+.data-tab-btn:hover::before,
+.data-tab-btn.active::before {
+    opacity: 1;
+}
+
+.data-tab-btn:hover,
+.data-tab-btn.active {
+    color: var(--white);
+    border-color: rgba(255,79,0,.5);
+    box-shadow: 0 4px 20px rgba(255,79,0,.15);
+    transform: translateY(-2px);
+}
+
+.data-tab-btn .dtb-text {
+    position: relative;
+    z-index: 1;
+}
+
+.data-tab-btn .dtb-arrow {
+    position: relative;
+    z-index: 1;
+    font-size: 13px;
+    color: var(--gray-500);
+    transition: color .3s ease, transform .3s ease;
+}
+
+.data-tab-btn:hover .dtb-arrow,
+.data-tab-btn.active .dtb-arrow {
+    color: var(--orange);
+    transform: translateX(3px);
+}
+
+/* ---------- 录取数据 - 内容面板 ---------- */
+.data-content {
+    display: none;
+    margin-top: 24px;
+}
+
+.data-content.active {
+    display: block;
+}
+
+/* ---------- 26F 悬停数据卡片 ---------- */
+.data-hover-card {
+    padding: 24px 28px;
+    background: linear-gradient(135deg, rgba(255,79,0,.08) 0%, rgba(255,79,0,.03) 100%);
+    border: 1px solid rgba(255,79,0,.2);
+    border-radius: var(--radius-lg);
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: opacity .4s ease, max-height .4s ease, margin .4s ease, padding .4s ease;
+    margin-top: 0;
+    padding: 0 28px;
+}
+
+.data-hover-card.show {
+    opacity: 1;
+    max-height: 300px;
+    margin-top: 0;
+    padding: 24px 28px;
+}
+
+.data-hover-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.data-hover-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--white);
+    background: var(--orange);
+    border-radius: 20px;
+    letter-spacing: .05em;
+}
+
+.data-hover-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--white);
+}
+
+.data-hover-stats {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+}
+
+.data-hover-stat {
+    text-align: center;
+    padding: 12px 8px;
+    background: rgba(255,255,255,.04);
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(255,255,255,.06);
+}
+
+.dhs-num {
+    display: block;
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--orange);
+    line-height: 1;
+    margin-bottom: 6px;
+}
+
+.dhs-label {
+    font-size: 12px;
+    color: var(--gray-400);
+    white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+    .data-hover-stats {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .data-hover-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 /* ---------- 短期项目 - 海报轮播 (Coverflow) ---------- */
@@ -1005,20 +1103,38 @@ img { display: block; max-width: 100%; }
     transform: translateX(10%) scale(.85);
 }
 
-/* 更远的slide - 隐藏 */
+/* 更远的slide - 显示更多海报 */
 .carousel-slide.far-prev,
 .carousel-slide.far-next {
-    opacity: 0;
+    opacity: .25;
+    filter: blur(4px) brightness(.4);
     z-index: 1;
     pointer-events: none;
 }
 
 .carousel-slide.far-prev {
-    transform: translateX(-160%) scale(.65);
+    transform: translateX(-150%) scale(.7);
 }
 
 .carousel-slide.far-next {
-    transform: translateX(60%) scale(.65);
+    transform: translateX(50%) scale(.7);
+}
+
+/* 最远的slide - 第3层海报 */
+.carousel-slide.extra-prev,
+.carousel-slide.extra-next {
+    opacity: .15;
+    filter: blur(6px) brightness(.3);
+    z-index: 0;
+    pointer-events: none;
+}
+
+.carousel-slide.extra-prev {
+    transform: translateX(-200%) scale(.55);
+}
+
+.carousel-slide.extra-next {
+    transform: translateX(100%) scale(.55);
 }
 
 /* 左右箭头按钮 */
@@ -1120,14 +1236,111 @@ img { display: block; max-width: 100%; }
     background: var(--orange);
 }
 
-.quick-entry-placeholder {
-    text-align: center;
-    padding: 40px 0;
+/* ---------- 快捷入口 ---------- */
+.quick-entry-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+    margin-top: 32px;
 }
 
-.quick-entry-placeholder p {
+.quick-entry-card {
+    background: var(--gray-900);
+    border: 1px solid var(--gray-800);
+    border-radius: var(--radius-lg);
+    padding: 24px 20px 20px;
+    text-align: center;
+    transition: all .3s ease;
+}
+
+.quick-entry-card:hover {
+    border-color: var(--orange-50);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(255, 79, 0, .12);
+}
+
+.quick-entry-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--gray-800);
+}
+
+.quick-entry-icon {
+    width: 28px;
+    height: 28px;
+    color: var(--orange);
+    stroke-width: 1.5;
+}
+
+.quick-entry-category {
     font-size: 15px;
-    color: var(--gray-500);
+    font-weight: 600;
+    color: var(--white);
+    letter-spacing: .02em;
+}
+
+.quick-entry-links {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+/* 与 case-link 相同的简约风格 */
+.quick-entry-link {
+    display: block;
+    padding: 8px 4px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--gray-400);
+    text-decoration: none;
+    transition: all .25s var(--ease);
+    position: relative;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.quick-entry-link:hover {
+    color: var(--white);
+}
+
+.quick-entry-link::after {
+    content: '';
+    position: absolute;
+    bottom: 4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 1px;
+    background: var(--orange);
+    transition: width .25s var(--ease);
+}
+
+.quick-entry-link:hover::after {
+    width: 80%;
+}
+
+/* 移动端响应式 */
+@media (max-width: 1024px) {
+    .quick-entry-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .quick-entry-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .quick-entry-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 /* ---------- Footer ---------- */
