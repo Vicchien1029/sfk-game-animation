@@ -1150,7 +1150,7 @@ img { display: block; max-width: 100%; }
     background: var(--gray-900);
     border: 1px solid var(--gray-800);
     border-radius: var(--radius-lg);
-    padding: 28px 20px 24px;
+    padding: 24px 20px 20px;
     text-align: center;
     transition: all .3s ease;
 }
@@ -1161,47 +1161,69 @@ img { display: block; max-width: 100%; }
     box-shadow: 0 12px 32px rgba(255, 79, 0, .12);
 }
 
+.quick-entry-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--gray-800);
+}
+
 .quick-entry-icon {
-    font-size: 36px;
-    margin-bottom: 12px;
-    line-height: 1;
+    width: 28px;
+    height: 28px;
+    color: var(--orange);
+    stroke-width: 1.5;
 }
 
 .quick-entry-category {
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 600;
     color: var(--white);
-    margin-bottom: 16px;
-    padding-bottom: 12px;
-    border-bottom: 1px solid var(--gray-800);
+    letter-spacing: .02em;
 }
 
 .quick-entry-links {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 4px;
 }
 
-.quick-entry-btn {
+/* 与 case-link 相同的简约风格 */
+.quick-entry-link {
     display: block;
-    padding: 10px 16px;
+    padding: 8px 4px;
     font-size: 13px;
-    color: var(--gray-300);
-    background: var(--gray-800);
-    border: 1px solid var(--gray-700);
-    border-radius: var(--radius-sm);
+    font-weight: 500;
+    color: var(--gray-400);
     text-decoration: none;
-    transition: all .25s ease;
+    transition: all .25s var(--ease);
+    position: relative;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-.quick-entry-btn:hover {
+.quick-entry-link:hover {
     color: var(--white);
+}
+
+.quick-entry-link::after {
+    content: '';
+    position: absolute;
+    bottom: 4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 1px;
     background: var(--orange);
-    border-color: var(--orange);
-    transform: scale(1.02);
+    transition: width .25s var(--ease);
+}
+
+.quick-entry-link:hover::after {
+    width: 80%;
 }
 
 /* 移动端响应式 */
