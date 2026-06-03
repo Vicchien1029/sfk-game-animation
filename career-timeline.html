@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SFK 游戏动画｜英国本科三年+一年制硕士职业规划时间线</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a0a0a;
+  --bg2:#121212;
+  --panel:#1a1a1a;
+  --ink:#f0f0f0;
+  --muted:#999;
+  --line:#2e2e2e;
+  --deep:#ff4f00;
+  --brand:#ff4f00;
+  --soft-red:rgba(255,79,0,.18);
+  --soft-yellow:rgba(255,200,80,.18);
+  --soft-green:rgba(80,200,120,.18);
+  --soft-purple:rgba(160,120,255,.18);
+  --soft-blue:rgba(100,160,255,.18);
+  --soft-orange:rgba(255,160,60,.18);
+  --shadow:0 16px 40px rgba(0,0,0,.40);
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;font-family:'Noto Sans SC',-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;color:var(--ink);background:var(--bg)}
+body{min-width:1180px}
+
+/* Back to home link */
+.back-home{position:fixed;top:16px;left:16px;z-index:200;display:flex;align-items:center;gap:8px;padding:8px 16px;background:rgba(26,26,26,.9);border:1px solid var(--line);border-radius:999px;color:var(--muted);font-size:13px;text-decoration:none;transition:all .2s;backdrop-filter:blur(8px)}
+.back-home:hover{color:var(--brand);border-color:var(--brand)}
+.back-home svg{width:16px;height:16px}
+
+header{position:sticky;top:0;z-index:60;padding:22px 28px 18px;background:rgba(10,10,10,.94);border-bottom:1px solid var(--line);backdrop-filter:blur(8px)}
+.brandRow{display:flex;align-items:flex-start;justify-content:space-between;gap:18px}
+h1{margin:0;font-size:28px;letter-spacing:.2px;color:var(--ink);font-weight:700}
+.subtitle{margin-top:4px;color:var(--muted);font-size:14px;line-height:1.75;max-width:980px;min-height:0}
+.badge{display:inline-flex;align-items:center;padding:9px 12px;border-radius:999px;background:rgba(255,79,0,.12);border:1px solid rgba(255,79,0,.30);color:var(--brand);font-size:12px;font-weight:700;white-space:nowrap}
+.layout{padding:22px 28px 40px;display:grid;grid-template-columns:300px minmax(840px,1fr);gap:20px;align-items:start}
+.side{position:sticky;top:108px;background:var(--panel);border:1px solid var(--line);border-radius:22px;padding:18px;box-shadow:var(--shadow)}
+.side h2{margin:0 0 14px;font-size:17px;color:var(--ink);font-weight:600}
+.sectionTitle{font-size:12px;font-weight:700;color:var(--muted);margin:14px 0 8px;text-transform:uppercase;letter-spacing:.5px}
+select,.btn{width:100%;border:1px solid var(--line);background:var(--bg2);border-radius:14px;padding:11px 12px;font-size:14px;color:var(--ink);font-family:inherit;cursor:pointer}
+select:focus,.btn:focus{outline:none;border-color:var(--brand)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{padding:9px 12px;border-radius:999px;background:var(--bg2);border:1px solid var(--line);font-size:12px;cursor:pointer;user-select:none;transition:.18s;color:var(--muted)}
+.chip.active{background:var(--brand);border-color:var(--brand);color:#fff}
+.legend{display:grid;gap:10px;margin-top:6px}
+.legendItem{display:flex;align-items:center;gap:10px;font-size:12px;color:var(--muted);line-height:1.6}
+.swatch{width:12px;height:12px;border-radius:50%}
+.noteCard{margin-top:16px;background:rgba(255,79,0,.06);border:1px dashed rgba(255,79,0,.25);padding:12px 13px;border-radius:14px;font-size:13px;line-height:1.75;color:var(--muted)}
+.main{min-width:0}
+.timelineWrap{background:var(--panel);border:1px solid var(--line);border-radius:24px;overflow:hidden;box-shadow:var(--shadow)}
+.yearBlock{border-top:1px solid var(--line)}
+.yearBlock:first-of-type{border-top:0}
+.yearHead{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:14px 18px;background:linear-gradient(135deg,#1a1a1a 0%,#252525 100%);color:var(--ink);border-bottom:1px solid var(--line)}
+.yearTitle{font-size:17px;font-weight:700;letter-spacing:.3px;color:var(--ink)}
+.yearDesc{font-size:12px;color:var(--muted)}
+.monthNums,.termRow,.lane{display:grid;grid-template-columns:118px repeat(12,1fr)}
+.monthNums{background:var(--bg2);border-bottom:1px solid var(--line);position:sticky;top:84px;z-index:30}
+.monthNums .label,.termRow .label,.laneLabel{border-right:1px solid var(--line)}
+.monthNums .label,.termRow .label{padding:8px 10px;font-size:13px;font-weight:700;color:var(--ink);display:flex;align-items:center}
+.mCell{padding:10px 2px;text-align:center;font-size:13px;font-weight:700;color:var(--ink);border-right:1px solid var(--line);min-width:0}
+.termRow{background:var(--bg2);border-bottom:1px solid var(--line)}
+.termMerge{padding:10px 6px;text-align:center;font-size:12px;color:var(--muted);border-right:1px solid var(--line);display:flex;align-items:center;justify-content:center;line-height:1.35;min-height:42px}
+.term-autumn{background:rgba(100,160,255,.10)}
+.term-holiday{background:rgba(255,200,80,.10)}
+.term-spring{background:rgba(80,200,120,.10)}
+.term-easter{background:rgba(200,100,160,.10)}
+.term-summer{background:rgba(255,160,60,.10)}
+.term-pre{background:rgba(160,120,255,.10)}
+.term-grad{background:rgba(100,200,180,.10)}
+.lane{min-height:146px;border-bottom:1px solid var(--line)}
+.lane:last-child{border-bottom:0}
+.laneLabel{padding:14px 10px;background:var(--bg2);display:flex;flex-direction:column;justify-content:center;gap:6px}
+.laneLabel strong{font-size:15px;color:var(--ink);font-weight:600}
+.laneLabel span{font-size:12px;line-height:1.55;color:var(--muted)}
+.cells{grid-column:2 / span 12;display:grid;grid-template-columns:repeat(12,1fr);position:relative;background-image:linear-gradient(to right,var(--line) 1px, transparent 1px);background-size:calc(100%/12) 100%}
+.bar{position:absolute;height:40px;border-radius:14px;padding:6px 12px;border:1px solid rgba(255,255,255,.06);box-shadow:0 8px 16px rgba(0,0,0,.25);cursor:pointer;overflow:hidden;transition:.18s;display:flex;flex-direction:column;justify-content:center}
+.bar:hover{transform:translateY(-2px);box-shadow:0 12px 22px rgba(0,0,0,.35)}
+.bar strong{display:block;font-size:12px;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:600}
+.bar small{display:block;font-size:11px;line-height:1.15;opacity:.74;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.r1{top:18px}.r2{top:64px}.r3{top:110px}
+.key{background:var(--soft-red);color:#ffb8a0}
+.key.important{background:var(--brand);color:#fff}
+.growth-base{background:var(--soft-blue);color:#a0c8ff}
+.growth-portfolio{background:var(--soft-purple);color:#c8b0ff}
+.growth-support{background:var(--soft-green);color:#90e0a0}
+.growth-flag{background:var(--soft-orange);color:#ffd0a0}
+.job-practice{background:var(--soft-yellow);color:#e8d080}
+.job-intern{background:rgba(255,200,80,.22);color:#e0c060}
+.job-recruit{background:rgba(255,180,60,.25);color:#f0b860}
+.faded{opacity:.15}
+.drawer{position:fixed;right:26px;bottom:26px;width:400px;max-width:calc(100vw - 52px);background:var(--panel);border:1px solid var(--line);border-radius:20px;box-shadow:0 24px 54px rgba(0,0,0,.50);padding:18px 18px 16px;display:none;z-index:100}
+.drawer.show{display:block}
+.drawer h3{margin:0 0 8px;font-size:18px;color:var(--ink);font-weight:600}
+.drawerMeta{font-size:12px;color:var(--muted);margin-bottom:10px}
+.drawer p{font-size:14px;line-height:1.75;color:var(--muted);margin:0 0 10px}
+.drawer ul{margin:0;padding-left:18px;font-size:13px;line-height:1.85;color:var(--muted)}
+.closeBtn{position:absolute;right:10px;top:10px;width:28px;height:28px;border:0;border-radius:50%;background:var(--line);cursor:pointer;font-size:16px;color:var(--ink)}
+
+@media(max-width:1400px){body{min-width:0}.layout{grid-template-columns:1fr}.side{position:relative;top:0}.monthNums{position:static}}
+@media print{header,.side,.drawer,.back-home{display:none}.layout{display:block;padding:0}.timelineWrap{box-shadow:none}.monthNums{position:static}}
+</style>
+</head>
+<body>
+<a href="index.html#quick-entry" class="back-home">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+  返回资料库
+</a>
+<header>
+  <div class="brandRow">
+    <div>
+      <h1>英国本科三年 + 一年制硕士｜职业规划时间线</h1>
+    </div>
+    <div class="badge">SFK游戏动画科系</div>
+  </div>
+</header>
+<div class="layout">
+  <aside class="side">
+    <h2>视图设置</h2>
+    <div class="sectionTitle">当前阶段</div>
+    <select id="entry">
+      <option value="y1">大一刚入学</option>
+      <option value="y2">大二在读</option>
+      <option value="y3">大三在读 / 准备申研</option>
+      <option value="m1">一年制硕士入学前 / 在读</option>
+    </select>
+    <div class="sectionTitle">显示路径</div>
+    <select id="path">
+      <option value="all">本科三年 + 一年制硕士 + 国内校招</option>
+      <option value="ug">仅展示本科阶段</option>
+      <option value="master">仅展示硕士与求职阶段</option>
+    </select>
+    <div class="sectionTitle">显示维度</div>
+    <div class="chips" id="filters">
+      <span class="chip active" data-filter="keypoint">关键节点</span>
+      <span class="chip active" data-filter="growth">专业成长</span>
+      <span class="chip active" data-filter="jobprep">求职准备</span>
+    </div>
+    <div class="sectionTitle">图例</div>
+    <div class="legend">
+      <div class="legendItem"><i class="swatch" style="background:var(--brand)"></i>关键节点：申研 / 秋招 / 笔试面试等</div>
+      <div class="legendItem"><i class="swatch" style="background:var(--soft-blue)"></i>专业成长：专业基础 / 作品集</div>
+      <div class="legendItem"><i class="swatch" style="background:var(--soft-green)"></i>专业成长：大师课 / 安心办 / 毕无忧</div>
+      <div class="legendItem"><i class="swatch" style="background:var(--soft-orange)"></i>专业成长：夏校 / 强化模块</div>
+      <div class="legendItem"><i class="swatch" style="background:var(--soft-yellow)"></i>求职准备：商业实践 / 实习 / 校招</div>
+    </div>
+    <div class="noteCard" id="summary"></div>
+    <button class="btn" style="margin-top:12px;background:var(--brand);color:#fff;border-color:var(--brand)" onclick="window.print()">导出 / 打印当前视图</button>
+  </aside>
+  <main class="main">
+    <section class="timelineWrap">
+      <!-- Y1 -->
+      <div class="yearBlock" data-path="all ug">
+        <div class="yearHead"><div><div class="yearTitle">大一｜认知建立与专业基础启动</div><div class="yearDesc">重点：方向认知、基础能力、项目归档习惯</div></div></div>
+        <div class="monthNums">
+          <div class="label">月份</div>
+          <div class="mCell">09</div><div class="mCell">10</div><div class="mCell">11</div><div class="mCell">12</div><div class="mCell">01</div><div class="mCell">02</div><div class="mCell">03</div><div class="mCell">04</div><div class="mCell">05</div><div class="mCell">06</div><div class="mCell">07</div><div class="mCell">08</div>
+        </div>
+        <div class="termRow">
+          <div class="label">学期 / 假期</div>
+          <div class="termMerge term-autumn" style="grid-column:2 / span 3">秋季学期</div>
+          <div class="termMerge term-holiday" style="grid-column:5 / span 1">圣诞寒假</div>
+          <div class="termMerge term-spring" style="grid-column:6 / span 2">春季学期</div>
+          <div class="termMerge term-easter" style="grid-column:8 / span 1">复活节前后</div>
+          <div class="termMerge term-summer" style="grid-column:9 / span 3">夏季学期 / 期末</div>
+          <div class="termMerge term-holiday" style="grid-column:12 / span 2">暑假</div>
+        </div>
+        <div class="lane" data-lane="keypoint">
+          <div class="laneLabel"><strong>关键节点</strong><span>建立未来申请与职业规划意识。</span></div>
+          <div class="cells">
+            <div class="bar key r1" data-type="keypoint" style="left:6%;width:18%" data-title="专业方向初筛" data-meta="大一秋季｜10–11月" data-body="开始理解自己更适合游戏设计、游戏美术、动画、概念艺术还是交互方向。" data-todo="研究目标方向|初步了解海外院校与未来岗位|建立项目归档习惯"><strong>专业方向初筛</strong><small>10–11月</small></div>
+            <div class="bar key r2" data-type="keypoint" style="left:56%;width:18%" data-title="作品归档意识建立" data-meta="大一春季｜03–04月" data-body="课程作业不只是课堂作业，而是未来作品集素材。" data-todo="保留过程图|记录研究逻辑|梳理作业可延展潜力"><strong>作品归档意识</strong><small>03–04月</small></div>
+            <div class="bar key r1" data-type="keypoint" style="left:82%;width:12%" data-title="暑期规划确认" data-meta="大一学年末｜06–07月" data-body="确认暑假是否参加夏校、短期项目或软件补强。" data-todo="暑期计划确定|与老师确认补强重点|为大二项目积累做准备"><strong>暑期规划</strong><small>06–07月</small></div>
+          </div>
+        </div>
+        <div class="lane" data-lane="growth">
+          <div class="laneLabel"><strong>专业成长</strong><span>专业基础、作品集意识、安心办与夏校。</span></div>
+          <div class="cells">
+            <div class="bar growth-base r1" data-type="growth" style="left:0%;width:44%" data-title="专业基础" data-meta="大一｜09–02月" data-body="完成基础软件、观察方法、项目表达、专业语言等基础能力训练。" data-todo="专业基础训练|软件技能建立|课堂项目方法入门"><strong>专业基础</strong><small>09–02月</small></div>
+            <div class="bar growth-support r2" data-type="growth" style="left:18%;width:24%" data-title="安心办 1–2" data-meta="大一｜11月–次年02月" data-body="关注适应、课程节奏、GPA 与方向建立。" data-todo="GPA 跟进|选课适应|方向沟通"><strong>安心办 1–2</strong><small>11月–02月</small></div>
+            <div class="bar growth-portfolio r1" data-type="growth" style="left:48%;width:26%" data-title="作品集启蒙" data-meta="大一春夏｜03–05月" data-body="开始理解作品集并非简单作业堆砌，而是项目叙事。" data-todo="整理一批课堂项目|理解过程页逻辑|形成初步目录"><strong>作品集启蒙</strong><small>03–05月</small></div>
+            <div class="bar growth-flag r2" data-type="growth" style="left:82%;width:12%" data-title="夏校 1" data-meta="大一暑假｜07–08月" data-body="通过高密度项目强化技能与认知，为大二进阶做准备。" data-todo="完成一个集中项目|拿到外部反馈|为大二做作品积累"><strong>夏校 1</strong><small>07–08月</small></div>
+          </div>
+        </div>
+        <div class="lane" data-lane="jobprep">
+          <div class="laneLabel"><strong>求职准备</strong><span>先理解行业标准与岗位要求。</span></div>
+          <div class="cells">
+            <div class="bar job-practice r1" data-type="jobprep" style="left:58%;width:18%" data-title="行业认知积累" data-meta="大一春季｜04–05月" data-body="开始了解目标岗位的招聘要求和作品标准。" data-todo="收集岗位 JD|关注行业案例|理解大厂校招节奏"><strong>行业认知积累</strong><small>04–05月</small></div>
+            <div class="bar job-practice r2" data-type="jobprep" style="left:84%;width:10%" data-title="暑期轻量实践" data-meta="大一暑假｜07–08月" data-body="可尝试短期项目、比赛或轻量实践，为后续实习打基础。" data-todo="参与比赛/小项目|积累协作经验"><strong>轻量实践</strong><small>07–08月</small></div>
+          </div>
+        </div>
+      </div>
+      <!-- Y2 -->
+      <div class="yearBlock" data-path="all ug">
+        <div class="yearHead"><div><div class="yearTitle">大二｜方向确认与第一段行业经历</div><div class="yearDesc">重点：商业实践、作品集项目、大二暑假第一段实习</div></div></div>
+        <div class="monthNums">
+          <div class="label">月份</div>
+          <div class="mCell">09</div><div class="mCell">10</div><div class="mCell">11</div><div class="mCell">12</div><div class="mCell">01</div><div class="mCell">02</div><div class="mCell">03</div><div class="mCell">04</div><div class="mCell">05</div><div class="mCell">06</div><div class="mCell">07</div><div class="mCell">08</div>
+        </div>
+        <div class="termRow">
+          <div class="label">学期 / 假期</div>
+          <div class="termMerge term-autumn" style="grid-column:2 / span 3">秋季学期</div>
+          <div class="termMerge term-holiday" style="grid-column:5 / span 1">圣诞寒假</div>
+          <div class="termMerge term-spring" style="grid-column:6 / span 2">春季学期</div>
+          <div class="termMerge term-easter" style="grid-column:8 / span 1">复活节前后</div>
+          <div class="termMerge term-summer" style="grid-column:9 / span 3">夏季学期 / 期末</div>
+          <div class="termMerge term-holiday" style="grid-column:12 / span 2">暑假</div>
+        </div>
+        <div class="lane" data-lane="keypoint">
+          <div class="laneLabel"><strong>关键节点</strong><span>真正进入"未来申研 + 求职"双线预备期。</span></div>
+          <div class="cells">
+            <div class="bar key r1" data-type="keypoint" style="left:4%;width:24%" data-title="方向正式确认" data-meta="大二秋季｜09–11月" data-body="学生需要明确未来主申方向与目标岗位方向。" data-todo="明确方向|梳理院校与岗位要求|确定作品集项目规划"><strong>方向正式确认</strong><small>09–11月</small></div>
+            <div class="bar key r2" data-type="keypoint" style="left:36%;width:26%" data-title="申研前置准备启动" data-meta="大二寒假至春季｜12月–03月" data-body="开始把大二项目视为大三申研的关键储备。" data-todo="确定潜在申研院校|整理推荐信资源|明确作品集缺口"><strong>申研前置准备</strong><small>12月–03月</small></div>
+            <div class="bar key important r1" data-type="keypoint" style="left:82%;width:12%" data-title="实习 1 窗口" data-meta="大二暑假｜07–08月" data-body="大二暑假是第一段高质量实习和商业实践的黄金窗口。" data-todo="准备中英文简历|准备作品链接|有针对性投递岗位"><strong>实习 1</strong><small>07–08月</small></div>
+          </div>
+        </div>
+        <div class="lane" data-lane="growth">
+          <div class="laneLabel"><strong>专业成长</strong><span>用真实项目、导师反馈和系统课程积累核心内容。</span></div>
+          <div class="cells">
+            <div class="bar growth-portfolio r1" data-type="growth" style="left:0%;width:24%" data-title="作品集核心项目 1" data-meta="大二秋季｜09–11月" data-body="开始积累真正可以进入申研作品集的核心项目。" data-todo="做深项目|建立研究逻辑|保留完整过程"><strong>作品集项目 1</strong><small>09–11月</small></div>
+            <div class="bar growth-support r2" data-type="growth" style="left:8%;width:20%" data-title="商业实践课 1" data-meta="大二秋季" data-body="通过行业命题项目，理解真实生产逻辑。" data-todo="接触真实需求|理解团队协作|获得行业反馈"><strong>商业实践课 1</strong><small>行业命题</small></div>
+            <div class="bar growth-support r1" data-type="growth" style="left:34%;width:18%" data-title="大师课 1" data-meta="大二春季前后" data-body="通过外部导师反馈校准项目方向与质量。" data-todo="完成一次项目 review|确认修改清单"><strong>大师课 1</strong><small>项目诊断</small></div>
+            <div class="bar growth-support r2" data-type="growth" style="left:50%;width:18%" data-title="安心办 3–4" data-meta="大二｜02–05月" data-body="重点跟进 GPA、项目完成度与申研前置材料准备。" data-todo="GPA 跟进|材料准备|节奏把控"><strong>安心办 3–4</strong><small>02–05月</small></div>
+            <div class="bar growth-flag r1" data-type="growth" style="left:78%;width:16%" data-title="夏校 2" data-meta="大二暑假｜07–08月" data-body="适合再做一个高密度项目，为大三申研和岗位作品集储备内容。" data-todo="产出强化项目|接受外部 review"><strong>夏校 2</strong><small>07–08月</small></div>
+          </div>
+        </div>
+        <div class="lane" data-lane="jobprep">
+          <div class="laneLabel"><strong>求职准备</strong><span>开始积累第一段真实行业经历。</span></div>
+          <div class="cells">
+            <div class="bar job-practice r1" data-type="jobprep" style="left:8%;width:22%" data-title="商业实践课" data-meta="大二秋季" data-body="在求职准备中，商业实践是第一种可写进简历的行业经验。" data-todo="理解行业 workflow|写入简历|提炼项目职责"><strong>商业实践课</strong><small>可写入简历</small></div>
+            <div class="bar job-intern r2" data-type="jobprep" style="left:82%;width:12%" data-title="实习 1" data-meta="大二暑假｜07–08月" data-body="第一段实习重在真实岗位、真实任务、真实团队，不一定非得是大厂。" data-todo="优先选择岗位相关实习|争取证明/推荐"><strong>实习 1</strong><small>第一段行业经历</small></div>
+          </div>
+        </div>
+      </div>
+      <!-- Y3 -->
+      <div class="yearBlock" data-path="all ug">
+        <div class="yearHead"><div><div class="yearTitle">大三｜研究生申请递交与求职作品集转译</div><div class="yearDesc">重点：大三秋季递交研究生申请；本科毕业前完成求职作品集基础版</div></div></div>
+        <div class="monthNums">
+          <div class="label">月份</div>
+          <div class="mCell">09</div><div class="mCell">10</div><div class="mCell">11</div><div class="mCell">12</div><div class="mCell">01</div><div class="mCell">02</div><div class="mCell">03</div><div class="mCell">04</div><div class="mCell">05</div><div class="mCell">06</div><div class="mCell">07</div><div class="mCell">08</div>
+        </div>
+        <div class="termRow">
+          <div class="label">学期 / 假期</div>
+          <div class="termMerge term-autumn" style="grid-column:2 / span 3">秋季学期</div>
+          <div class="termMerge term-holiday" style="grid-column:5 / span 1">圣诞寒假</div>
+          <div class="termMerge term-spring" style="grid-column:6 / span 2">春季学期</div>
+          <div class="termMerge term-easter" style="grid-column:8 / span 1">复活节前后</div>
+          <div class="termMerge term-summer" style="grid-column:9 / span 3">毕业设计阶段</div>
+          <div class="termMerge term-holiday" style="grid-column:12 / span 2">暑假 / 硕前准备</div>
+        </div>
+        <div class="lane" data-lane="keypoint">
+          <div class="laneLabel"><strong>关键节点</strong><span>本科最后一个完整学年，也是申研与求职衔接转折点。</span></div>
+          <div class="cells">
+            <div class="bar key important r1" data-type="keypoint" style="left:0%;width:26%" data-title="递交研究生申请" data-meta="大三秋季｜09–12月中" data-body="英国本科三年制学生的研究生申请主窗口，一定不能等毕业后再准备。" data-todo="作品集终稿|文书推荐信|递交第一批学校|同步准备面试"><strong>递交研究生申请</strong><small>09–12月中</small></div>
+            <div class="bar key r2" data-type="keypoint" style="left:42%;width:18%" data-title="毕业设计启动" data-meta="大三春季｜01–03月" data-body="毕业设计应尽量服务于未来读研与就业方向。" data-todo="毕业方向确定|与导师确认项目深度"><strong>毕业设计启动</strong><small>01–03月</small></div>
+            <div class="bar key r1" data-type="keypoint" style="left:80%;width:14%" data-title="硕前求职预热" data-meta="大三暑假｜07–08月" data-body="硕士开学前就要开始关注国内秋招，不能等入学后再慢慢准备。" data-todo="确认目标公司|关注秋招开放时间|开始预投"><strong>硕前预热</strong><small>07–08月</small></div>
+          </div>
+        </div>
+        <div class="lane" data-lane="growth">
+          <div class="laneLabel"><strong>专业成长</strong><span>申研作品集在秋季前成熟；本科毕业前完成求职方向转译。</span></div>
+          <div class="cells">
+            <div class="bar growth-portfolio r1" data-type="growth" style="left:0%;width:26%" data-title="申研作品集终稿" data-meta="大三秋季｜09–12月" data-body="作品集应该在递交申请前已经完成终稿，而不是从秋季才开始做。" data-todo="项目整合|排版完成|适配不同院校版本"><strong>申研作品集终稿</strong><small>递交前完成</small></div>
+            <div class="bar growth-support r2" data-type="growth" style="left:34%;width:18%" data-title="毕无忧" data-meta="大三春季" data-body="保障毕业设计、毕业论文/项目、成绩与升学衔接。" data-todo="毕业进度跟踪|成绩风险排查|Offer 条件跟踪"><strong>毕无忧</strong><small>毕业与升学衔接</small></div>
+            <div class="bar growth-portfolio r1" data-type="growth" style="left:58%;width:28%" data-title="求职作品集基础版" data-meta="大三春夏｜04–08月" data-body="在本科毕业前将申研项目转译为岗位作品集，为硕士秋招争取时间。" data-todo="按岗位拆分版本|整理技术点|建立作品集网站"><strong>求职作品集基础版</strong><small>04–08月</small></div>
+          </div>
+        </div>
+        <div class="lane" data-lane="jobprep">
+          <div class="laneLabel"><strong>求职准备</strong><span>至少应再完成一段更贴近岗位的实践或实习经历。</span></div>
+          <div class="cells">
+            <div class="bar job-practice r1" data-type="jobprep" style="left:34%;width:18%" data-title="商业实践课 2" data-meta="大三春季" data-body="进一步用真实命题或行业项目对齐岗位能力要求。" data-todo="增强岗位向成果|形成可面试讲述案例"><strong>商业实践课 2</strong><small>春季强化</small></div>
+            <div class="bar job-intern r2" data-type="jobprep" style="left:42%;width:18%" data-title="实习 2" data-meta="大三寒假–春季" data-body="第二段实习最好更接近未来目标岗位。" data-todo="优先岗位相关性|争取真实项目上线/展示"><strong>实习 2</strong><small>岗位相关经历</small></div>
+            <div class="bar job-intern r1" data-type="jobprep" style="left:78%;width:16%" data-title="实习 3" data-meta="大三暑假" data-body="若时间允许，这是进入硕士前最后一次集中补强行业经历的窗口。" data-todo="冲刺更高质量实习|为秋招准备项目复盘"><strong>实习 3</strong><small>硕前冲刺</small></div>
+          </div>
+        </div>
+      </div>
+      <!-- M1 -->
+      <div class="yearBlock" data-path="all master">
+        <div class="yearHead"><div><div class="yearTitle">一年制硕士｜秋招主战场与春招补录</div><div class="yearDesc">重点：开学即秋招；求职节奏必须早于课程节奏</div></div></div>
+        <div class="monthNums">
+          <div class="label">月份</div>
+          <div class="mCell">06</div><div class="mCell">07</div><div class="mCell">08</div><div class="mCell">09</div><div class="mCell">10</div><div class="mCell">11</div><div class="mCell">12</div><div class="mCell">01</div><div class="mCell">02</div><div class="mCell">03</div><div class="mCell">04</div><div class="mCell">05</div>
+        </div>
+        <div class="termRow">
+          <div class="label">学期 / 假期</div>
+          <div class="termMerge term-pre" style="grid-column:2 / span 3">入学前准备</div>
+          <div class="termMerge term-autumn" style="grid-column:5 / span 3">秋季学期</div>
+          <div class="termMerge term-holiday" style="grid-column:8 / span 1">圣诞假 / 秋招尾段</div>
+          <div class="termMerge term-spring" style="grid-column:9 / span 2">春季学期</div>
+          <div class="termMerge term-spring" style="grid-column:11 / span 1">春招补录</div>
+          <div class="termMerge term-grad" style="grid-column:12 / span 2">毕业设计</div>
+        </div>
+        <div class="lane" data-lane="keypoint">
+          <div class="laneLabel"><strong>关键节点</strong><span>一年制硕士最大的挑战：开学时，国内秋招已开始。</span></div>
+          <div class="cells">
+            <div class="bar key r1" data-type="keypoint" style="left:0%;width:20%" data-title="求职作品集定版" data-meta="硕士入学前｜06–08月" data-body="入学前必须完成岗位导向的求职作品集基础版。" data-todo="完成作品集网站|准备中文简历|准备项目讲述"><strong>求职作品集定版</strong><small>06–08月</small></div>
+            <div class="bar key important r2" data-type="keypoint" style="left:24%;width:28%" data-title="秋招投递 + 笔试面试" data-meta="硕士秋季｜09–12月" data-body="国内大厂校招主战场，需同步处理课程、投递、笔试和面试。" data-todo="固定每周投递|训练测试题|模拟面试|记录反馈"><strong>秋招主战场</strong><small>09–12月</small></div>
+            <div class="bar key r1" data-type="keypoint" style="left:58%;width:20%" data-title="春招补录" data-meta="硕士春季｜01–03月" data-body="若秋招未上岸或希望冲刺更优岗位，春招补录是第二窗口。" data-todo="补投春招|调整策略|准备社招预备"><strong>春招补录</strong><small>01–03月</small></div>
+            <div class="bar key r2" data-type="keypoint" style="left:82%;width:12%" data-title="毕业设计与就业衔接" data-meta="硕士夏季｜04–05月起" data-body="毕业设计尽量服务于求职，而不是与岗位方向脱节。" data-todo="统一毕业项目与求职方向|更新作品集"><strong>就业衔接</strong><small>04–05月</small></div>
+          </div>
+        </div>
+        <div class="lane" data-lane="growth">
+          <div class="laneLabel"><strong>专业成长</strong><span>项目与就业目标合一，而非做两个体系。</span></div>
+          <div class="cells">
+            <div class="bar growth-portfolio r1" data-type="growth" style="left:0%;width:20%" data-title="求职作品集深化" data-meta="06–08月" data-body="入学前进一步完成岗位化整理。" data-todo="作品集岗位版|项目职责拆解"><strong>求职作品集深化</strong><small>06–08月</small></div>
+            <div class="bar growth-support r2" data-type="growth" style="left:30%;width:20%" data-title="课程项目与就业统一" data-meta="09–12月" data-body="让课程项目尽可能服务未来岗位能力展示。" data-todo="选题向岗位靠拢|保留过程记录"><strong>课程项目统一</strong><small>09–12月</small></div>
+            <div class="bar growth-support r1" data-type="growth" style="left:58%;width:18%" data-title="根据秋招反馈修正" data-meta="01–03月" data-body="根据企业反馈迭代作品集与面试表达。" data-todo="修正项目表达|补强短板"><strong>反馈修正</strong><small>01–03月</small></div>
+            <div class="bar growth-flag r2" data-type="growth" style="left:80%;width:14%" data-title="毕业设计服务就业" data-meta="04–05月起" data-body="毕业设计尽量成为作品集中的求职核心项目，而非另起炉灶。" data-todo="毕业设计与岗位统一"><strong>毕业设计服务就业</strong><small>04–05月</small></div>
+          </div>
+        </div>
+        <div class="lane" data-lane="jobprep">
+          <div class="laneLabel"><strong>求职准备</strong><span>不是等毕业，而是入学前就开始，并贯穿整个学年。</span></div>
+          <div class="cells">
+            <div class="bar job-recruit r1" data-type="jobprep" style="left:10%;width:18%" data-title="秋招预投" data-meta="07–08月" data-body="入学前就要关注提前批和秋招启动节奏。" data-todo="建立目标公司清单|提前准备内推"><strong>秋招预投</strong><small>07–08月</small></div>
+            <div class="bar job-recruit r2" data-type="jobprep" style="left:24%;width:28%" data-title="秋招投递 / 笔试 / 面试" data-meta="09–12月" data-body="求职准备进入最高强度阶段。" data-todo="每周投递|测试题训练|面试复盘"><strong>秋招投递 / 笔面试</strong><small>09–12月</small></div>
+            <div class="bar job-recruit r1" data-type="jobprep" style="left:58%;width:20%" data-title="春招补录 + 社招预备" data-meta="01–03月" data-body="第二轮冲刺与策略调整期。" data-todo="补投春招|为社招做准备"><strong>春招补录 + 社招</strong><small>01–03月</small></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+<div class="drawer" id="drawer">
+  <button class="closeBtn" onclick="closeDrawer()">×</button>
+  <h3 id="dTitle"></h3>
+  <div class="drawerMeta" id="dMeta"></div>
+  <p id="dBody"></p>
+  <ul id="dTodo"></ul>
+</div>
+<script>
+const recs={
+  y1:'当前重点：建立专业认知与作品归档习惯，让大一课程开始为未来申请与职业规划服务。',
+  y2:'当前重点：完成方向确认，积累核心项目与第一段真实行业经历，为大三申研做储备。',
+  y3:'当前重点：申研递交、毕业衔接，以及把项目转译为求职作品集基础版。',
+  m1:'当前重点：以秋招为中心组织整个硕士学年的学习和求职节奏。'
+};
+function renderSummary(){document.getElementById('summary').innerHTML=recs[document.getElementById('entry').value];}
+function applyFilters(){
+  const active=[...document.querySelectorAll('.chip.active')].map(n=>n.dataset.filter);
+  document.querySelectorAll('.lane').forEach(lane=>{lane.style.display=active.includes(lane.dataset.lane)?'grid':'none';});
+  document.querySelectorAll('.bar').forEach(bar=>bar.classList.toggle('faded',!active.includes(bar.dataset.type)));
+  const path=document.getElementById('path').value;
+  document.querySelectorAll('.yearBlock').forEach(block=>{const show=path==='all'||(block.dataset.path||'').includes(path);block.style.display=show?'block':'none';});
+}
+function closeDrawer(){document.getElementById('drawer').classList.remove('show');}
+window.closeDrawer=closeDrawer;
+document.getElementById('entry').addEventListener('change',renderSummary);
+document.getElementById('path').addEventListener('change',applyFilters);
+document.querySelectorAll('.chip').forEach(chip=>chip.addEventListener('click',()=>{chip.classList.toggle('active');applyFilters();}));
+document.querySelectorAll('.bar').forEach(el=>el.addEventListener('click',()=>{
+ document.getElementById('dTitle').innerText=el.dataset.title||'';
+ document.getElementById('dMeta').innerText=el.dataset.meta||'';
+ document.getElementById('dBody').innerText=el.dataset.body||'';
+ document.getElementById('dTodo').innerHTML=(el.dataset.todo||'').split('|').filter(Boolean).map(x=>`<li>${x}</li>`).join('');
+ document.getElementById('drawer').classList.add('show');
+}));
+renderSummary();applyFilters();
+</script>
+</body>
+</html>
