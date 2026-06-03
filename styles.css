@@ -1414,7 +1414,7 @@ img { display: block; max-width: 100%; }
     padding: 16px;
     box-shadow: var(--shadow-xl);
     opacity: 0;
-    visibility: hidden;
+    pointer-events: none;
     transition: all .3s var(--ease);
     z-index: 100;
     display: flex;
@@ -1434,7 +1434,7 @@ img { display: block; max-width: 100%; }
 
 .qr-trigger:hover .qr-popup {
     opacity: 1;
-    visibility: visible;
+    pointer-events: auto;
     transform: translateX(-50%) scale(1);
 }
 
