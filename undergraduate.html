@@ -169,6 +169,288 @@
             .ug-tabs-inner { padding: 0 16px; }
             .ug-tab-btn { padding: 8px 20px; font-size: 14px; }
         }
+
+        /* 英国教育体系 - 展开按钮 */
+        .uk-edu-toggle {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 32px;
+            background: var(--gray-900);
+            border: 1px solid var(--gray-700);
+            border-radius: var(--radius-full);
+            color: var(--gray-300);
+            font-size: 15px;
+            font-weight: 600;
+            font-family: var(--font);
+            cursor: pointer;
+            transition: all .3s var(--ease);
+        }
+        .uk-edu-toggle:hover {
+            border-color: var(--orange);
+            color: var(--orange);
+            background: var(--orange-10);
+            box-shadow: var(--shadow-orange);
+        }
+        .uk-edu-toggle.active {
+            background: var(--orange);
+            border-color: var(--orange);
+            color: var(--white);
+        }
+        .uk-edu-toggle-icon { font-size: 20px; }
+        .uk-edu-toggle-arrow {
+            font-size: 12px;
+            transition: transform .3s var(--ease);
+        }
+        .uk-edu-toggle.active .uk-edu-toggle-arrow {
+            transform: rotate(180deg);
+        }
+
+        /* 英国教育体系 - 展开面板 */
+        .uk-edu-panel {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height .5s var(--ease), opacity .4s var(--ease), margin .4s var(--ease);
+            opacity: 0;
+            margin-bottom: 0;
+        }
+        .uk-edu-panel.open {
+            max-height: 800px;
+            opacity: 1;
+            margin-bottom: 40px;
+        }
+
+        /* 英国教育体系 - 互动图谱（暗色主题适配） */
+        .uk-edu-map {
+            background: var(--gray-900);
+            border: 1px solid var(--gray-800);
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            padding: 14px;
+        }
+        .uk-edu-mobile-note {
+            display: none;
+            color: var(--gray-500);
+            font-size: 12px;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+        .uk-edu-level-strip {
+            display: flex;
+            gap: 8px;
+            min-height: 420px;
+        }
+        .uk-edu-level-panel {
+            flex: 1 1 0;
+            min-width: 72px;
+            border: 1px solid var(--gray-800);
+            border-radius: var(--radius-xl);
+            background: var(--dark);
+            overflow: hidden;
+            cursor: pointer;
+            transition: flex .38s ease, box-shadow .25s ease, transform .25s ease;
+            position: relative;
+        }
+        .uk-edu-level-panel:hover,
+        .uk-edu-level-panel.active {
+            flex: 5.4 1 0;
+            box-shadow: 0 20px 46px rgba(0,0,0,.30);
+            transform: translateY(-2px);
+        }
+        .uk-edu-level-panel:not(:hover):not(.active) {
+            flex: .72 1 0;
+        }
+        .uk-edu-level-tab {
+            height: 100%;
+            min-height: 420px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px 8px;
+            color: #fff;
+            font-weight: 900;
+            letter-spacing: .02em;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            font-size: 20px;
+            transition: opacity .2s ease;
+        }
+        .uk-edu-level-panel:hover .uk-edu-level-tab,
+        .uk-edu-level-panel.active .uk-edu-level-tab {
+            opacity: 0;
+            pointer-events: none;
+            position: absolute;
+        }
+        .uk-edu-level-content {
+            display: none;
+            height: 100%;
+            min-height: 420px;
+            padding: 16px;
+            background: var(--gray-900);
+        }
+        .uk-edu-level-panel:hover .uk-edu-level-content,
+        .uk-edu-level-panel.active .uk-edu-level-content {
+            display: flex;
+            flex-direction: column;
+        }
+        .uk-edu-level-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--gray-800);
+        }
+        .uk-edu-level-badge {
+            flex: 0 0 auto;
+            min-width: 76px;
+            border-radius: 18px;
+            color: #fff;
+            text-align: center;
+            font-weight: 900;
+            padding: 10px 8px;
+        }
+        .uk-edu-level-badge small {
+            display: block;
+            font-size: 11px;
+            opacity: .88;
+        }
+        .uk-edu-level-badge span {
+            display: block;
+            font-size: 22px;
+            line-height: 1.05;
+        }
+        .uk-edu-level-title h3 {
+            margin: 0;
+            font-size: 18px;
+            line-height: 1.25;
+            color: var(--white);
+        }
+        .uk-edu-level-title .en {
+            display: block;
+            color: var(--gray-500);
+            font-weight: 400;
+            font-size: .88em;
+            margin-top: 4px;
+        }
+        .uk-edu-level-title p {
+            margin: 6px 0 0;
+            color: var(--gray-500);
+            font-size: 13px;
+            line-height: 1.5;
+        }
+        .uk-edu-content-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 9px;
+            margin-top: 10px;
+        }
+        .uk-edu-card {
+            border: 1px solid var(--gray-800);
+            background: var(--dark);
+            border-radius: 18px;
+            padding: 11px;
+        }
+        .uk-edu-card h4 {
+            margin: 0 0 7px;
+            font-size: 14px;
+            color: var(--white);
+        }
+        .uk-edu-items {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 6px;
+        }
+        .uk-edu-item {
+            background: var(--gray-800);
+            border: 1px solid var(--gray-700);
+            border-radius: 14px;
+            padding: 8px;
+        }
+        .uk-edu-item strong {
+            display: block;
+            font-size: 13px;
+            line-height: 1.35;
+            color: var(--white);
+        }
+        .uk-edu-item span {
+            display: block;
+            color: var(--gray-500);
+            font-size: 12px;
+            line-height: 1.5;
+            margin-top: 3px;
+        }
+        .uk-edu-route {
+            background: var(--gray-800);
+        }
+        .uk-edu-route p {
+            margin: 0;
+            color: var(--gray-500);
+            font-size: 13px;
+            line-height: 1.7;
+        }
+        .uk-edu-path-footer {
+            margin-top: auto;
+            padding-top: 8px;
+        }
+        .uk-edu-path-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+        }
+        .uk-edu-chip {
+            border-radius: 999px;
+            background: var(--gray-800);
+            border: 1px solid var(--gray-700);
+            padding: 7px 9px;
+            font-size: 12px;
+            color: var(--gray-400);
+        }
+        .uk-edu-cat-higher .uk-edu-level-tab,
+        .uk-edu-cat-higher .uk-edu-level-badge { background: #25a7d8; }
+        .uk-edu-cat-he .uk-edu-level-tab,
+        .uk-edu-cat-he .uk-edu-level-badge { background: #8a9a30; color: #fff; }
+        .uk-edu-cat-fe .uk-edu-level-tab,
+        .uk-edu-cat-fe .uk-edu-level-badge { background: #e5007f; }
+        .uk-edu-cat-school .uk-edu-level-tab,
+        .uk-edu-cat-school .uk-edu-level-badge { background: #5d337f; }
+        .uk-edu-cat-entry .uk-edu-level-tab,
+        .uk-edu-cat-entry .uk-edu-level-badge { background: #8a6f9e; }
+
+        @media (max-width: 980px) {
+            .uk-edu-mobile-note { display: block; }
+            .uk-edu-level-strip {
+                flex-direction: column;
+                min-height: auto;
+            }
+            .uk-edu-level-panel,
+            .uk-edu-level-panel:not(:hover):not(.active),
+            .uk-edu-level-panel:hover,
+            .uk-edu-level-panel.active {
+                flex: auto;
+                min-width: 0;
+                transform: none;
+            }
+            .uk-edu-level-tab {
+                min-height: 60px;
+                height: 60px;
+                writing-mode: horizontal-tb;
+                font-size: 18px;
+            }
+            .uk-edu-level-content,
+            .uk-edu-level-panel:hover .uk-edu-level-content,
+            .uk-edu-level-panel.active .uk-edu-level-content {
+                min-height: auto;
+                height: auto;
+                display: none;
+            }
+            .uk-edu-level-panel.active .uk-edu-level-content {
+                display: flex;
+            }
+            .uk-edu-level-panel.active .uk-edu-level-tab {
+                display: none;
+            }
+            .uk-edu-items { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
@@ -189,8 +471,9 @@
                 <li><a href="index.html#programs" class="nav-link">短期项目</a></li>
                 <li><a href="index.html#data" class="nav-link">录取数据</a></li>
                 <li><a href="index.html#quick-entry" class="nav-link">快捷入口</a></li>
-                <li><a href="undergraduate.html" class="nav-link active">本科</a></li>
-                <li><a href="#" class="nav-link" style="opacity:.4;cursor:not-allowed">研究生</a></li>
+                <li class="nav-spacer"></li>
+                <li><a href="undergraduate.html" class="nav-link nav-link-accent active">本科</a></li>
+                <li><a href="#" class="nav-link nav-link-accent" style="opacity:.4;cursor:not-allowed">研究生</a></li>
             </ul>
             <button class="nav-toggle" id="navToggle" aria-label="菜单">
                 <span></span><span></span><span></span>
@@ -216,6 +499,24 @@
                     <h1>英联邦本科申请</h1>
                     <p>英国、澳洲、加拿大、香港、新加坡等英联邦体系本科申请规划与资源汇总</p>
                 </div>
+
+                <!-- 英国教育体系互动工具按钮 -->
+                <div style="text-align:center;margin-bottom:40px;">
+                    <button class="uk-edu-toggle" id="ukEduToggle" onclick="toggleUkEdu()">
+                        <span class="uk-edu-toggle-icon">🎓</span>
+                        <span>英国教育体系</span>
+                        <span class="uk-edu-toggle-arrow" id="ukEduArrow">▾</span>
+                    </button>
+                </div>
+
+                <!-- 英国教育体系互动工具（可展开） -->
+                <div class="uk-edu-panel" id="ukEduPanel">
+                    <div class="uk-edu-map">
+                        <div class="uk-edu-mobile-note">移动端建议点击 Level 展开查看；桌面端鼠标悬停即可展开。</div>
+                        <div class="uk-edu-level-strip" id="ukEduStrip"></div>
+                    </div>
+                </div>
+
                 <div class="ug-grid">
                     <div class="ug-card">
                         <div class="ug-card-icon">🇬🇧</div>
@@ -300,16 +601,10 @@
         tabBtns.forEach(btn => {
             btn.addEventListener('click', () => {
                 const target = btn.dataset.tab;
-                
-                // 切换按钮状态
                 tabBtns.forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
-                
-                // 切换内容面板
                 panels.forEach(p => p.classList.remove('active'));
                 document.getElementById('panel-' + target).classList.add('active');
-                
-                // 滚动到内容顶部
                 document.querySelector('.ug-content-wrap').scrollIntoView({ behavior: 'smooth', block: 'start' });
             });
         });
@@ -322,6 +617,76 @@
                 navLinks.classList.toggle('show');
             });
         }
+
+        // 英国教育体系 - 展开/收起
+        function toggleUkEdu() {
+            const panel = document.getElementById('ukEduPanel');
+            const toggle = document.getElementById('ukEduToggle');
+            const isOpen = panel.classList.toggle('open');
+            toggle.classList.toggle('active', isOpen);
+        }
+
+        // 英国教育体系 - 数据渲染
+        const ukLevels=[
+          {level:'1',cat:'school',titleCN:'GCSE 入门等级与基础资格',titleEN:'Introductory school-level qualifications',summaryCN:'GCSE 1–3、BTEC Level 1、NVQ Level 1 等。',summaryEN:'GCSE grades 1–3, BTEC Level 1, NVQ Level 1 and similar qualifications.',items:[['GCSE Grade 1–3','GCSE 基础等级'],['BTEC Level 1','职业入门课程'],['NVQ Level 1','入门职业能力资格']],routeCN:'Level 1 → Level 2 → Level 3',routeEN:'Level 1 → Level 2 → Level 3'},
+          {level:'2',cat:'school',titleCN:'GCSE 合格与基础职业资格',titleEN:'GCSE pass level and foundation vocational qualifications',summaryCN:'GCSE 4–9、BTEC Level 2、NVQ Level 2 等。',summaryEN:'GCSE grades 4–9, BTEC Level 2, NVQ Level 2 and similar qualifications.',items:[['GCSE Grade 4–9','通常视为 GCSE pass'],['BTEC Level 2','职业基础课程'],['NVQ Level 2','职业能力资格'],['Intermediate Apprenticeship','中级学徒制']],routeCN:'Level 2 → A Level / BTEC Level 3 / T Level',routeEN:'Level 2 → A Levels / BTEC Level 3 / T Levels'},
+          {level:'3',cat:'fe',titleCN:'大学前核心衔接阶段',titleEN:'Main pre-university level',summaryCN:'A Level、BTEC Level 3、T Level、IB 等通常用于申请大学。',summaryEN:'A Levels, BTEC Level 3, T Levels and IB are commonly used for university entry.',items:[['A Levels / AS Levels','英国传统大学申请课程'],['BTEC National / Level 3','职业导向课程，可申请本科'],['T Levels','技术路线，含行业实践'],['International Baccalaureate','IB 国际文凭'],['Access to HE Diploma','成人或转轨学生升学通道']],routeCN:'GCSE / 国际高中 → Level 3 → 本科 / Foundation / HNC',routeEN:'GCSE / international high school → Level 3 → degree / foundation / HNC'},
+          {level:'4',cat:'he',titleCN:'高等教育入门阶段',titleEN:'First stage of higher education',summaryCN:'HNC、CertHE 等常见于高等教育第一阶段。',summaryEN:'Includes HNC and CertHE, often the first stage of higher education.',items:[['HNC','Higher National Certificate / 高级国家证书'],['Certificate of Higher Education','CertHE / 高等教育证书'],['Level 4 Diploma','职业或专业 4 级文凭'],['Higher Apprenticeship','高级学徒制部分方向']],routeCN:'Level 3 → HNC / CertHE → HND / 本科继续学习',routeEN:'Level 3 → HNC / CertHE → HND / further degree study'},
+          {level:'5',cat:'he',titleCN:'本科中段 / 高级文凭阶段',titleEN:'Intermediate undergraduate / higher diploma level',summaryCN:'常见资格包括 HND、Foundation Degree、DipHE，对应本科前两年左右。',summaryEN:'Includes HND, Foundation Degree and DipHE; broadly comparable to early undergraduate study.',items:[['HND','Higher National Diploma / 高级国家文凭'],['Foundation Degree','基础学位'],['Diploma of Higher Education','DipHE / 高等教育文凭'],['Level 5 Diploma','职业或专业文凭']],routeCN:'HNC / Level 4 → HND / Level 5 → 本科 Top-up / 就业',routeEN:'HNC / Level 4 → HND / Level 5 → top-up degree / employment'},
+          {level:'6',cat:'he',titleCN:'本科荣誉学位阶段',titleEN:'Bachelor\'s / Honours Degree level',summaryCN:'对应英国本科最终阶段，也包括部分高级职业资格。',summaryEN:'Final undergraduate level, also including some advanced professional qualifications.',items:[['Bachelor\'s Degree with Honours','BA(Hons) / BSc(Hons) / BDes(Hons)'],['Degree Apprenticeship','学位学徒制'],['Graduate Certificate / Diploma','部分毕业证书或文凭'],['BTEC Advanced Professional Level 6','BTEC 高级专业 6 级']],routeCN:'Level 3/4/5 → 本科毕业 → 硕士或就业',routeEN:'Level 3/4/5 → Bachelor\'s completion → master\'s or employment'},
+          {level:'7',cat:'higher',titleCN:'研究生阶段',titleEN:'Postgraduate level',summaryCN:'硕士学位、研究生文凭与研究生证书所在等级。',summaryEN:'Master\'s degrees, postgraduate diplomas and postgraduate certificates.',items:[['Master\'s Degree','MA / MSc / MFA / MDes 等'],['Postgraduate Diploma','PGDip / 研究生文凭'],['Postgraduate Certificate','PGCert / 研究生证书'],['Level 7 Diploma','部分职业资格与专业认证']],routeCN:'本科 → 硕士 → 就业 / 博士 / 高级专业路径',routeEN:'Bachelor\'s → Master\'s → employment / doctorate / advanced practice'},
+          {level:'8',cat:'higher',titleCN:'博士与最高研究型资格',titleEN:'Doctoral and highest-level qualifications',summaryCN:'面向原创研究、博士学位与高级专业实践。',summaryEN:'Original research, doctoral study and advanced professional practice.',items:[['PhD / DPhil','博士学位 / Doctoral Degree'],['Professional Doctorate','专业博士，如 EdD、DBA 等'],['Level 8 Diploma','高级专业资格']],routeCN:'硕士 → 博士 / 研究职位 / 高级行业专家',routeEN:'Master\'s → Doctorate / research roles / senior specialist roles'}
+        ];
+
+        function renderUkEdu(){
+          const strip=document.getElementById('ukEduStrip');
+          strip.innerHTML=ukLevels.map((l,i)=>`
+            <article class="uk-edu-level-panel uk-edu-cat-${l.cat} ${i===2?'active':''}" tabindex="0">
+              <div class="uk-edu-level-tab">Level ${l.level}</div>
+              <div class="uk-edu-level-content">
+                <div class="uk-edu-level-header">
+                  <div class="uk-edu-level-badge"><small>LEVEL</small><span>${l.level}</span></div>
+                  <div class="uk-edu-level-title">
+                    <h3>${l.titleCN}<span class="en">${l.titleEN}</span></h3>
+                    <p>${l.summaryCN}<br>${l.summaryEN}</p>
+                  </div>
+                </div>
+                <div class="uk-edu-content-grid">
+                  <div class="uk-edu-card">
+                    <h4>常见资格 / Common qualifications</h4>
+                    <div class="uk-edu-items">
+                      ${l.items.map(it=>`<div class="uk-edu-item"><strong>${it[0]}</strong><span>${it[1]}</span></div>`).join('')}
+                    </div>
+                  </div>
+                  <div class="uk-edu-card uk-edu-route">
+                    <h4>典型去向 / Typical progression</h4>
+                    <p>${l.routeCN}<br>${l.routeEN}</p>
+                  </div>
+                </div>
+                <div class="uk-edu-path-footer">
+                  <div class="uk-edu-path-chips">
+                    <span class="uk-edu-chip">GCSE</span>
+                    <span class="uk-edu-chip">A Level</span>
+                    <span class="uk-edu-chip">BTEC</span>
+                    <span class="uk-edu-chip">HNC / HND</span>
+                    <span class="uk-edu-chip">Bachelor</span>
+                    <span class="uk-edu-chip">Master</span>
+                  </div>
+                </div>
+              </div>
+            </article>
+          `).join('');
+          document.querySelectorAll('.uk-edu-level-panel').forEach(panel=>{
+            panel.addEventListener('mouseenter',()=>setUkActive(panel));
+            panel.addEventListener('focus',()=>setUkActive(panel));
+            panel.addEventListener('click',()=>setUkActive(panel));
+          });
+        }
+        function setUkActive(panel){
+          document.querySelectorAll('.uk-edu-level-panel').forEach(p=>p.classList.remove('active'));
+          panel.classList.add('active');
+        }
+        renderUkEdu();
     </script>
 </body>
 </html>
