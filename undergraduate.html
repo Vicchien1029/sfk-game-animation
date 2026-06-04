@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>本科申请 · 斯芬克游戏动画科系</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* 本科页面专用样式 */
+        .ug-page {
+            padding-top: 68px;
+            min-height: 100vh;
+            background: var(--black);
+        }
+        
+        /* 顶部标签切换栏 */
+        .ug-tabs-bar {
+            position: sticky;
+            top: 68px;
+            z-index: 50;
+            background: rgba(10,10,10,.94);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--gray-800);
+        }
+        .ug-tabs-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            gap: 8px;
+            height: 64px;
+            align-items: center;
+        }
+        .ug-tab-btn {
+            padding: 10px 28px;
+            border-radius: var(--radius-full);
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--gray-400);
+            background: transparent;
+            border: 1px solid transparent;
+            cursor: pointer;
+            transition: all .3s var(--ease);
+            font-family: var(--font);
+        }
+        .ug-tab-btn:hover {
+            color: var(--white);
+            background: var(--gray-800);
+        }
+        .ug-tab-btn.active {
+            color: var(--white);
+            background: var(--orange);
+            border-color: var(--orange);
+            box-shadow: var(--shadow-orange);
+        }
+        
+        /* 内容区域 */
+        .ug-content-wrap {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 24px 80px;
+        }
+        .ug-panel {
+            display: none;
+            animation: fadeSlideIn .5s var(--ease);
+        }
+        .ug-panel.active {
+            display: block;
+        }
+        @keyframes fadeSlideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* 页面标题区 */
+        .ug-hero {
+            text-align: center;
+            padding: 60px 0 40px;
+        }
+        .ug-hero h1 {
+            font-size: 36px;
+            font-weight: 900;
+            color: var(--white);
+            margin-bottom: 12px;
+        }
+        .ug-hero p {
+            font-size: 15px;
+            color: var(--gray-400);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+        
+        /* 内容卡片网格 */
+        .ug-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 40px;
+        }
+        .ug-card {
+            background: var(--gray-900);
+            border: 1px solid var(--gray-800);
+            border-radius: var(--radius-lg);
+            padding: 32px 28px;
+            transition: all .35s var(--ease);
+            cursor: pointer;
+        }
+        .ug-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--orange);
+            box-shadow: 0 0 24px rgba(255,79,0,.12);
+        }
+        .ug-card-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--orange-10);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 22px;
+        }
+        .ug-card h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 10px;
+        }
+        .ug-card p {
+            font-size: 13px;
+            color: var(--gray-400);
+            line-height: 1.7;
+        }
+        
+        /* 占位内容样式 */
+        .ug-placeholder {
+            text-align: center;
+            padding: 100px 0;
+            color: var(--gray-500);
+        }
+        .ug-placeholder-icon {
+            font-size: 64px;
+            margin-bottom: 24px;
+            opacity: .3;
+        }
+        .ug-placeholder h2 {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--gray-300);
+            margin-bottom: 12px;
+        }
+        .ug-placeholder p {
+            font-size: 14px;
+            color: var(--gray-500);
+            max-width: 480px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+        
+        @media (max-width: 1024px) {
+            .ug-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 768px) {
+            .ug-grid { grid-template-columns: 1fr; }
+            .ug-hero h1 { font-size: 28px; }
+            .ug-tabs-inner { padding: 0 16px; }
+            .ug-tab-btn { padding: 8px 20px; font-size: 14px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="assets/logo.png" alt="Logo" class="logo-img">
+                <div class="logo-text">
+                    <span class="logo-main">斯芬克 · 游戏动画科系</span>
+                    <span class="logo-sub">内部资料库</span>
+                </div>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html" class="nav-link">主页</a></li>
+                <li><a href="index.html#cases" class="nav-link">作品案例</a></li>
+                <li><a href="index.html#professors" class="nav-link">海外教授</a></li>
+                <li><a href="index.html#programs" class="nav-link">短期项目</a></li>
+                <li><a href="index.html#data" class="nav-link">录取数据</a></li>
+                <li><a href="index.html#quick-entry" class="nav-link">快捷入口</a></li>
+                <li><a href="undergraduate.html" class="nav-link active">本科</a></li>
+                <li><a href="#" class="nav-link" style="opacity:.4;cursor:not-allowed">研究生</a></li>
+            </ul>
+            <button class="nav-toggle" id="navToggle" aria-label="菜单">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- 本科页面主体 -->
+    <div class="ug-page">
+        <!-- 标签切换栏 -->
+        <div class="ug-tabs-bar">
+            <div class="ug-tabs-inner">
+                <button class="ug-tab-btn active" data-tab="commonwealth">英联邦</button>
+                <button class="ug-tab-btn" data-tab="us-others">美本及其他</button>
+            </div>
+        </div>
+
+        <!-- 内容区域 -->
+        <div class="ug-content-wrap">
+            <!-- 英联邦内容 -->
+            <div class="ug-panel active" id="panel-commonwealth">
+                <div class="ug-hero">
+                    <h1>英联邦本科申请</h1>
+                    <p>英国、澳洲、加拿大、香港、新加坡等英联邦体系本科申请规划与资源汇总</p>
+                </div>
+                <div class="ug-grid">
+                    <div class="ug-card">
+                        <div class="ug-card-icon">🇬🇧</div>
+                        <h3>英国本科</h3>
+                        <p>UCAS 申请系统、作品集要求、文书准备、面试辅导等全流程申请指南</p>
+                    </div>
+                    <div class="ug-card">
+                        <div class="ug-card-icon">🇦🇺</div>
+                        <h3>澳洲本科</h3>
+                        <p>澳洲八大院校申请要点、作品集标准、语言要求与签证办理</p>
+                    </div>
+                    <div class="ug-card">
+                        <div class="ug-card-icon">🇨🇦</div>
+                        <h3>加拿大本科</h3>
+                        <p>加拿大艺术院校申请策略、 provincial 差异与移民优势分析</p>
+                    </div>
+                    <div class="ug-card">
+                        <div class="ug-card-icon">🇭🇰</div>
+                        <h3>香港本科</h3>
+                        <p>港校申请时间线、作品集要求、面试技巧与奖学金申请</p>
+                    </div>
+                    <div class="ug-card">
+                        <div class="ug-card-icon">🇸🇬</div>
+                        <h3>新加坡本科</h3>
+                        <p>新加坡国立、南洋理工等院校申请要点与作品集规范</p>
+                    </div>
+                    <div class="ug-card">
+                        <div class="ug-card-icon">📋</div>
+                        <h3>申请时间线</h3>
+                        <p>英联邦体系本科申请完整时间规划，从准备到入学的每个关键节点</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 美本及其他内容 -->
+            <div class="ug-panel" id="panel-us-others">
+                <div class="ug-hero">
+                    <h1>美本及其他本科申请</h1>
+                    <p>美国本科及其他国家/地区本科申请规划与资源汇总</p>
+                </div>
+                <div class="ug-grid">
+                    <div class="ug-card">
+                        <div class="ug-card-icon">🇺🇸</div>
+                        <h3>美国本科</h3>
+                        <p>Common App / Coalition 申请系统、作品集要求、文书策略、面试准备</p>
+                    </div>
+                    <div class="ug-card">
+                        <div class="ug-card-icon">🎨</div>
+                        <h3>艺术院校申请</h3>
+                        <p>CalArts、Ringling、ACCD、SCAD 等顶尖艺术院校申请专项指南</p>
+                    </div>
+                    <div class="ug-card">
+                        <div class="ug-card-icon">🏛️</div>
+                        <h3>综合大学申请</h3>
+                        <p>USC、NYU、CMU 等综合大学游戏/动画专业申请策略</p>
+                    </div>
+                    <div class="ug-card">
+                        <div class="ug-card-icon">🇯🇵</div>
+                        <h3>日本本科</h3>
+                        <p>日本艺术院校申请要点、日语要求、作品集规范与留学准备</p>
+                    </div>
+                    <div class="ug-card">
+                        <div class="ug-card-icon">🇰🇷</div>
+                        <h3>韩国本科</h3>
+                        <p>韩国艺术院校申请流程、语言要求与作品集准备</p>
+                    </div>
+                    <div class="ug-card">
+                        <div class="ug-card-icon">📋</div>
+                        <h3>申请时间线</h3>
+                        <p>美本及其他国家本科申请完整时间规划与关键节点</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 标签切换逻辑
+        const tabBtns = document.querySelectorAll('.ug-tab-btn');
+        const panels = document.querySelectorAll('.ug-panel');
+        
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const target = btn.dataset.tab;
+                
+                // 切换按钮状态
+                tabBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                // 切换内容面板
+                panels.forEach(p => p.classList.remove('active'));
+                document.getElementById('panel-' + target).classList.add('active');
+                
+                // 滚动到内容顶部
+                document.querySelector('.ug-content-wrap').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+        
+        // 移动端菜单
+        const navToggle = document.getElementById('navToggle');
+        const navLinks = document.getElementById('navLinks');
+        if (navToggle && navLinks) {
+            navToggle.addEventListener('click', () => {
+                navLinks.classList.toggle('show');
+            });
+        }
+    </script>
+</body>
+</html>
