@@ -170,12 +170,11 @@
             .ug-tab-btn { padding: 8px 20px; font-size: 14px; }
         }
 
-        /* 英国教育体系 - 右侧浮动按钮 */
-        .uk-edu-float-btn {
+        /* 英国教育体系 - 右上方按钮 */
+        .uk-edu-top-btn {
             display: flex;
             justify-content: flex-end;
-            margin-top: 16px;
-            margin-bottom: 0;
+            margin-bottom: 16px;
         }
         .uk-edu-toggle-simple {
             display: inline-flex;
@@ -212,17 +211,17 @@
             opacity: 0;
         }
         .uk-edu-panel.open {
-            max-height: 600px;
+            max-height: 900px;
             opacity: 1;
         }
 
         /* 英国教育体系 - 互动图谱（暗色主题适配） */
         .uk-edu-map {
-            background: var(--gray-900);
-            border: 1px solid var(--gray-800);
-            border-radius: var(--radius-xl);
+            background: transparent;
+            border: none;
+            border-radius: 0;
             overflow: hidden;
-            padding: 14px;
+            padding: 0;
             width: 100%;
         }
         .uk-edu-mobile-note {
@@ -492,20 +491,20 @@
         <div class="ug-content-wrap">
             <!-- 英联邦内容 -->
             <div class="ug-panel active" id="panel-commonwealth">
+                <!-- 右上方收起/展开按钮 -->
+                <div class="uk-edu-top-btn">
+                    <button class="uk-edu-toggle-simple" id="ukEduToggle" onclick="toggleUkEdu()">
+                        <span>英国教育体系</span>
+                        <span class="uk-edu-toggle-arrow" id="ukEduArrow">▾</span>
+                    </button>
+                </div>
+
                 <!-- 英国教育体系互动工具（默认展开） -->
                 <div class="uk-edu-panel open" id="ukEduPanel">
                     <div class="uk-edu-map">
                         <div class="uk-edu-mobile-note">移动端建议点击 Level 展开查看；桌面端鼠标悬停即可展开。</div>
                         <div class="uk-edu-level-strip" id="ukEduStrip"></div>
                     </div>
-                </div>
-
-                <!-- 右侧浮动收起/展开按钮 -->
-                <div class="uk-edu-float-btn">
-                    <button class="uk-edu-toggle-simple" id="ukEduToggle" onclick="toggleUkEdu()">
-                        <span id="ukEduToggleText">收起</span>
-                        <span class="uk-edu-toggle-arrow" id="ukEduArrow">▾</span>
-                    </button>
                 </div>
             </div>
 
