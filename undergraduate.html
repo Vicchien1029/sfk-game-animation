@@ -547,6 +547,47 @@
             max-width: 600px;
         }
 
+        /* 左右切换按钮 */
+        .carousel-nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 44px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0,0,0,.25);
+            border: none;
+            color: rgba(255,255,255,.55);
+            cursor: pointer;
+            opacity: 0;
+            transition: all .35s var(--ease);
+            z-index: 6;
+            padding: 0;
+        }
+        .carousel-nav-btn svg {
+            width: 20px;
+            height: 20px;
+        }
+        .carousel-prev {
+            left: 0;
+            border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+            padding-left: 6px;
+        }
+        .carousel-next {
+            right: 0;
+            border-radius: var(--radius-lg) 0 0 var(--radius-lg);
+            padding-right: 6px;
+        }
+        .portfolio-carousel:hover .carousel-nav-btn {
+            opacity: 1;
+        }
+        .carousel-nav-btn:hover {
+            background: rgba(0,0,0,.55);
+            color: var(--white);
+        }
+
         /* 轮播指示器 */
         .carousel-indicators {
             position: absolute;
@@ -572,7 +613,7 @@
 
         /* 右侧案例列表 */
         .portfolio-sidebar {
-            flex: 0 0 280px;
+            flex: 0 0 196px;
             display: flex;
             flex-direction: column;
         }
@@ -753,6 +794,13 @@
                                     <p class="work-desc" id="workDesc">作品简介...</p>
                                 </div>
                             </div>
+                            <!-- 左右切换按钮 -->
+                            <button class="carousel-nav-btn carousel-prev" id="carouselPrev" aria-label="上一张">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                            </button>
+                            <button class="carousel-nav-btn carousel-next" id="carouselNext" aria-label="下一张">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                            </button>
                             <!-- 轮播指示器 -->
                             <div class="carousel-indicators" id="carouselIndicators"></div>
                         </div>
@@ -1089,6 +1137,24 @@
                 showImage(idx);
                 resetAutoPlay();
             }
+        });
+
+        // 左右切换按钮点击
+        document.getElementById('carouselPrev').addEventListener('click', () => {
+            const caseData = portfolioData[currentCaseIndex];
+            const prev = currentImageIndex > 0 ? currentImageIndex - 1 : caseData.images.length - 1;
+            showImage(prev);
+            resetAutoPlay();
+        });
+        document.getElementById('carouselNext').addEventListener('click', () => {
+            const caseData = portfolioData[currentCaseIndex];
+            if (currentImageIndex < caseData.images.length - 1) {
+                showImage(currentImageIndex + 1);
+            } else {
+                const nextCase = (currentCaseIndex + 1) % portfolioData.length;
+                switchCase(nextCase);
+            }
+            resetAutoPlay();
         });
 
         initPortfolio();
