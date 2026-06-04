@@ -170,39 +170,37 @@
             .ug-tab-btn { padding: 8px 20px; font-size: 14px; }
         }
 
-        /* 英国教育体系 - 展开按钮 */
-        .uk-edu-toggle {
+        /* 英国教育体系 - 右侧浮动按钮 */
+        .uk-edu-float-btn {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 16px;
+            margin-bottom: 0;
+        }
+        .uk-edu-toggle-simple {
             display: inline-flex;
             align-items: center;
-            gap: 10px;
-            padding: 14px 32px;
-            background: var(--gray-900);
+            gap: 6px;
+            padding: 8px 20px;
+            background: transparent;
             border: 1px solid var(--gray-700);
             border-radius: var(--radius-full);
-            color: var(--gray-300);
-            font-size: 15px;
-            font-weight: 600;
+            color: var(--gray-500);
+            font-size: 13px;
+            font-weight: 500;
             font-family: var(--font);
             cursor: pointer;
-            transition: all .3s var(--ease);
+            transition: all .25s var(--ease);
         }
-        .uk-edu-toggle:hover {
-            border-color: var(--orange);
+        .uk-edu-toggle-simple:hover {
             color: var(--orange);
-            background: var(--orange-10);
-            box-shadow: var(--shadow-orange);
-        }
-        .uk-edu-toggle.active {
-            background: var(--orange);
             border-color: var(--orange);
-            color: var(--white);
         }
-        .uk-edu-toggle-icon { font-size: 20px; }
         .uk-edu-toggle-arrow {
-            font-size: 12px;
+            font-size: 10px;
             transition: transform .3s var(--ease);
         }
-        .uk-edu-toggle.active .uk-edu-toggle-arrow {
+        .uk-edu-toggle-simple.active .uk-edu-toggle-arrow {
             transform: rotate(180deg);
         }
 
@@ -210,14 +208,12 @@
         .uk-edu-panel {
             max-height: 0;
             overflow: hidden;
-            transition: max-height .5s var(--ease), opacity .4s var(--ease), margin .4s var(--ease);
+            transition: max-height .5s var(--ease), opacity .4s var(--ease);
             opacity: 0;
-            margin-bottom: 0;
         }
         .uk-edu-panel.open {
-            max-height: 800px;
+            max-height: 600px;
             opacity: 1;
-            margin-bottom: 40px;
         }
 
         /* 英国教育体系 - 互动图谱（暗色主题适配） */
@@ -227,6 +223,7 @@
             border-radius: var(--radius-xl);
             overflow: hidden;
             padding: 14px;
+            width: 100%;
         }
         .uk-edu-mobile-note {
             display: none;
@@ -238,7 +235,7 @@
         .uk-edu-level-strip {
             display: flex;
             gap: 8px;
-            min-height: 420px;
+            min-height: 273px;
         }
         .uk-edu-level-panel {
             flex: 1 1 0;
@@ -262,7 +259,7 @@
         }
         .uk-edu-level-tab {
             height: 100%;
-            min-height: 420px;
+            min-height: 273px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -284,7 +281,7 @@
         .uk-edu-level-content {
             display: none;
             height: 100%;
-            min-height: 420px;
+            min-height: 273px;
             padding: 16px;
             background: var(--gray-900);
         }
@@ -472,8 +469,8 @@
                 <li><a href="index.html#data" class="nav-link">录取数据</a></li>
                 <li><a href="index.html#quick-entry" class="nav-link">快捷入口</a></li>
                 <li class="nav-spacer"></li>
-                <li><a href="undergraduate.html" class="nav-link nav-link-accent active">本科</a></li>
-                <li><a href="#" class="nav-link nav-link-accent" style="opacity:.4;cursor:not-allowed">研究生</a></li>
+                <li><a href="undergraduate.html" class="nav-link active">本科</a></li>
+                <li><a href="#" class="nav-link" style="opacity:.4;cursor:not-allowed">研究生</a></li>
             </ul>
             <button class="nav-toggle" id="navToggle" aria-label="菜单">
                 <span></span><span></span><span></span>
@@ -495,59 +492,20 @@
         <div class="ug-content-wrap">
             <!-- 英联邦内容 -->
             <div class="ug-panel active" id="panel-commonwealth">
-                <div class="ug-hero">
-                    <h1>英联邦本科申请</h1>
-                    <p>英国、澳洲、加拿大、香港、新加坡等英联邦体系本科申请规划与资源汇总</p>
-                </div>
-
-                <!-- 英国教育体系互动工具按钮 -->
-                <div style="text-align:center;margin-bottom:40px;">
-                    <button class="uk-edu-toggle" id="ukEduToggle" onclick="toggleUkEdu()">
-                        <span class="uk-edu-toggle-icon">🎓</span>
-                        <span>英国教育体系</span>
-                        <span class="uk-edu-toggle-arrow" id="ukEduArrow">▾</span>
-                    </button>
-                </div>
-
-                <!-- 英国教育体系互动工具（可展开） -->
-                <div class="uk-edu-panel" id="ukEduPanel">
+                <!-- 英国教育体系互动工具（默认展开） -->
+                <div class="uk-edu-panel open" id="ukEduPanel">
                     <div class="uk-edu-map">
                         <div class="uk-edu-mobile-note">移动端建议点击 Level 展开查看；桌面端鼠标悬停即可展开。</div>
                         <div class="uk-edu-level-strip" id="ukEduStrip"></div>
                     </div>
                 </div>
 
-                <div class="ug-grid">
-                    <div class="ug-card">
-                        <div class="ug-card-icon">🇬🇧</div>
-                        <h3>英国本科</h3>
-                        <p>UCAS 申请系统、作品集要求、文书准备、面试辅导等全流程申请指南</p>
-                    </div>
-                    <div class="ug-card">
-                        <div class="ug-card-icon">🇦🇺</div>
-                        <h3>澳洲本科</h3>
-                        <p>澳洲八大院校申请要点、作品集标准、语言要求与签证办理</p>
-                    </div>
-                    <div class="ug-card">
-                        <div class="ug-card-icon">🇨🇦</div>
-                        <h3>加拿大本科</h3>
-                        <p>加拿大艺术院校申请策略、 provincial 差异与移民优势分析</p>
-                    </div>
-                    <div class="ug-card">
-                        <div class="ug-card-icon">🇭🇰</div>
-                        <h3>香港本科</h3>
-                        <p>港校申请时间线、作品集要求、面试技巧与奖学金申请</p>
-                    </div>
-                    <div class="ug-card">
-                        <div class="ug-card-icon">🇸🇬</div>
-                        <h3>新加坡本科</h3>
-                        <p>新加坡国立、南洋理工等院校申请要点与作品集规范</p>
-                    </div>
-                    <div class="ug-card">
-                        <div class="ug-card-icon">📋</div>
-                        <h3>申请时间线</h3>
-                        <p>英联邦体系本科申请完整时间规划，从准备到入学的每个关键节点</p>
-                    </div>
+                <!-- 右侧浮动收起/展开按钮 -->
+                <div class="uk-edu-float-btn">
+                    <button class="uk-edu-toggle-simple" id="ukEduToggle" onclick="toggleUkEdu()">
+                        <span id="ukEduToggleText">收起</span>
+                        <span class="uk-edu-toggle-arrow" id="ukEduArrow">▾</span>
+                    </button>
                 </div>
             </div>
 
@@ -622,8 +580,10 @@
         function toggleUkEdu() {
             const panel = document.getElementById('ukEduPanel');
             const toggle = document.getElementById('ukEduToggle');
+            const text = document.getElementById('ukEduToggleText');
             const isOpen = panel.classList.toggle('open');
             toggle.classList.toggle('active', isOpen);
+            text.textContent = isOpen ? '收起' : '展开';
         }
 
         // 英国教育体系 - 数据渲染
