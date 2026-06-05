@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>院校查找 · 斯芬克游戏动画科系</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --search-bg: var(--black);
+      --search-ink: var(--white);
+      --search-muted: var(--gray-400);
+      --search-line: var(--gray-800);
+      --search-soft: var(--gray-900);
+      --search-panel: var(--dark);
+      --search-brand: var(--orange);
+      --search-brand-dim: rgba(255,79,0,.18);
+      --search-ochre: #c47a2a;
+      --search-blue: #4a7ac4;
+      --search-shadow: 0 14px 30px rgba(0,0,0,.35);
+    }
+
+    .search-page {
+      padding-top: 68px;
+      min-height: 100vh;
+      background: var(--search-bg);
+      color: var(--search-ink);
+      font-family: var(--font);
+    }
+
+    .search-wrap {
+      width: min(1440px, calc(100vw - 32px));
+      margin: 0 auto;
+    }
+
+    .search-header {
+      padding: 40px 0 20px;
+    }
+    .search-header h1 {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--white);
+      margin: 0 0 8px;
+      letter-spacing: .02em;
+    }
+    .search-header p {
+      font-size: 14px;
+      color: var(--gray-400);
+      margin: 0;
+    }
+
+    .search-main {
+      display: grid;
+      grid-template-columns: 300px minmax(0, 1fr);
+      gap: 20px;
+      padding: 0 0 48px;
+    }
+
+    .search-aside, .results-shell {
+      background: var(--search-panel);
+      border: 1px solid var(--search-line);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--search-shadow);
+    }
+
+    .search-aside {
+      align-self: start;
+      position: sticky;
+      top: 80px;
+      padding: 20px;
+      max-height: calc(100vh - 100px);
+      overflow-y: auto;
+    }
+    .search-aside::-webkit-scrollbar { width: 4px; }
+    .search-aside::-webkit-scrollbar-track { background: transparent; }
+    .search-aside::-webkit-scrollbar-thumb { background: var(--gray-700); border-radius: 4px; }
+
+    .filter-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .filter-title h2 {
+      margin: 0;
+      font-size: 16px;
+      color: var(--white);
+      font-weight: 700;
+    }
+    .reset {
+      height: 32px;
+      border: 1px solid var(--gray-700);
+      border-radius: var(--radius-md);
+      background: transparent;
+      color: var(--gray-400);
+      cursor: pointer;
+      font-family: var(--font);
+      font-size: 13px;
+      padding: 0 12px;
+      transition: all .25s var(--ease);
+    }
+    .reset:hover {
+      border-color: var(--orange);
+      color: var(--orange);
+    }
+
+    .filter-group {
+      margin-bottom: 16px;
+    }
+    .filter-group label {
+      display: block;
+      margin: 0 0 8px;
+      color: var(--gray-300);
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .filter-group input, .filter-group select {
+      width: 100%;
+      height: 42px;
+      border: 1px solid var(--gray-700);
+      border-radius: var(--radius-md);
+      padding: 0 12px;
+      background: var(--gray-900);
+      color: var(--white);
+      font: inherit;
+      font-size: 14px;
+      transition: all .25s var(--ease);
+    }
+    .filter-group input:focus, .filter-group select:focus {
+      outline: 2px solid var(--search-brand-dim);
+      border-color: var(--orange);
+    }
+    .filter-group input::placeholder {
+      color: var(--gray-500);
+    }
+
+    .segmented {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+      padding: 4px;
+      background: var(--search-soft);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--search-line);
+    }
+    .segmented button {
+      min-height: 38px;
+      border: 0;
+      border-radius: var(--radius-md);
+      background: transparent;
+      color: var(--gray-400);
+      font-weight: 600;
+      cursor: pointer;
+      font-family: var(--font);
+      font-size: 13px;
+      transition: all .25s var(--ease);
+    }
+    .segmented button:hover {
+      color: var(--white);
+    }
+    .segmented button.active {
+      background: var(--orange);
+      color: #fff;
+      box-shadow: var(--shadow-orange);
+    }
+
+    .results-shell {
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .results-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--search-line);
+    }
+    .results-count {
+      font-size: 14px;
+      color: var(--gray-400);
+    }
+    .results-count strong {
+      color: var(--orange);
+      font-weight: 700;
+    }
+
+    .results {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 14px;
+      padding: 16px;
+      max-height: calc(100vh - 200px);
+      overflow-y: auto;
+    }
+    .results::-webkit-scrollbar { width: 6px; }
+    .results::-webkit-scrollbar-track { background: transparent; }
+    .results::-webkit-scrollbar-thumb { background: var(--gray-700); border-radius: 4px; }
+
+    .course-card {
+      min-height: 260px;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid var(--search-line);
+      border-radius: var(--radius-lg);
+      background: var(--search-soft);
+      overflow: hidden;
+      transition: all .3s var(--ease);
+    }
+    .course-card:hover {
+      border-color: var(--orange);
+      box-shadow: 0 0 24px rgba(255,79,0,.10);
+      transform: translateY(-2px);
+    }
+    .card-main { padding: 16px; }
+    .course-link {
+      display: inline;
+      color: var(--orange);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(255,79,0,.35);
+      font-size: 17px;
+      line-height: 1.35;
+      font-weight: 700;
+      transition: all .25s var(--ease);
+    }
+    .course-link:hover {
+      border-bottom-color: var(--orange);
+    }
+    .school {
+      margin-top: 8px;
+      color: var(--gray-300);
+      font-size: 14px;
+      line-height: 1.45;
+      font-weight: 600;
+    }
+    .meta, .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
+    }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 24px;
+      border-radius: var(--radius-full);
+      padding: 4px 10px;
+      background: rgba(255,79,0,.10);
+      color: var(--orange);
+      font-size: 12px;
+      font-weight: 600;
+      border: 1px solid rgba(255,79,0,.15);
+    }
+    .pill.level { background: rgba(74,122,196,.12); color: var(--search-blue); border-color: rgba(74,122,196,.20); }
+    .pill.area { background: rgba(196,122,42,.12); color: var(--search-ochre); border-color: rgba(196,122,42,.20); }
+    .pill.rank { background: rgba(180,160,80,.12); color: #c4a050; border-color: rgba(180,160,80,.20); }
+    .brief {
+      margin: 12px 0 0;
+      color: var(--gray-400);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+    .card-foot {
+      margin-top: auto;
+      padding: 14px 16px;
+      border-top: 1px solid var(--search-line);
+      background: rgba(0,0,0,.15);
+    }
+    .foot-label {
+      color: var(--gray-300);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .listline {
+      margin: 6px 0 0;
+      color: var(--gray-500);
+      font-size: 12px;
+      line-height: 1.6;
+    }
+    .empty {
+      grid-column: 1 / -1;
+      padding: 60px 20px;
+      color: var(--gray-500);
+      text-align: center;
+      font-size: 15px;
+    }
+    mark {
+      padding: 0 2px;
+      background: rgba(255,79,0,.25);
+      color: var(--white);
+      border-radius: 3px;
+    }
+
+    @media (max-width: 1024px) {
+      .search-main { grid-template-columns: 1fr; }
+      .search-aside { position: static; max-height: none; }
+      .results { max-height: none; }
+    }
+    @media (max-width: 620px) {
+      .search-wrap { width: min(100vw - 20px, 1440px); }
+      .results { grid-template-columns: 1fr; }
+      .search-header h1 { font-size: 22px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- 导航栏 -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">
+        <img src="assets/logo.png" alt="Logo" class="logo-img">
+        <div class="logo-text">
+          <span class="logo-main">斯芬克 · 游戏动画科系</span>
+          <span class="logo-sub">内部资料库</span>
+        </div>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" class="nav-link">主页</a></li>
+        <li><a href="index.html#cases" class="nav-link">作品案例</a></li>
+        <li><a href="school-search.html" class="nav-link active">院校查找</a></li>
+        <li><a href="index.html#professors" class="nav-link">海外教授</a></li>
+        <li><a href="index.html#programs" class="nav-link">短期项目</a></li>
+        <li><a href="index.html#data" class="nav-link">录取数据</a></li>
+        <li><a href="index.html#quick-entry" class="nav-link">快捷入口</a></li>
+        <li class="nav-spacer"></li>
+        <li><a href="undergraduate.html" class="nav-link">本科</a></li>
+        <li><a href="#" class="nav-link" style="opacity:.4;cursor:not-allowed">研究生</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="菜单">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="search-page">
+    <div class="search-wrap">
+      <div class="search-header">
+        <h1>院校查找</h1>
+        <p>游戏动画科系 · 课程检索工具</p>
+      </div>
+
+      <div class="search-main">
+        <aside class="search-aside">
+          <div class="filter-title">
+            <h2>筛选条件</h2>
+            <button class="reset" id="reset">重置</button>
+          </div>
+
+          <div class="filter-group">
+            <label>学习阶段</label>
+            <div class="segmented" id="levelSeg">
+              <button class="active" data-value="">全部</button>
+              <button data-value="本科">本科</button>
+              <button data-value="研究生">研究生</button>
+            </div>
+          </div>
+
+          <div class="filter-group">
+            <label for="area">申请方向</label>
+            <select id="area">
+              <option value="">游戏和动画都看</option>
+              <option>游戏</option>
+              <option>动画</option>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <label for="category">细分类型</label>
+            <select id="category">
+              <option value="">全部类型</option>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <label for="career">岗位方向</label>
+            <select id="career">
+              <option value="">全部岗位方向</option>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <label for="keyword">关键词</label>
+            <input id="keyword" placeholder="课程 / 学校 / 城市 / 职业 / 企业">
+          </div>
+
+          <div class="filter-group">
+            <label for="audience">选校偏好</label>
+            <select id="audience">
+              <option value="">全部</option>
+              <option value="偏向综合排名">偏向综合排名</option>
+              <option value="偏向专业排名">偏向专业排名</option>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <label for="region">地区</label>
+            <select id="region">
+              <option value="">全部地区</option>
+            </select>
+          </div>
+        </aside>
+
+        <section class="results-shell">
+          <div class="results-bar">
+            <div class="results-count" id="resultsCount">加载中...</div>
+          </div>
+          <div class="results" id="results"></div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const state = { level: "", area: "", category: "", career: "", keyword: "", audience: "", region: "" };
+    const $ = (id) => document.getElementById(id);
+    let db = null;
+
+    const esc = (s) => String(s || "").replace(/[&<>"']/g, ch => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[ch]));
+    const trim = (s, n = 260) => {
+      const text = String(s || "").replace(/\s+/g, " ").trim();
+      return text.length > n ? text.slice(0, n) + "..." : text;
+    };
+    const haystack = (course) => [
+      course.name, course.school, course.region, course.schoolType, course.brief,
+      course.categories.join(" "), course.primaryArea.join(" "), course.careerDirections.join(" "),
+      course.enterpriseMatches.join(" "), course.contextPath.join(" ")
+    ].join(" ").toLowerCase();
+
+    function fillFilters() {
+      const categories = [...new Set(db.courses.flatMap(c => c.categories))].sort();
+      const careers = [...new Set(db.courses.flatMap(c => c.careerDirections || []))].sort();
+      const regions = [...new Set(db.courses.map(c => c.region).filter(Boolean))].sort();
+      categories.forEach(c => $("category").insertAdjacentHTML("beforeend", `<option>${esc(c)}</option>`));
+      careers.forEach(c => $("career").insertAdjacentHTML("beforeend", `<option>${esc(c)}</option>`));
+      regions.forEach(r => $("region").insertAdjacentHTML("beforeend", `<option>${esc(r)}</option>`));
+    }
+
+    function courseMatches(course) {
+      if (state.level && course.level !== state.level) return false;
+      if (state.area && !course.primaryArea.includes(state.area)) return false;
+      if (state.category && !course.categories.includes(state.category)) return false;
+      if (state.career && !(course.careerDirections || []).includes(state.career)) return false;
+      if (state.audience && !course.audiences.includes(state.audience)) return false;
+      if (state.region && course.region !== state.region) return false;
+      if (state.keyword && !haystack(course).includes(state.keyword.toLowerCase())) return false;
+      return true;
+    }
+
+    function card(course) {
+      return `<article class="course-card">
+        <div class="card-main">
+          <a class="course-link" href="${esc(course.url)}" target="_blank" rel="noreferrer">${esc(course.name)}</a>
+          <div class="school">${esc(course.school)}</div>
+          <div class="meta">
+            <span class="pill level">${esc(course.level)}</span>
+            <span class="pill">${esc(course.region)}</span>
+            ${course.primaryArea.map(x => `<span class="pill area">${esc(x)}</span>`).join("")}
+            ${course.audiences.map(x => `<span class="pill rank">${esc(x)}</span>`).join("")}
+          </div>
+          <div class="tags"><span class="pill">${esc(course.dominantCategory || course.categories[0] || "未分类")}</span>${course.categories.filter(x => x !== course.dominantCategory).map(x => `<span class="pill">${esc(x)}</span>`).join("")}</div>
+          <p class="brief">${esc(trim(course.brief))}</p>
+        </div>
+        <div class="card-foot">
+          <div class="foot-label">未来职业方向</div>
+          <div class="listline">${esc(course.careerDirections.join(" / ") || "可结合课程官网进一步判断")}</div>
+          <div class="foot-label" style="margin-top:10px;">企业岗位关联</div>
+          <div class="listline">${esc(course.enterpriseMatches.join(" / ") || "资料库暂未匹配企业")}</div>
+        </div>
+      </article>`;
+    }
+
+    function render() {
+      const filtered = db.courses.filter(courseMatches);
+      $("results").innerHTML = filtered.length
+        ? filtered.slice(0, 240).map(card).join("")
+        : `<div class="empty">没有匹配课程，可以放宽一个筛选条件再看。</div>`;
+      $("resultsCount").innerHTML = filtered.length
+        ? `共找到 <strong>${filtered.length}</strong> 门课程`
+        : `共找到 <strong>0</strong> 门课程`;
+    }
+
+    function setLevel(value) {
+      state.level = value;
+      document.querySelectorAll("#levelSeg button").forEach(btn => btn.classList.toggle("active", btn.dataset.value === value));
+      render();
+    }
+
+    $("levelSeg").addEventListener("click", (event) => {
+      if (event.target.matches("button")) setLevel(event.target.dataset.value);
+    });
+    $("area").addEventListener("change", e => { state.area = e.target.value; render(); });
+    $("category").addEventListener("change", e => { state.category = e.target.value; render(); });
+    $("career").addEventListener("change", e => { state.career = e.target.value; render(); });
+    $("keyword").addEventListener("input", e => { state.keyword = e.target.value.trim(); render(); });
+    $("audience").addEventListener("change", e => { state.audience = e.target.value; render(); });
+    $("region").addEventListener("change", e => { state.region = e.target.value; render(); });
+    $("reset").addEventListener("click", () => {
+      Object.keys(state).forEach(key => state[key] = "");
+      $("area").value = "";
+      $("category").value = "";
+      $("career").value = "";
+      $("keyword").value = "";
+      $("audience").value = "";
+      $("region").value = "";
+      setLevel("");
+    });
+
+    // 移动端菜单
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+    if (navToggle && navLinks) {
+      navToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('show');
+      });
+    }
+
+    fetch("data/course-search-data.json")
+      .then(response => response.json())
+      .then(json => {
+        db = json;
+        fillFilters();
+        render();
+      })
+      .catch(() => {
+        $("results").innerHTML = `<div class="empty">数据文件未加载。请确认 data/course-search-data.json 和本页面一起上传到网站。</div>`;
+        $("resultsCount").innerHTML = `数据加载失败`;
+      });
+  </script>
+</body>
+</html>
