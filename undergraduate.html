@@ -935,7 +935,7 @@
             {
                 name: '于同学',
                 course: 'A-Level 平面',
-                grade: 'A',
+                grade: '预估A',
                 desc: '以《山海经》与东方创世神话为灵感，将真实动物、古代图像与个人想象重新组合，创造出游走于人、兽与神之间的异形生命。作品探讨人类如何通过神话理解自然、死亡、重生与创造的循环。',
                 images: [
                     'yu_student/yu_01.jpg','yu_student/yu_02.jpg','yu_student/yu_03.jpg',
@@ -1151,6 +1151,7 @@
             studentName.textContent = data.name;
             courseType.textContent = data.course;
             grade.textContent = data.grade;
+            grade.style.display = data.grade ? '' : 'none';
             workDesc.textContent = data.desc;
         }
 
