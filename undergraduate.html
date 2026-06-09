@@ -793,6 +793,123 @@
                 font-size: 13px;
             }
         }
+
+        /* ========== 教学板块 ========== */
+        .teaching-section-title {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--white);
+            margin: 56px 0 24px;
+            letter-spacing: .02em;
+        }
+        .teaching-wrap {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 48px;
+        }
+        .teaching-item {
+            position: relative;
+            flex: 1 1 160px;
+            min-width: 140px;
+            max-width: 220px;
+        }
+        .teaching-label {
+            padding: 14px 20px;
+            background: var(--gray-900);
+            border: 1px solid var(--gray-800);
+            border-radius: var(--radius-lg);
+            color: var(--gray-300);
+            font-size: 14px;
+            font-weight: 600;
+            text-align: center;
+            cursor: default;
+            transition: all .3s var(--ease);
+            white-space: nowrap;
+        }
+        .teaching-item:hover .teaching-label {
+            border-color: var(--orange);
+            color: var(--white);
+            background: rgba(255,79,0,.08);
+        }
+        .teaching-submenu {
+            position: absolute;
+            top: calc(100% + 8px);
+            left: 50%;
+            transform: translateX(-50%) translateY(-6px);
+            display: flex;
+            gap: 8px;
+            padding: 10px 14px;
+            background: var(--dark);
+            border: 1px solid var(--gray-700);
+            border-radius: var(--radius-lg);
+            box-shadow: 0 10px 30px rgba(0,0,0,.4);
+            opacity: 0;
+            pointer-events: none;
+            transition: all .3s var(--ease);
+            z-index: 20;
+            white-space: nowrap;
+        }
+        .teaching-item:hover .teaching-submenu {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateX(-50%) translateY(0);
+        }
+        .teaching-submenu::before {
+            content: '';
+            position: absolute;
+            top: -6px;
+            left: 50%;
+            transform: translateX(-50%) rotate(45deg);
+            width: 10px;
+            height: 10px;
+            background: var(--dark);
+            border-left: 1px solid var(--gray-700);
+            border-top: 1px solid var(--gray-700);
+        }
+        .teaching-link {
+            display: inline-block;
+            padding: 6px 14px;
+            background: var(--gray-900);
+            border: 1px solid var(--gray-800);
+            border-radius: var(--radius-md);
+            color: var(--gray-400);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all .25s var(--ease);
+        }
+        .teaching-link:hover {
+            border-color: var(--orange);
+            color: var(--white);
+            background: rgba(255,79,0,.10);
+        }
+
+        @media (max-width: 768px) {
+            .teaching-section-title {
+                font-size: 22px;
+                margin-top: 40px;
+            }
+            .teaching-wrap {
+                gap: 10px;
+            }
+            .teaching-item {
+                flex: 1 1 120px;
+                min-width: 110px;
+            }
+            .teaching-label {
+                padding: 12px 14px;
+                font-size: 13px;
+            }
+            .teaching-submenu {
+                padding: 8px 10px;
+                gap: 6px;
+            }
+            .teaching-link {
+                padding: 5px 10px;
+                font-size: 12px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -915,6 +1032,51 @@
                         <a href="https://yk3.gokuai.com/file/vj0mxg6qjfgwr6v7h3htg4739sfu9h48#" target="_blank" rel="noreferrer">首课规划表</a>
                         <span class="course-divider">/</span>
                         <a href="https://yk3.gokuai.com/file/tml0k2i5cz33mozs8thuskr8dz6b6f21#" target="_blank" rel="noreferrer">首课规划案例</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 教学板块 -->
+            <h2 class="teaching-section-title">教学</h2>
+            <div class="teaching-wrap">
+                <div class="teaching-item">
+                    <div class="teaching-label">ALevel</div>
+                    <div class="teaching-submenu">
+                        <a href="https://yk3.gokuai.com/file/8yfhvy6i12d8v9mlyhhudn5so6lmwa9g#" target="_blank" rel="noreferrer" class="teaching-link">教学</a>
+                        <a href="https://yk3.gokuai.com/file/436px3jlu3t3fdepijb70gg0b6k2ndpm#" target="_blank" rel="noreferrer" class="teaching-link">结课</a>
+                        <a href="https://yk3.gokuai.com/file/0rvdfw2j1za72j2xk1ugmoh9xohrbrnt#" target="_blank" rel="noreferrer" class="teaching-link">培训</a>
+                    </div>
+                </div>
+                <div class="teaching-item">
+                    <div class="teaching-label">BTEC LEVEL 3</div>
+                    <div class="teaching-submenu">
+                        <a href="https://yk3.gokuai.com/file/z4pmekaggqqpt0nyinae4bp66px0e1pk#" target="_blank" rel="noreferrer" class="teaching-link">教学</a>
+                        <a href="https://yk3.gokuai.com/file/zh9eu3n3grrvns39qgrb6a4a5mtsq7c2#" target="_blank" rel="noreferrer" class="teaching-link">结课</a>
+                        <a href="https://yk3.gokuai.com/file/b4ufclc41dbc10qhrtoun7zrjln16r1f#" target="_blank" rel="noreferrer" class="teaching-link">培训</a>
+                    </div>
+                </div>
+                <div class="teaching-item">
+                    <div class="teaching-label">BTEC LEVEL 4</div>
+                    <div class="teaching-submenu">
+                        <a href="https://yk3.gokuai.com/file/shl08yclcm6gaomcvfl8oif6yzmeshuo#" target="_blank" rel="noreferrer" class="teaching-link">教学</a>
+                        <a href="https://yk3.gokuai.com/file/144ra1w0ie04o1evpvq9iv7pc6gc8pkv#" target="_blank" rel="noreferrer" class="teaching-link">结课</a>
+                        <a href="https://yk3.gokuai.com/file/6jno53w82rtm8eewxwl6zsc3ies57061#" target="_blank" rel="noreferrer" class="teaching-link">培训</a>
+                    </div>
+                </div>
+                <div class="teaching-item">
+                    <div class="teaching-label">Alevel&BTEC双轨制</div>
+                    <div class="teaching-submenu">
+                        <a href="https://yk3.gokuai.com/file/i3gnglmjtn42cln1p6928xdqib4kdeww#" target="_blank" rel="noreferrer" class="teaching-link">教学</a>
+                        <a href="https://yk3.gokuai.com/file/89vamzuiin4knhbnz9r1el071jna2bk6#" target="_blank" rel="noreferrer" class="teaching-link">结课</a>
+                        <a href="https://yk3.gokuai.com/file/kjr9jfa3bff7809nzg48h537twieug21#" target="_blank" rel="noreferrer" class="teaching-link">培训</a>
+                    </div>
+                </div>
+                <div class="teaching-item">
+                    <div class="teaching-label">HNC 1+2</div>
+                    <div class="teaching-submenu">
+                        <a href="https://yk3.gokuai.com/file/ggdz1qbuz8sv8fddaseuz03e95t61kih#" target="_blank" rel="noreferrer" class="teaching-link">教学</a>
+                        <a href="https://yk3.gokuai.com/file/tj1b9z4lvrh7pp8p8sn2v2tws8hku59n#" target="_blank" rel="noreferrer" class="teaching-link">结课</a>
+                        <a href="https://yk3.gokuai.com/file/raukjeg440942opwc0fh2xaz9ke9qf7d#" target="_blank" rel="noreferrer" class="teaching-link">培训</a>
                     </div>
                 </div>
             </div>
