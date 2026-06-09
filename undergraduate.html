@@ -744,55 +744,38 @@
             padding: 24px;
         }
         .course-group-title {
+            display: inline-block;
             font-size: 18px;
             font-weight: 700;
             color: var(--white);
             margin: 0 0 16px;
-            padding-bottom: 12px;
-            border-bottom: 1px solid var(--gray-800);
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--orange);
         }
-        .course-links {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        .course-link-card {
+        .course-links-row {
             display: flex;
             align-items: center;
-            gap: 12px;
-            padding: 14px 16px;
-            background: var(--dark);
-            border: 1px solid var(--gray-800);
-            border-radius: var(--radius-lg);
-            color: var(--gray-300);
+            flex-wrap: wrap;
+            gap: 8px 0;
+        }
+        .course-links-row a {
+            color: var(--gray-400);
             text-decoration: none;
             font-size: 14px;
             font-weight: 500;
-            transition: all .3s var(--ease);
+            padding: 4px 8px;
+            transition: all .25s var(--ease);
+            border-radius: var(--radius-sm);
         }
-        .course-link-card:hover {
-            border-color: var(--orange);
-            background: rgba(255,79,0,.06);
+        .course-links-row a:hover {
             color: var(--white);
-            transform: translateY(-1px);
+            background: rgba(255,255,255,.06);
         }
-        .course-link-icon {
-            font-size: 18px;
-            flex-shrink: 0;
-        }
-        .course-link-text {
-            flex: 1;
-        }
-        .course-link-arrow {
-            width: 16px;
-            height: 16px;
-            opacity: .4;
-            transition: opacity .25s var(--ease);
-            flex-shrink: 0;
-        }
-        .course-link-card:hover .course-link-arrow {
-            opacity: 1;
-            color: var(--orange);
+        .course-divider {
+            color: var(--gray-700);
+            font-size: 14px;
+            padding: 0 4px;
+            user-select: none;
         }
 
         @media (max-width: 768px) {
@@ -802,6 +785,12 @@
             .course-section-title {
                 font-size: 22px;
                 margin-top: 40px;
+            }
+            .course-links-row {
+                gap: 6px 0;
+            }
+            .course-links-row a {
+                font-size: 13px;
             }
         }
     </style>
@@ -910,42 +899,22 @@
             <div class="course-resource-wrap">
                 <div class="course-group">
                     <h3 class="course-group-title">课程</h3>
-                    <div class="course-links">
-                        <a href="https://yk3.gokuai.com/file/vhko6fxxgaurt0ajck27revbksd6poxk#" target="_blank" rel="noreferrer" class="course-link-card">
-                            <span class="course-link-icon">📖</span>
-                            <span class="course-link-text">课程手册</span>
-                            <svg class="course-link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                        </a>
-                        <a href="https://yk3.gokuai.com/file/o5atk2xcikhnynxgx8929feycfsb8gtb#" target="_blank" rel="noreferrer" class="course-link-card">
-                            <span class="course-link-icon">📝</span>
-                            <span class="course-link-text">基础课大纲</span>
-                            <svg class="course-link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                        </a>
-                        <a href="https://yk3.gokuai.com/file/9a2qrxvzdfo6qahcdvr0n7oiyk7n5xqw#" target="_blank" rel="noreferrer" class="course-link-card">
-                            <span class="course-link-icon">📂</span>
-                            <span class="course-link-text">基础课课件</span>
-                            <svg class="course-link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                        </a>
-                        <a href="https://yk3.gokuai.com/file/48q4jj46bju7ovf5dgnl4ddlz0rh3oe6#" target="_blank" rel="noreferrer" class="course-link-card">
-                            <span class="course-link-icon">🎯</span>
-                            <span class="course-link-text">项目课大纲</span>
-                            <svg class="course-link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                        </a>
+                    <div class="course-links-row">
+                        <a href="https://yk3.gokuai.com/file/vhko6fxxgaurt0ajck27revbksd6poxk#" target="_blank" rel="noreferrer">课程手册</a>
+                        <span class="course-divider">/</span>
+                        <a href="https://yk3.gokuai.com/file/o5atk2xcikhnynxgx8929feycfsb8gtb#" target="_blank" rel="noreferrer">基础课大纲</a>
+                        <span class="course-divider">/</span>
+                        <a href="https://yk3.gokuai.com/file/9a2qrxvzdfo6qahcdvr0n7oiyk7n5xqw#" target="_blank" rel="noreferrer">基础课课件</a>
+                        <span class="course-divider">/</span>
+                        <a href="https://yk3.gokuai.com/file/48q4jj46bju7ovf5dgnl4ddlz0rh3oe6#" target="_blank" rel="noreferrer">项目课大纲</a>
                     </div>
                 </div>
                 <div class="course-group">
                     <h3 class="course-group-title">首课</h3>
-                    <div class="course-links">
-                        <a href="https://yk3.gokuai.com/file/vj0mxg6qjfgwr6v7h3htg4739sfu9h48#" target="_blank" rel="noreferrer" class="course-link-card">
-                            <span class="course-link-icon">📋</span>
-                            <span class="course-link-text">首课规划表</span>
-                            <svg class="course-link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                        </a>
-                        <a href="https://yk3.gokuai.com/file/tml0k2i5cz33mozs8thuskr8dz6b6f21#" target="_blank" rel="noreferrer" class="course-link-card">
-                            <span class="course-link-icon">💡</span>
-                            <span class="course-link-text">首课规划案例</span>
-                            <svg class="course-link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                        </a>
+                    <div class="course-links-row">
+                        <a href="https://yk3.gokuai.com/file/vj0mxg6qjfgwr6v7h3htg4739sfu9h48#" target="_blank" rel="noreferrer">首课规划表</a>
+                        <span class="course-divider">/</span>
+                        <a href="https://yk3.gokuai.com/file/tml0k2i5cz33mozs8thuskr8dz6b6f21#" target="_blank" rel="noreferrer">首课规划案例</a>
                     </div>
                 </div>
             </div>
