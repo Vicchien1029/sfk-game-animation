@@ -243,6 +243,7 @@ function setupHeader() {
   const header = $("[data-header]");
   const nav = $("[data-nav]");
   const toggle = $("[data-menu-toggle]");
+  if (!header || !nav || !toggle) return;
   toggle.addEventListener("click", () => nav.classList.toggle("open"));
   $$("[data-nav] a").forEach((link) => link.addEventListener("click", () => nav.classList.remove("open")));
   window.addEventListener("scroll", () => header.classList.toggle("scrolled", window.scrollY > 12), { passive: true });
