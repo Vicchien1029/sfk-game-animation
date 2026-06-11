@@ -125,7 +125,7 @@ img { display: block; max-width: 100%; }
     display: flex;
     list-style: none;
     gap: 4px;
-    flex: 1;
+    flex: none;
 }
 
 .nav-spacer {
