@@ -125,11 +125,11 @@ img { display: block; max-width: 100%; }
     display: flex;
     list-style: none;
     gap: 4px;
-    flex: none;
+    flex: 1;
 }
 
 .nav-spacer {
-    flex: 2;
+    flex: 3;
 }
 
 .nav-link-accent {
