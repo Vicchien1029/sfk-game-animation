@@ -26,38 +26,67 @@
         margin: 0 auto;
         padding: 0 24px;
         display: flex;
-        gap: 8px;
-        height: 56px;
         align-items: center;
+        justify-content: space-between;
+        height: 56px;
         overflow-x: auto;
         scrollbar-width: none;
       }
       .ft-tabs-inner::-webkit-scrollbar { display: none; }
-      .ft-tab-btn {
-        padding: 8px 22px;
-        border-radius: 999px;
-        font-size: 14px;
+      /* 左侧主按钮 - 和本科页面"英联邦"按钮一致 */
+      .ft-tab-main {
+        padding: 10px 28px;
+        border-radius: var(--radius-full);
+        font-size: 15px;
         font-weight: 600;
-        color: #9ca3af;
-        background: transparent;
-        border: 1px solid transparent;
+        color: #fff;
+        background: #f97316;
+        border: 1px solid #f97316;
+        box-shadow: 0 0 12px rgba(249,115,22,.35);
         cursor: pointer;
         transition: all .3s ease;
         white-space: nowrap;
         font-family: system-ui, -apple-system, sans-serif;
+        flex-shrink: 0;
+        text-decoration: none;
+      }
+      .ft-tab-main:hover {
+        background: #ea580c;
+        border-color: #ea580c;
+      }
+      /* 右侧导航按钮组 */
+      .ft-tabs-right {
+        display: flex;
+        gap: 4px;
+        align-items: center;
+        flex-shrink: 0;
+      }
+      .ft-tab-btn {
+        padding: 6px 14px;
+        border-radius: var(--radius-full);
+        font-size: 13px;
+        font-weight: 500;
+        color: #6b7280;
+        background: transparent;
+        border: 1px solid transparent;
+        cursor: pointer;
+        transition: all .25s ease;
+        white-space: nowrap;
+        font-family: system-ui, -apple-system, sans-serif;
       }
       .ft-tab-btn:hover {
-        color: #fff;
-        background: #1f2937;
+        color: #d1d5db;
+        background: rgba(255,255,255,.06);
       }
       .ft-tab-btn.active {
         color: #fff;
-        background: #f97316;
-        border-color: #f97316;
-        box-shadow: 0 0 12px rgba(249,115,22,.35);
+        background: rgba(255,255,255,.1);
+        border-color: rgba(255,255,255,.15);
       }
       @media (max-width: 768px) {
-        .ft-tab-btn { padding: 6px 16px; font-size: 13px; }
+        .ft-tab-main { padding: 8px 20px; font-size: 14px; }
+        .ft-tab-btn { padding: 5px 10px; font-size: 12px; }
+        .ft-tabs-right { gap: 2px; }
       }
     </style>
   </head>
@@ -66,13 +95,16 @@
       <!-- sticky 标签导航栏 -->
       <div class="ft-tabs-bar">
         <div class="ft-tabs-inner">
-          <button class="ft-tab-btn active" data-target="path">项目介绍</button>
-          <button class="ft-tab-btn" data-target="advantages">路径优势</button>
-          <button class="ft-tab-btn" data-target="teesside-section">提赛德大学</button>
-          <button class="ft-tab-btn" data-target="majors">专业方向</button>
-          <button class="ft-tab-btn" data-target="timeline">学习路径</button>
-          <button class="ft-tab-btn" data-target="fit">适合学生</button>
-          <button class="ft-tab-btn" data-target="faq">FAQ</button>
+          <a class="ft-tab-main" href="index.html" target="_blank">Teesside 1+2</a>
+          <div class="ft-tabs-right">
+            <button class="ft-tab-btn active" data-target="path">项目介绍</button>
+            <button class="ft-tab-btn" data-target="advantages">路径优势</button>
+            <button class="ft-tab-btn" data-target="teesside-section">提赛德大学</button>
+            <button class="ft-tab-btn" data-target="majors">专业方向</button>
+            <button class="ft-tab-btn" data-target="timeline">学习路径</button>
+            <button class="ft-tab-btn" data-target="fit">适合学生</button>
+            <button class="ft-tab-btn" data-target="faq">FAQ</button>
+          </div>
         </div>
       </div>
 
