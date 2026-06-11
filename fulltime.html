@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全日制 · 斯芬克游戏动画科系</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        .ft-page {
+            padding-top: 68px;
+            min-height: 100vh;
+            background: var(--black);
+        }
+        .ft-iframe {
+            width: 100%;
+            min-height: calc(100vh - 68px);
+            border: none;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="assets/logo.png" alt="Logo" class="logo-img">
+                <div class="logo-text">
+                    <span class="logo-main">斯芬克 · 游戏动画科系</span>
+                    <span class="logo-sub">内部资料库</span>
+                </div>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html" class="nav-link">主页</a></li>
+                <li><a href="index.html#cases" class="nav-link">作品案例</a></li>
+                <li><a href="school-search.html" class="nav-link">院校查找</a></li>
+                <li><a href="index.html#professors" class="nav-link">海外教授</a></li>
+                <li><a href="index.html#programs" class="nav-link">短期项目</a></li>
+                <li><a href="index.html#data" class="nav-link">录取数据</a></li>
+                <li><a href="index.html#quick-entry" class="nav-link">快捷入口</a></li>
+                <li class="nav-spacer"></li>
+                <li><a href="fulltime.html" class="nav-link active">全日制</a></li>
+                <li><a href="undergraduate.html" class="nav-link">本科</a></li>
+                <li><a href="#" class="nav-link" style="opacity:.4;cursor:not-allowed">研究生</a></li>
+            </ul>
+            <button class="nav-toggle" id="navToggle" aria-label="菜单">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="ft-page">
+        <iframe class="ft-iframe" src="fulltime/index-no-header.html" title="全日制1+2国际本科"></iframe>
+    </div>
+
+    <script>
+        const navToggle = document.getElementById('navToggle');
+        const navLinks = document.getElementById('navLinks');
+        if (navToggle && navLinks) {
+            navToggle.addEventListener('click', () => navLinks.classList.toggle('show'));
+        }
+    </script>
+</body>
+</html>
