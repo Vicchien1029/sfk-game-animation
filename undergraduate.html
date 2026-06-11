@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>本科申请 · 斯芬克游戏动画科系</title>
+    <title>学位项目 · 斯芬克游戏动画科系</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <style>
-        /* 本科页面专用样式 */
-        .ug-page {
+        /* 学位页面专用样式 */
+        .degree-page {
             padding-top: 68px;
             min-height: 100vh;
             background: var(--black);
         }
-        
+
         /* 顶部标签切换栏 */
-        .ug-tabs-bar {
+        .degree-tabs-bar {
             position: sticky;
             top: 68px;
             z-index: 50;
@@ -23,7 +23,7 @@
             backdrop-filter: blur(16px);
             border-bottom: 1px solid var(--gray-800);
         }
-        .ug-tabs-inner {
+        .degree-tabs-inner {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 24px;
@@ -32,7 +32,7 @@
             height: 64px;
             align-items: center;
         }
-        .ug-tab-btn {
+        .degree-tab-btn {
             padding: 10px 28px;
             border-radius: var(--radius-full);
             font-size: 15px;
@@ -44,871 +44,72 @@
             transition: all .3s var(--ease);
             font-family: var(--font);
         }
-        .ug-tab-btn:hover {
+        .degree-tab-btn:hover {
             color: var(--white);
             background: var(--gray-800);
         }
-        .ug-tab-btn.active {
+        .degree-tab-btn.active {
             color: var(--white);
             background: var(--orange);
             border-color: var(--orange);
             box-shadow: var(--shadow-orange);
         }
-        
+
         /* 内容区域 */
+        .degree-content-wrap {
+            max-width: 100%;
+            margin: 0 auto;
+        }
+        .degree-panel {
+            display: none;
+        }
+        .degree-panel.active {
+            display: block;
+        }
+
+        /* iframe 嵌入全日制页面 */
+        .degree-iframe {
+            width: 100%;
+            min-height: calc(100vh - 132px);
+            border: none;
+            display: block;
+        }
+
+        /* 本科内容区域 */
         .ug-content-wrap {
             max-width: 1200px;
             margin: 0 auto;
             padding: 40px 24px 80px;
         }
-        .ug-panel {
-            display: none;
-            animation: fadeSlideIn .5s var(--ease);
-        }
-        .ug-panel.active {
-            display: block;
-        }
-        @keyframes fadeSlideIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to   { opacity: 1; transform: translateY(0); }
-        }
-        
-        /* 页面标题区 */
-        .ug-hero {
-            text-align: center;
-            padding: 60px 0 40px;
-        }
-        .ug-hero h1 {
-            font-size: 36px;
-            font-weight: 900;
-            color: var(--white);
-            margin-bottom: 12px;
-        }
-        .ug-hero p {
-            font-size: 15px;
-            color: var(--gray-400);
-            max-width: 600px;
-            margin: 0 auto;
-            line-height: 1.7;
-        }
-        
-        /* 内容卡片网格 */
-        .ug-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
-            margin-top: 40px;
-        }
-        .ug-card {
-            background: var(--gray-900);
-            border: 1px solid var(--gray-800);
-            border-radius: var(--radius-lg);
-            padding: 32px 28px;
-            transition: all .35s var(--ease);
-            cursor: pointer;
-        }
-        .ug-card:hover {
-            transform: translateY(-6px);
-            border-color: var(--orange);
-            box-shadow: 0 0 24px rgba(255,79,0,.12);
-        }
-        .ug-card-icon {
-            width: 48px;
-            height: 48px;
-            background: var(--orange-10);
-            border-radius: var(--radius-md);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 20px;
-            font-size: 22px;
-        }
-        .ug-card h3 {
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--white);
-            margin-bottom: 10px;
-        }
-        .ug-card p {
-            font-size: 13px;
-            color: var(--gray-400);
-            line-height: 1.7;
-        }
-        
+
         /* 占位内容样式 */
-        .ug-placeholder {
+        .degree-placeholder {
             text-align: center;
             padding: 100px 0;
             color: var(--gray-500);
         }
-        .ug-placeholder-icon {
+        .degree-placeholder-icon {
             font-size: 64px;
             margin-bottom: 24px;
             opacity: .3;
         }
-        .ug-placeholder h2 {
+        .degree-placeholder h2 {
             font-size: 24px;
             font-weight: 700;
             color: var(--gray-300);
             margin-bottom: 12px;
         }
-        .ug-placeholder p {
+        .degree-placeholder p {
             font-size: 14px;
             color: var(--gray-500);
             max-width: 480px;
             margin: 0 auto;
             line-height: 1.7;
         }
-        
-        @media (max-width: 1024px) {
-            .ug-grid { grid-template-columns: repeat(2, 1fr); }
-        }
-        @media (max-width: 768px) {
-            .ug-grid { grid-template-columns: 1fr; }
-            .ug-hero h1 { font-size: 28px; }
-            .ug-tabs-inner { padding: 0 16px; }
-            .ug-tab-btn { padding: 8px 20px; font-size: 14px; }
-        }
-
-        /* 英国教育体系 - 右上方按钮 */
-        .uk-edu-top-btn {
-            display: flex;
-            justify-content: flex-end;
-            margin-bottom: 16px;
-        }
-        .uk-edu-toggle-simple {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 8px 20px;
-            background: transparent;
-            border: 1px solid var(--gray-700);
-            border-radius: var(--radius-full);
-            color: var(--gray-500);
-            font-size: 13px;
-            font-weight: 500;
-            font-family: var(--font);
-            cursor: pointer;
-            transition: all .25s var(--ease);
-        }
-        .uk-edu-toggle-simple:hover {
-            color: var(--orange);
-            border-color: var(--orange);
-        }
-        .uk-edu-toggle-arrow {
-            font-size: 10px;
-            transition: transform .3s var(--ease);
-        }
-        .uk-edu-toggle-simple.active .uk-edu-toggle-arrow {
-            transform: rotate(180deg);
-        }
-
-        /* 英国教育体系 - 展开面板 */
-        .uk-edu-panel {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height .5s var(--ease), opacity .4s var(--ease);
-            opacity: 0;
-        }
-        .uk-edu-panel.open {
-            max-height: 500px;
-            opacity: 1;
-        }
-
-        /* 英国教育体系 - 互动图谱（暗色主题适配） */
-        .uk-edu-map {
-            background: transparent;
-            border: none;
-            border-radius: 0;
-            overflow: hidden;
-            padding: 0;
-            width: 100%;
-        }
-        .uk-edu-mobile-note {
-            display: none;
-            color: var(--gray-500);
-            font-size: 12px;
-            line-height: 1.6;
-            margin-bottom: 12px;
-        }
-        .uk-edu-level-strip {
-            display: flex;
-            gap: 8px;
-            height: 500px;
-            min-height: 0;
-        }
-        .uk-edu-level-panel {
-            flex: 1 1 0;
-            min-width: 72px;
-            border: 1px solid var(--gray-800);
-            border-radius: var(--radius-xl);
-            background: var(--dark);
-            overflow: hidden;
-            cursor: pointer;
-            transition: flex .38s ease, box-shadow .25s ease, transform .25s ease;
-            position: relative;
-        }
-        .uk-edu-level-panel:hover,
-        .uk-edu-level-panel.active {
-            flex: 5.4 1 0;
-            box-shadow: 0 20px 46px rgba(0,0,0,.30);
-            transform: translateY(-2px);
-        }
-        .uk-edu-level-panel:not(:hover):not(.active) {
-            flex: .72 1 0;
-        }
-        .uk-edu-level-tab {
-            height: 100%;
-            min-height: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 16px 8px;
-            color: #fff;
-            font-weight: 900;
-            letter-spacing: .02em;
-            writing-mode: vertical-rl;
-            text-orientation: mixed;
-            font-size: 20px;
-            transition: opacity .2s ease;
-        }
-        .uk-edu-level-panel:hover .uk-edu-level-tab,
-        .uk-edu-level-panel.active .uk-edu-level-tab {
-            opacity: 0;
-            pointer-events: none;
-            position: absolute;
-        }
-        .uk-edu-level-content {
-            display: none;
-            height: 100%;
-            min-height: 0;
-            padding: 16px;
-            overflow: hidden;
-            background: var(--gray-900);
-        }
-        .uk-edu-level-panel:hover .uk-edu-level-content,
-        .uk-edu-level-panel.active .uk-edu-level-content {
-            display: flex;
-            flex-direction: column;
-        }
-        .uk-edu-level-header {
-            display: flex;
-            align-items: flex-start;
-            gap: 14px;
-            padding-bottom: 16px;
-            border-bottom: 1px solid var(--gray-800);
-        }
-        .uk-edu-level-badge {
-            flex: 0 0 auto;
-            min-width: 76px;
-            border-radius: 18px;
-            color: #fff;
-            text-align: center;
-            font-weight: 900;
-            padding: 10px 8px;
-        }
-        .uk-edu-level-badge small {
-            display: block;
-            font-size: 11px;
-            opacity: .88;
-        }
-        .uk-edu-level-badge span {
-            display: block;
-            font-size: 22px;
-            line-height: 1.05;
-        }
-        .uk-edu-level-title h3 {
-            margin: 0;
-            font-size: 18px;
-            line-height: 1.25;
-            color: var(--white);
-        }
-        .uk-edu-level-title .en {
-            display: block;
-            color: var(--gray-500);
-            font-weight: 400;
-            font-size: .88em;
-            margin-top: 4px;
-        }
-        .uk-edu-level-title p {
-            margin: 6px 0 0;
-            color: var(--gray-500);
-            font-size: 13px;
-            line-height: 1.5;
-        }
-        .uk-edu-content-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 9px;
-            margin-top: 10px;
-        }
-        .uk-edu-card {
-            border: 1px solid var(--gray-800);
-            background: var(--dark);
-            border-radius: 18px;
-            padding: 11px;
-        }
-        .uk-edu-card h4 {
-            margin: 0 0 7px;
-            font-size: 14px;
-            color: var(--white);
-        }
-        .uk-edu-items {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 6px;
-        }
-        .uk-edu-item {
-            background: var(--gray-800);
-            border: 1px solid var(--gray-700);
-            border-radius: 14px;
-            padding: 8px;
-        }
-        .uk-edu-item strong {
-            display: block;
-            font-size: 13px;
-            line-height: 1.35;
-            color: var(--white);
-        }
-        .uk-edu-item span {
-            display: block;
-            color: var(--gray-500);
-            font-size: 12px;
-            line-height: 1.5;
-            margin-top: 3px;
-        }
-        .uk-edu-route {
-            background: var(--gray-800);
-        }
-        .uk-edu-route p {
-            margin: 0;
-            color: var(--gray-500);
-            font-size: 13px;
-            line-height: 1.7;
-        }
-        .uk-edu-path-footer {
-            margin-top: auto;
-            padding-top: 6px;
-        }
-        .uk-edu-path-chips {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 7px;
-        }
-        .uk-edu-chip {
-            border-radius: 999px;
-            background: var(--gray-800);
-            border: 1px solid var(--gray-700);
-            padding: 6px 8px;
-            font-size: 11px;
-            color: var(--gray-400);
-        }
-        .uk-edu-cat-higher .uk-edu-level-tab,
-        .uk-edu-cat-higher .uk-edu-level-badge { background: #25a7d8; }
-        .uk-edu-cat-he .uk-edu-level-tab,
-        .uk-edu-cat-he .uk-edu-level-badge { background: #8a9a30; color: #fff; }
-        .uk-edu-cat-fe .uk-edu-level-tab,
-        .uk-edu-cat-fe .uk-edu-level-badge { background: #e5007f; }
-        .uk-edu-cat-school .uk-edu-level-tab,
-        .uk-edu-cat-school .uk-edu-level-badge { background: #5d337f; }
-        .uk-edu-cat-entry .uk-edu-level-tab,
-        .uk-edu-cat-entry .uk-edu-level-badge { background: #8a6f9e; }
-
-        @media (max-width: 980px) {
-            .uk-edu-mobile-note { display: block; }
-            .uk-edu-level-strip {
-                flex-direction: column;
-                height: auto;
-                min-height: auto;
-            }
-            .uk-edu-level-panel,
-            .uk-edu-level-panel:not(:hover):not(.active),
-            .uk-edu-level-panel:hover,
-            .uk-edu-level-panel.active {
-                flex: auto;
-                min-width: 0;
-                transform: none;
-            }
-            .uk-edu-level-tab {
-                min-height: 60px;
-                height: 60px;
-                writing-mode: horizontal-tb;
-                font-size: 18px;
-            }
-            .uk-edu-level-content,
-            .uk-edu-level-panel:hover .uk-edu-level-content,
-            .uk-edu-level-panel.active .uk-edu-level-content {
-                min-height: auto;
-                height: auto;
-                display: none;
-            }
-            .uk-edu-level-panel.active .uk-edu-level-content {
-                display: flex;
-            }
-            .uk-edu-level-panel.active .uk-edu-level-tab {
-                display: none;
-            }
-            .uk-edu-items { grid-template-columns: 1fr; }
-        }
-
-        /* ========== 学生作品展示板块 ========== */
-        .portfolio-section-title {
-            font-size: 28px;
-            font-weight: 800;
-            color: var(--white);
-            margin: 48px 0 20px;
-            letter-spacing: .02em;
-        }
-        .portfolio-showcase {
-            display: flex;
-            gap: 20px;
-            margin-top: 48px;
-            min-height: 600px;
-        }
-        .portfolio-main {
-            flex: 1 1 0;
-            min-width: 0;
-        }
-        .portfolio-carousel {
-            position: relative;
-            width: 100%;
-            height: 640px;
-            border-radius: var(--radius-xl);
-            overflow: hidden;
-            background: var(--gray-900);
-            border: 1px solid var(--gray-800);
-        }
-        .carousel-images {
-            width: 100%;
-            height: 100%;
-            position: relative;
-        }
-        .carousel-img {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            opacity: 0;
-            transition: opacity .8s var(--ease);
-        }
-        .carousel-img.active {
-            opacity: 1;
-        }
-
-        /* 悬停信息遮罩 */
-        .portfolio-overlay {
-            position: absolute;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            padding: 48px 32px 32px;
-            background: linear-gradient(to top, rgba(0,0,0,.88) 0%, rgba(0,0,0,.55) 60%, transparent 100%);
-            opacity: 0;
-            transform: translateY(12px);
-            transition: all .4s var(--ease);
-            pointer-events: none;
-        }
-        .portfolio-carousel:hover .portfolio-overlay {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .overlay-content {
-            max-width: 720px;
-        }
-        .student-name {
-            font-size: 24px;
-            font-weight: 800;
-            color: var(--white);
-            margin: 0 0 10px;
-            letter-spacing: .02em;
-        }
-        .student-info {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 12px;
-        }
-        .course-type {
-            font-size: 14px;
-            color: var(--gray-300);
-            background: rgba(255,255,255,.10);
-            padding: 5px 14px;
-            border-radius: var(--radius-full);
-            border: 1px solid rgba(255,255,255,.12);
-        }
-        .grade {
-            font-size: 15px;
-            font-weight: 800;
-            color: var(--orange);
-            background: rgba(255,79,0,.15);
-            padding: 5px 14px;
-            border-radius: var(--radius-full);
-            border: 1px solid rgba(255,79,0,.25);
-        }
-        .work-desc {
-            font-size: 14px;
-            color: var(--gray-300);
-            line-height: 1.7;
-            margin: 0;
-            max-width: 600px;
-        }
-
-        /* 左右切换按钮 */
-        .carousel-nav-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 44px;
-            height: 64px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(0,0,0,.25);
-            border: none;
-            color: rgba(255,255,255,.55);
-            cursor: pointer;
-            opacity: 0;
-            transition: all .35s var(--ease);
-            z-index: 6;
-            padding: 0;
-        }
-        .carousel-nav-btn svg {
-            width: 20px;
-            height: 20px;
-        }
-        .carousel-prev {
-            left: 0;
-            border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
-            padding-left: 6px;
-        }
-        .carousel-next {
-            right: 0;
-            border-radius: var(--radius-lg) 0 0 var(--radius-lg);
-            padding-right: 6px;
-        }
-        .portfolio-carousel:hover .carousel-nav-btn {
-            opacity: 1;
-        }
-        .carousel-nav-btn:hover {
-            background: rgba(0,0,0,.55);
-            color: var(--white);
-        }
-
-        /* 轮播指示器 */
-        .carousel-indicators {
-            position: absolute;
-            bottom: 20px;
-            right: 24px;
-            display: flex;
-            gap: 8px;
-            z-index: 5;
-        }
-        .carousel-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: rgba(255,255,255,.35);
-            cursor: pointer;
-            transition: all .3s var(--ease);
-        }
-        .carousel-dot.active {
-            background: var(--orange);
-            width: 24px;
-            border-radius: 4px;
-        }
-
-        /* 右侧案例列表 */
-        .portfolio-sidebar {
-            flex: 0 0 196px;
-            display: flex;
-            flex-direction: column;
-        }
-        .case-list {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            overflow-y: auto;
-            max-height: 640px;
-            padding-right: 4px;
-        }
-        .case-list::-webkit-scrollbar { width: 4px; }
-        .case-list::-webkit-scrollbar-track { background: transparent; }
-        .case-list::-webkit-scrollbar-thumb { background: var(--gray-700); border-radius: 4px; }
-
-        .case-thumb {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 10px;
-            border-radius: var(--radius-lg);
-            background: var(--gray-900);
-            border: 2px solid transparent;
-            cursor: pointer;
-            transition: all .3s var(--ease);
-        }
-        .case-thumb:hover {
-            background: var(--gray-800);
-            border-color: var(--gray-700);
-        }
-        .case-thumb.active {
-            border-color: var(--orange);
-            background: rgba(255,79,0,.08);
-        }
-        .case-thumb-img {
-            width: 64px;
-            height: 64px;
-            border-radius: var(--radius-md);
-            object-fit: cover;
-            flex-shrink: 0;
-            background: var(--gray-800);
-        }
-        .case-thumb-info {
-            min-width: 0;
-        }
-        .case-thumb-name {
-            font-size: 14px;
-            font-weight: 700;
-            color: var(--white);
-            margin: 0 0 4px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        .case-thumb-meta {
-            font-size: 12px;
-            color: var(--gray-500);
-            margin: 0;
-        }
-
-        @media (max-width: 1024px) {
-            .portfolio-showcase {
-                flex-direction: column;
-            }
-            .portfolio-sidebar {
-                flex: auto;
-                width: 100%;
-            }
-            .case-list {
-                flex-direction: row;
-                overflow-x: auto;
-                overflow-y: hidden;
-                max-height: none;
-                padding-right: 0;
-                padding-bottom: 4px;
-            }
-            .case-list::-webkit-scrollbar { height: 4px; }
-            .case-thumb {
-                flex-direction: column;
-                min-width: 100px;
-                text-align: center;
-                padding: 12px 8px;
-            }
-            .case-thumb-img {
-                width: 72px;
-                height: 72px;
-            }
-            .portfolio-carousel {
-                height: 480px;
-            }
-        }
-        @media (max-width: 768px) {
-            .portfolio-carousel {
-                height: 360px;
-            }
-            .portfolio-overlay {
-                padding: 32px 20px 24px;
-            }
-            .student-name { font-size: 20px; }
-            .work-desc { font-size: 13px; }
-        }
-
-        /* ========== 课程资源板块 ========== */
-        .course-section-title {
-            font-size: 28px;
-            font-weight: 800;
-            color: var(--white);
-            margin: 56px 0 24px;
-            letter-spacing: .02em;
-        }
-        .course-resource-wrap {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-bottom: 48px;
-        }
-        .course-group {
-            background: var(--gray-900);
-            border: 1px solid var(--gray-800);
-            border-radius: var(--radius-xl);
-            padding: 24px;
-        }
-        .course-group-title {
-            display: inline-block;
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--white);
-            margin: 0 0 16px;
-            padding-bottom: 8px;
-            border-bottom: 2px solid var(--orange);
-        }
-        .course-links-row {
-            display: flex;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 8px 0;
-        }
-        .course-links-row a {
-            color: var(--gray-400);
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 500;
-            padding: 4px 8px;
-            transition: all .25s var(--ease);
-            border-radius: var(--radius-sm);
-        }
-        .course-links-row a:hover {
-            color: var(--white);
-            background: rgba(255,255,255,.06);
-        }
-        .course-divider {
-            color: var(--gray-700);
-            font-size: 14px;
-            padding: 0 4px;
-            user-select: none;
-        }
 
         @media (max-width: 768px) {
-            .course-resource-wrap {
-                grid-template-columns: 1fr;
-            }
-            .course-section-title {
-                font-size: 22px;
-                margin-top: 40px;
-            }
-            .course-links-row {
-                gap: 6px 0;
-            }
-            .course-links-row a {
-                font-size: 13px;
-            }
-        }
-
-        /* ========== 教学板块 ========== */
-        .teaching-section-title {
-            font-size: 28px;
-            font-weight: 800;
-            color: var(--white);
-            margin: 56px 0 24px;
-            letter-spacing: .02em;
-        }
-        .teaching-wrap {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin-bottom: 48px;
-        }
-        .teaching-item {
-            position: relative;
-            flex: 1 1 160px;
-            min-width: 140px;
-            max-width: 220px;
-        }
-        .teaching-label {
-            padding: 14px 20px;
-            background: var(--gray-900);
-            border: 1px solid var(--gray-800);
-            border-radius: var(--radius-lg);
-            color: var(--gray-300);
-            font-size: 14px;
-            font-weight: 600;
-            text-align: center;
-            cursor: default;
-            transition: all .3s var(--ease);
-            white-space: nowrap;
-        }
-        .teaching-item:hover .teaching-label {
-            border-color: var(--orange);
-            color: var(--white);
-            background: rgba(255,79,0,.08);
-        }
-        .teaching-submenu {
-            position: absolute;
-            top: calc(100% + 8px);
-            left: 50%;
-            transform: translateX(-50%) translateY(-6px);
-            display: flex;
-            gap: 8px;
-            padding: 10px 14px;
-            background: var(--dark);
-            border: 1px solid var(--gray-700);
-            border-radius: var(--radius-lg);
-            box-shadow: 0 10px 30px rgba(0,0,0,.4);
-            opacity: 0;
-            pointer-events: none;
-            transition: all .3s var(--ease);
-            z-index: 20;
-            white-space: nowrap;
-        }
-        .teaching-item:hover .teaching-submenu {
-            opacity: 1;
-            pointer-events: auto;
-            transform: translateX(-50%) translateY(0);
-        }
-        .teaching-submenu::before {
-            content: '';
-            position: absolute;
-            top: -6px;
-            left: 50%;
-            transform: translateX(-50%) rotate(45deg);
-            width: 10px;
-            height: 10px;
-            background: var(--dark);
-            border-left: 1px solid var(--gray-700);
-            border-top: 1px solid var(--gray-700);
-        }
-        .teaching-link {
-            display: inline-block;
-            padding: 6px 14px;
-            background: var(--gray-900);
-            border: 1px solid var(--gray-800);
-            border-radius: var(--radius-md);
-            color: var(--gray-400);
-            text-decoration: none;
-            font-size: 13px;
-            font-weight: 500;
-            transition: all .25s var(--ease);
-        }
-        .teaching-link:hover {
-            border-color: var(--orange);
-            color: var(--white);
-            background: rgba(255,79,0,.10);
-        }
-
-        @media (max-width: 768px) {
-            .teaching-section-title {
-                font-size: 22px;
-                margin-top: 40px;
-            }
-            .teaching-wrap {
-                gap: 10px;
-            }
-            .teaching-item {
-                flex: 1 1 120px;
-                min-width: 110px;
-            }
-            .teaching-label {
-                padding: 12px 14px;
-                font-size: 13px;
-            }
-            .teaching-submenu {
-                padding: 8px 10px;
-                gap: 6px;
-            }
-            .teaching-link {
-                padding: 5px 10px;
-                font-size: 12px;
-            }
+            .degree-tabs-inner { padding: 0 16px; }
+            .degree-tab-btn { padding: 8px 20px; font-size: 14px; }
         }
     </style>
 </head>
@@ -932,8 +133,8 @@
                 <li><a href="index.html#data" class="nav-link">录取数据</a></li>
                 <li><a href="index.html#quick-entry" class="nav-link">快捷入口</a></li>
                 <li class="nav-spacer"></li>
-                <li><a href="fulltime.html" class="nav-link">全日制</a></li>
-                <li><a href="undergraduate.html" class="nav-link active">本科</a></li>
+                <li><a href="undergraduate.html" class="nav-link active">全日制</a></li>
+                <li><a href="undergraduate.html" class="nav-link">本科</a></li>
                 <li><a href="#" class="nav-link" style="opacity:.4;cursor:not-allowed">研究生</a></li>
             </ul>
             <button class="nav-toggle" id="navToggle" aria-label="菜单">
@@ -942,151 +143,43 @@
         </div>
     </nav>
 
-    <!-- 本科页面主体 -->
-    <div class="ug-page">
+    <!-- 学位页面主体 -->
+    <div class="degree-page">
         <!-- 标签切换栏 -->
-        <div class="ug-tabs-bar">
-            <div class="ug-tabs-inner">
-                <button class="ug-tab-btn active" data-tab="commonwealth">英联邦</button>
-                <button class="ug-tab-btn" data-tab="us-others">美本及其他</button>
+        <div class="degree-tabs-bar">
+            <div class="degree-tabs-inner">
+                <button class="degree-tab-btn active" data-tab="fulltime">全日制</button>
+                <button class="degree-tab-btn" data-tab="undergraduate">本科</button>
+                <button class="degree-tab-btn" data-tab="graduate" style="opacity:.4;cursor:not-allowed" disabled>研究生</button>
             </div>
         </div>
 
         <!-- 内容区域 -->
-        <div class="ug-content-wrap">
-            <!-- 英联邦内容 -->
-            <div class="ug-panel active" id="panel-commonwealth">
-                <!-- 右上方收起/展开按钮 -->
-                <div class="uk-edu-top-btn">
-                    <button class="uk-edu-toggle-simple" id="ukEduToggle" onclick="toggleUkEdu()">
-                        <span>英国教育体系</span>
-                        <span class="uk-edu-toggle-arrow" id="ukEduArrow">▾</span>
-                    </button>
-                </div>
+        <div class="degree-content-wrap">
+            <!-- 全日制内容 - iframe嵌入 -->
+            <div class="degree-panel active" id="panel-fulltime">
+                <iframe class="degree-iframe" src="fulltime/index-no-header.html" title="全日制1+2国际本科"></iframe>
+            </div>
 
-                <!-- 英国教育体系互动工具（默认展开） -->
-                <div class="uk-edu-panel open" id="ukEduPanel">
-                    <div class="uk-edu-map">
-                        <div class="uk-edu-mobile-note">移动端建议点击 Level 展开查看；桌面端鼠标悬停即可展开。</div>
-                        <div class="uk-edu-level-strip" id="ukEduStrip"></div>
-                    </div>
-                </div>
-
-                <!-- 学生作品展示板块 -->
-                <h2 class="portfolio-section-title">学生作品</h2>
-                <div class="portfolio-showcase" id="portfolioShowcase">
-                    <div class="portfolio-main">
-                        <!-- 大图轮播区 -->
-                        <div class="portfolio-carousel">
-                            <div class="carousel-images" id="carouselImages">
-                                <!-- 动态生成图片 -->
-                            </div>
-                            <!-- 悬停信息遮罩 -->
-                            <div class="portfolio-overlay" id="portfolioOverlay">
-                                <div class="overlay-content">
-                                    <h3 class="student-name" id="studentName">学生姓名</h3>
-                                    <div class="student-info">
-                                        <span class="course-type" id="courseType">A-Level 平面</span>
-                                        <span class="grade" id="grade">A*</span>
-                                    </div>
-                                    <p class="work-desc" id="workDesc">作品简介...</p>
-                                </div>
-                            </div>
-                            <!-- 左右切换按钮 -->
-                            <button class="carousel-nav-btn carousel-prev" id="carouselPrev" aria-label="上一张">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
-                            </button>
-                            <button class="carousel-nav-btn carousel-next" id="carouselNext" aria-label="下一张">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                            </button>
-                            <!-- 轮播指示器 -->
-                            <div class="carousel-indicators" id="carouselIndicators"></div>
-                        </div>
-                    </div>
-                    <!-- 右侧案例列表 -->
-                    <div class="portfolio-sidebar">
-                        <div class="case-list" id="caseList">
-                            <!-- 动态生成缩略图 -->
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 课程板块 -->
-                <h2 class="course-section-title">课程</h2>
-                <div class="course-resource-wrap">
-                    <div class="course-group">
-                        <h3 class="course-group-title">课程</h3>
-                        <div class="course-links-row">
-                            <a href="https://yk3.gokuai.com/file/vhko6fxxgaurt0ajck27revbksd6poxk#" target="_blank" rel="noreferrer">课程手册</a>
-                            <span class="course-divider">/</span>
-                            <a href="https://yk3.gokuai.com/file/o5atk2xcikhnynxgx8929feycfsb8gtb#" target="_blank" rel="noreferrer">基础课大纲</a>
-                            <span class="course-divider">/</span>
-                            <a href="https://yk3.gokuai.com/file/9a2qrxvzdfo6qahcdvr0n7oiyk7n5xqw#" target="_blank" rel="noreferrer">基础课课件</a>
-                            <span class="course-divider">/</span>
-                            <a href="https://yk3.gokuai.com/file/48q4jj46bju7ovf5dgnl4ddlz0rh3oe6#" target="_blank" rel="noreferrer">项目课大纲</a>
-                        </div>
-                    </div>
-                    <div class="course-group">
-                        <h3 class="course-group-title">首课</h3>
-                        <div class="course-links-row">
-                            <a href="https://yk3.gokuai.com/file/vj0mxg6qjfgwr6v7h3htg4739sfu9h48#" target="_blank" rel="noreferrer">首课规划表</a>
-                            <span class="course-divider">/</span>
-                            <a href="https://yk3.gokuai.com/file/tml0k2i5cz33mozs8thuskr8dz6b6f21#" target="_blank" rel="noreferrer">首课规划案例</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 教学板块 -->
-                <h2 class="teaching-section-title">教学</h2>
-                <div class="teaching-wrap">
-                    <div class="teaching-item">
-                        <div class="teaching-label">ALevel</div>
-                        <div class="teaching-submenu">
-                            <a href="https://yk3.gokuai.com/file/8yfhvy6i12d8v9mlyhhudn5so6lmwa9g#" target="_blank" rel="noreferrer" class="teaching-link">教学</a>
-                            <a href="https://yk3.gokuai.com/file/436px3jlu3t3fdepijb70gg0b6k2ndpm#" target="_blank" rel="noreferrer" class="teaching-link">结课</a>
-                            <a href="https://yk3.gokuai.com/file/0rvdfw2j1za72j2xk1ugmoh9xohrbrnt#" target="_blank" rel="noreferrer" class="teaching-link">培训</a>
-                        </div>
-                    </div>
-                    <div class="teaching-item">
-                        <div class="teaching-label">BTEC LEVEL 3</div>
-                        <div class="teaching-submenu">
-                            <a href="https://yk3.gokuai.com/file/z4pmekaggqqpt0nyinae4bp66px0e1pk#" target="_blank" rel="noreferrer" class="teaching-link">教学</a>
-                            <a href="https://yk3.gokuai.com/file/zh9eu3n3grrvns39qgrb6a4a5mtsq7c2#" target="_blank" rel="noreferrer" class="teaching-link">结课</a>
-                            <a href="https://yk3.gokuai.com/file/b4ufclc41dbc10qhrtoun7zrjln16r1f#" target="_blank" rel="noreferrer" class="teaching-link">培训</a>
-                        </div>
-                    </div>
-                    <div class="teaching-item">
-                        <div class="teaching-label">BTEC LEVEL 4</div>
-                        <div class="teaching-submenu">
-                            <a href="https://yk3.gokuai.com/file/shl08yclcm6gaomcvfl8oif6yzmeshuo#" target="_blank" rel="noreferrer" class="teaching-link">教学</a>
-                            <a href="https://yk3.gokuai.com/file/144ra1w0ie04o1evpvq9iv7pc6gc8pkv#" target="_blank" rel="noreferrer" class="teaching-link">结课</a>
-                            <a href="https://yk3.gokuai.com/file/6jno53w82rtm8eewxwl6zsc3ies57061#" target="_blank" rel="noreferrer" class="teaching-link">培训</a>
-                        </div>
-                    </div>
-                    <div class="teaching-item">
-                        <div class="teaching-label">Alevel&BTEC双轨制</div>
-                        <div class="teaching-submenu">
-                            <a href="https://yk3.gokuai.com/file/i3gnglmjtn42cln1p6928xdqib4kdeww#" target="_blank" rel="noreferrer" class="teaching-link">教学</a>
-                            <a href="https://yk3.gokuai.com/file/89vamzuiin4knhbnz9r1el071jna2bk6#" target="_blank" rel="noreferrer" class="teaching-link">结课</a>
-                            <a href="https://yk3.gokuai.com/file/kjr9jfa3bff7809nzg48h537twieug21#" target="_blank" rel="noreferrer" class="teaching-link">培训</a>
-                        </div>
-                    </div>
-                    <div class="teaching-item">
-                        <div class="teaching-label">HNC 1+2</div>
-                        <div class="teaching-submenu">
-                            <a href="https://yk3.gokuai.com/file/ggdz1qbuz8sv8fddaseuz03e95t61kih#" target="_blank" rel="noreferrer" class="teaching-link">教学</a>
-                            <a href="https://yk3.gokuai.com/file/tj1b9z4lvrh7pp8p8sn2v2tws8hku59n#" target="_blank" rel="noreferrer" class="teaching-link">结课</a>
-                            <a href="https://yk3.gokuai.com/file/raukjeg440942opwc0fh2xaz9ke9qf7d#" target="_blank" rel="noreferrer" class="teaching-link">培训</a>
-                        </div>
+            <!-- 本科内容 -->
+            <div class="degree-panel" id="panel-undergraduate">
+                <div class="ug-content-wrap">
+                    <div class="degree-placeholder">
+                        <div class="degree-placeholder-icon">📚</div>
+                        <h2>本科申请内容</h2>
+                        <p>包含英联邦本科申请、美本申请等方向的详细指南、院校信息、申请流程与资源。</p>
                     </div>
                 </div>
             </div>
 
-            <!-- 美本及其他内容 -->
-            <div class="ug-panel" id="panel-us-others">
-                <div class="ug-placeholder">
-                    <div class="ug-placeholder-icon">🚧</div>
-                    <h2>内容正在搭建中...</h2>
+            <!-- 研究生内容 -->
+            <div class="degree-panel" id="panel-graduate">
+                <div class="ug-content-wrap">
+                    <div class="degree-placeholder">
+                        <div class="degree-placeholder-icon">🚧</div>
+                        <h2>内容正在搭建中...</h2>
+                        <p>研究生申请板块正在建设中，敬请期待。</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1094,20 +187,20 @@
 
     <script>
         // 标签切换逻辑
-        const tabBtns = document.querySelectorAll('.ug-tab-btn');
-        const panels = document.querySelectorAll('.ug-panel');
-        
+        const tabBtns = document.querySelectorAll('.degree-tab-btn');
+        const panels = document.querySelectorAll('.degree-panel');
+
         tabBtns.forEach(btn => {
             btn.addEventListener('click', () => {
+                if (btn.disabled) return;
                 const target = btn.dataset.tab;
                 tabBtns.forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
                 panels.forEach(p => p.classList.remove('active'));
                 document.getElementById('panel-' + target).classList.add('active');
-                document.querySelector('.ug-content-wrap').scrollIntoView({ behavior: 'smooth', block: 'start' });
             });
         });
-        
+
         // 移动端菜单
         const navToggle = document.getElementById('navToggle');
         const navLinks = document.getElementById('navLinks');
@@ -1116,413 +209,6 @@
                 navLinks.classList.toggle('show');
             });
         }
-
-        // 英国教育体系 - 展开/收起
-        function toggleUkEdu() {
-            const panel = document.getElementById('ukEduPanel');
-            const toggle = document.getElementById('ukEduToggle');
-            const text = document.getElementById('ukEduToggleText');
-            const isOpen = panel.classList.toggle('open');
-            toggle.classList.toggle('active', isOpen);
-            text.textContent = isOpen ? '收起' : '展开';
-        }
-
-        // 英国教育体系 - 数据渲染（新版 500px）
-        const ukLevels=[
-          {level:'1',cat:'school',titleCN:'GCSE 入门等级与基础资格',titleEN:'Introductory school-level qualifications',summaryCN:'GCSE 1–3、BTEC Level 1、NVQ Level 1 等。',summaryEN:'GCSE grades 1–3, BTEC Level 1, NVQ Level 1 and similar qualifications.',items:[['GCSE Grade 1–3','GCSE 基础等级'],['BTEC Level 1','职业入门课程'],['NVQ Level 1','入门职业能力资格']],routeCN:'Level 1 → Level 2 → Level 3',routeEN:'Level 1 → Level 2 → Level 3'},
-          {level:'2',cat:'school',titleCN:'GCSE 合格与基础职业资格',titleEN:'GCSE pass level and foundation vocational qualifications',summaryCN:'GCSE 4–9、BTEC Level 2、NVQ Level 2 等。',summaryEN:'GCSE grades 4–9, BTEC Level 2, NVQ Level 2 and similar qualifications.',items:[['GCSE Grade 4–9','通常视为 GCSE pass'],['BTEC Level 2','职业基础课程'],['NVQ Level 2','职业能力资格'],['Intermediate Apprenticeship','中级学徒制']],routeCN:'Level 2 → A Level / BTEC Level 3 / T Level',routeEN:'Level 2 → A Levels / BTEC Level 3 / T Levels'},
-          {level:'3',cat:'fe',titleCN:'大学前核心衔接阶段',titleEN:'Main pre-university level',summaryCN:'A Level、BTEC Level 3、T Level、IB 等通常用于申请大学。',summaryEN:'A Levels, BTEC Level 3, T Levels and IB are commonly used for university entry.',items:[['A Levels / AS Levels','英国传统大学申请课程'],['BTEC National / Level 3','职业导向课程，可申请本科'],['T Levels','技术路线，含行业实践'],['International Baccalaureate','IB 国际文凭'],['Access to HE Diploma','成人或转轨学生升学通道']],routeCN:'GCSE / 国际高中 → Level 3 → 本科 / Foundation / HNC',routeEN:'GCSE / international high school → Level 3 → degree / foundation / HNC'},
-          {level:'4',cat:'he',titleCN:'高等教育入门阶段',titleEN:'First stage of higher education',summaryCN:'HNC、CertHE 等常见于高等教育第一阶段。',summaryEN:'Includes HNC and CertHE, often the first stage of higher education.',items:[['HNC','Higher National Certificate / 高级国家证书'],['Certificate of Higher Education','CertHE / 高等教育证书'],['Level 4 Diploma','职业或专业 4 级文凭'],['Higher Apprenticeship','高级学徒制部分方向']],routeCN:'Level 3 → HNC / CertHE → HND / 本科继续学习',routeEN:'Level 3 → HNC / CertHE → HND / further degree study'},
-          {level:'5',cat:'he',titleCN:'本科中段 / 高级文凭阶段',titleEN:'Intermediate undergraduate / higher diploma level',summaryCN:'常见资格包括 HND、Foundation Degree、DipHE，对应本科前两年左右。',summaryEN:'Includes HND, Foundation Degree and DipHE; broadly comparable to early undergraduate study.',items:[['HND','Higher National Diploma / 高级国家文凭'],['Foundation Degree','基础学位'],['Diploma of Higher Education','DipHE / 高等教育文凭'],['Level 5 Diploma','职业或专业文凭']],routeCN:'HNC / Level 4 → HND / Level 5 → 本科 Top-up / 就业',routeEN:'HNC / Level 4 → HND / Level 5 → top-up degree / employment'},
-          {level:'6',cat:'he',titleCN:'本科荣誉学位阶段',titleEN:'Bachelor\'s / Honours Degree level',summaryCN:'对应英国本科最终阶段，也包括部分高级职业资格。',summaryEN:'Final undergraduate level, also including some advanced professional qualifications.',items:[['Bachelor\'s Degree with Honours','BA(Hons) / BSc(Hons) / BDes(Hons)'],['Degree Apprenticeship','学位学徒制'],['Graduate Certificate / Diploma','部分毕业证书或文凭'],['BTEC Advanced Professional Level 6','BTEC 高级专业 6 级']],routeCN:'Level 3/4/5 → 本科毕业 → 硕士或就业',routeEN:'Level 3/4/5 → Bachelor\'s completion → master\'s or employment'},
-          {level:'7',cat:'higher',titleCN:'研究生阶段',titleEN:'Postgraduate level',summaryCN:'硕士学位、研究生文凭与研究生证书所在等级。',summaryEN:'Master\'s degrees, postgraduate diplomas and postgraduate certificates.',items:[['Master\'s Degree','MA / MSc / MFA / MDes 等'],['Postgraduate Diploma','PGDip / 研究生文凭'],['Postgraduate Certificate','PGCert / 研究生证书'],['Level 7 Diploma','部分职业资格与专业认证']],routeCN:'本科 → 硕士 → 就业 / 博士 / 高级专业路径',routeEN:'Bachelor\'s → Master\'s → employment / doctorate / advanced practice'},
-          {level:'8',cat:'higher',titleCN:'博士与最高研究型资格',titleEN:'Doctoral and highest-level qualifications',summaryCN:'面向原创研究、博士学位与高级专业实践。',summaryEN:'Original research, doctoral study and advanced professional practice.',items:[['PhD / DPhil','博士学位 / Doctoral Degree'],['Professional Doctorate','专业博士，如 EdD、DBA 等'],['Level 8 Diploma','高级专业资格']],routeCN:'硕士 → 博士 / 研究职位 / 高级行业专家',routeEN:'Master\'s → Doctorate / research roles / senior specialist roles'}
-        ];
-
-        function renderUkEdu(){
-          const strip=document.getElementById('ukEduStrip');
-          strip.innerHTML=ukLevels.map((l,i)=>`
-            <article class="uk-edu-level-panel uk-edu-cat-${l.cat} ${i===2?'active':''}" tabindex="0">
-              <div class="uk-edu-level-tab">Level ${l.level}</div>
-              <div class="uk-edu-level-content">
-                <div class="uk-edu-level-header">
-                  <div class="uk-edu-level-badge"><small>LEVEL</small><span>${l.level}</span></div>
-                  <div class="uk-edu-level-title">
-                    <h3>${l.titleCN}<span class="en">${l.titleEN}</span></h3>
-                    <p>${l.summaryCN}<br>${l.summaryEN}</p>
-                  </div>
-                </div>
-                <div class="uk-edu-content-grid">
-                  <div class="uk-edu-card">
-                    <h4>常见资格 / Common qualifications</h4>
-                    <div class="uk-edu-items">
-                      ${l.items.map(it=>`<div class="uk-edu-item"><strong>${it[0]}</strong><span>${it[1]}</span></div>`).join('')}
-                    </div>
-                  </div>
-                  <div class="uk-edu-card uk-edu-route">
-                    <h4>典型去向 / Typical progression</h4>
-                    <p>${l.routeCN}<br>${l.routeEN}</p>
-                  </div>
-                </div>
-                <div class="uk-edu-path-footer">
-                  <div class="uk-edu-path-chips">
-                    <span class="uk-edu-chip">GCSE</span>
-                    <span class="uk-edu-chip">A Level</span>
-                    <span class="uk-edu-chip">BTEC</span>
-                    <span class="uk-edu-chip">HNC / HND</span>
-                    <span class="uk-edu-chip">Bachelor</span>
-                    <span class="uk-edu-chip">Master</span>
-                  </div>
-                </div>
-              </div>
-            </article>
-          `).join('');
-          document.querySelectorAll('.uk-edu-level-panel').forEach(panel=>{
-            panel.addEventListener('mouseenter',()=>setUkActive(panel));
-            panel.addEventListener('focus',()=>setUkActive(panel));
-            panel.addEventListener('click',()=>setUkActive(panel));
-          });
-        }
-        function setUkActive(panel){
-          document.querySelectorAll('.uk-edu-level-panel').forEach(p=>p.classList.remove('active'));
-          panel.classList.add('active');
-        }
-        renderUkEdu();
-
-        // ========== 学生作品展示板块 ==========
-        const portfolioData = [
-            {
-                name: '于同学',
-                course: 'Alevel 纯艺',
-                grade: 'A',
-                desc: '项目以时代的女性：地位、力量与挑战为主题，研究女性从原始社会的崇高地位到封建社会的压制，再到现代社会的复杂处境，通过艺术探讨女性身份、权力与平等议题，引发公众对女性权益的思考。',
-                images: [
-                    'yu_jennifer/img_01.jpg','yu_jennifer/img_02.jpg','yu_jennifer/img_03.jpg',
-                    'yu_jennifer/img_04.jpg','yu_jennifer/img_05.jpg','yu_jennifer/img_06.jpg',
-                    'yu_jennifer/img_07.jpg','yu_jennifer/img_08.jpg','yu_jennifer/img_09.jpg',
-                    'yu_jennifer/img_10.jpg'
-                ]
-            },
-            {
-                name: '俞同学',
-                course: 'Alevel 平面',
-                grade: '预估A*',
-                desc: '机械结合力学与美学，通过零部件传递能量与运动，体现理性逻辑与感性创造的结合，是力与美的直观呈现。',
-                images: [
-                    'yu_qingyue/img_01.jpg','yu_qingyue/img_02.jpg','yu_qingyue/img_03.jpg',
-                    'yu_qingyue/img_04.jpg','yu_qingyue/img_05.jpg','yu_qingyue/img_06.jpg',
-                    'yu_qingyue/img_07.jpg','yu_qingyue/img_08.jpg','yu_qingyue/img_09.jpg',
-                    'yu_qingyue/img_10.jpg','yu_qingyue/img_11.jpg','yu_qingyue/img_12.jpg',
-                    'yu_qingyue/img_13.jpg','yu_qingyue/img_14.jpg'
-                ]
-            },
-            {
-                name: '冯同学',
-                course: 'Alevel 综合',
-                grade: 'A',
-                desc: '通过调研多种占卜方式，尝试建立"奶茶占卜"品牌，将茶饮与视觉化占卜结合，结合雷诺曼卡牌和个人画风，创造趣味与美感兼具的体验。',
-                images: [
-                    'feng_meitong/img_01.jpg','feng_meitong/img_02.jpg','feng_meitong/img_03.jpg',
-                    'feng_meitong/img_04.jpg','feng_meitong/img_05.jpg','feng_meitong/img_06.jpg',
-                    'feng_meitong/img_07.jpg','feng_meitong/img_08.jpg','feng_meitong/img_09.jpg',
-                    'feng_meitong/img_10.jpg','feng_meitong/img_11.jpg','feng_meitong/img_12.jpg',
-                    'feng_meitong/img_13.jpg'
-                ]
-            },
-            {
-                name: '刘同学',
-                course: 'BTEC 游戏美术',
-                grade: 'Distinction',
-                desc: '这是一个棋盘游戏，帮助人们了解心理健康问题的经历，并鼓励那些受影响的人积极地与他们作斗争。',
-                images: [
-                    'liu_siyi/img_01.jpg','liu_siyi/img_02.jpg','liu_siyi/img_03.jpg',
-                    'liu_siyi/img_04.jpg','liu_siyi/img_05.jpg','liu_siyi/img_06.jpg',
-                    'liu_siyi/img_07.jpg','liu_siyi/img_08.jpg','liu_siyi/img_09.jpg',
-                    'liu_siyi/img_10.jpg'
-                ]
-            },
-            {
-                name: '刘同学',
-                course: 'HNC 动画设计',
-                grade: 'Distinction',
-                desc: '项目以中国神话为主题，通过传统神话与虚构伪纪录片神话的融合，进行角色设计与世界观构建，探索神话叙事、文化想象与个人创作之间的关系。',
-                images: [
-                    'liu_haoyue/img_01.jpg','liu_haoyue/img_02.jpg','liu_haoyue/img_03.jpg',
-                    'liu_haoyue/img_04.jpg','liu_haoyue/img_05.jpg','liu_haoyue/img_06.jpg',
-                    'liu_haoyue/img_07.jpg','liu_haoyue/img_08.jpg','liu_haoyue/img_09.jpg',
-                    'liu_haoyue/img_10.jpg'
-                ]
-            },
-            {
-                name: '卢同学',
-                course: 'Alevel 纯艺',
-                grade: 'A',
-                desc: '项目以动物乌托邦为主题，结合野生动物观察与职业体验经历，构建一个充满协作与秩序的动物社会，通过系列绘画探索个体价值、社会分工以及人与自然的关系。',
-                images: [
-                    'lu_yuner/img_01.jpg','lu_yuner/img_02.jpg','lu_yuner/img_03.jpg',
-                    'lu_yuner/img_04.jpg','lu_yuner/img_05.jpg','lu_yuner/img_06.jpg',
-                    'lu_yuner/img_07.jpg','lu_yuner/img_08.jpg','lu_yuner/img_09.jpg',
-                    'lu_yuner/img_10.jpg','lu_yuner/img_11.jpg'
-                ]
-            },
-            {
-                name: '常同学',
-                course: 'Alevel 摄影',
-                grade: '预估A',
-                desc: '项目《废墟与伪造记忆》试图通过"影像的再构造"来探讨时间、记忆与历史的关系。在这个作品中，废墟不只是过去的遗迹，更是一种时间的物质化形态。每一张照片既记录了消逝的空间，也暗示了我们如何在影像中重塑时间。',
-                images: [
-                    'chang_yilin/img_01.jpg','chang_yilin/img_02.jpg','chang_yilin/img_03.jpg',
-                    'chang_yilin/img_04.jpg','chang_yilin/img_05.jpg','chang_yilin/img_06.jpg',
-                    'chang_yilin/img_07.jpg','chang_yilin/img_08.jpg'
-                ]
-            },
-            {
-                name: '张同学',
-                course: 'Alevel 平面',
-                grade: 'A',
-                desc: '项目以当代交流方式为主题，通过幽默荒诞的插画呈现表情包、符号和手势取代语言的现象，探讨信息时代沟通表达的简化、情感隔阂以及人与人之间逐渐流失的深度连接。',
-                images: [
-                    'zhang_yingqi/img_01.jpg','zhang_yingqi/img_02.jpg','zhang_yingqi/img_03.jpg',
-                    'zhang_yingqi/img_04.jpg','zhang_yingqi/img_05.jpg','zhang_yingqi/img_06.jpg',
-                    'zhang_yingqi/img_07.jpg','zhang_yingqi/img_08.jpg','zhang_yingqi/img_09.jpg',
-                    'zhang_yingqi/img_10.jpg','zhang_yingqi/img_11.jpg','zhang_yingqi/img_12.jpg',
-                    'zhang_yingqi/img_13.jpg'
-                ]
-            },
-            {
-                name: '朱同学',
-                course: '基础课',
-                grade: '',
-                desc: 'SFK游戏动画本科的基础课程旨在打牢学生的绘画与视觉表达能力，培养观察力、造型力和创作思维，为后续动画、角色设计和概念美术的专业学习打下坚实基础。',
-                images: [
-                    'zhu_yimeng/img_01.jpg','zhu_yimeng/img_02.jpg','zhu_yimeng/img_03.jpg',
-                    'zhu_yimeng/img_04.jpg','zhu_yimeng/img_05.jpg','zhu_yimeng/img_06.jpg',
-                    'zhu_yimeng/img_07.jpg','zhu_yimeng/img_08.jpg','zhu_yimeng/img_09.jpg',
-                    'zhu_yimeng/img_10.jpg'
-                ]
-            },
-            {
-                name: '林同学',
-                course: '角色概念设计',
-                grade: '',
-                desc: '项目设定在一场宇宙灾难后，人类被缩小至原体积的百分之一。为适应充满威胁的新环境，人类借鉴昆虫结构开发生物机械技术，进入融合自然与科技的生物朋克时代。',
-                images: [
-                    'lin_peiyang/img_01.jpg','lin_peiyang/img_02.jpg','lin_peiyang/img_03.jpg',
-                    'lin_peiyang/img_04.jpg','lin_peiyang/img_05.jpg','lin_peiyang/img_06.jpg',
-                    'lin_peiyang/img_07.jpg'
-                ]
-            },
-            {
-                name: '王同学',
-                course: 'BTEC 动画设计',
-                grade: 'Distinction',
-                desc: '该项目灵感来自西部电影《三恶三丑》。通过牛仔与动物结合构建理想西部世界，以牛仔鼠与赏金乌鸦为核心角色，并延伸黑帮鳄鱼设定。在故事板创作中借鉴《奥术》，逐步完善狂野西部叙事世界观。',
-                images: [
-                    'wang_tianhe/img_01.jpg','wang_tianhe/img_02.jpg','wang_tianhe/img_03.jpg',
-                    'wang_tianhe/img_04.jpg','wang_tianhe/img_05.jpg','wang_tianhe/img_06.jpg',
-                    'wang_tianhe/img_07.jpg','wang_tianhe/img_08.jpg','wang_tianhe/img_09.jpg',
-                    'wang_tianhe/img_10.jpg','wang_tianhe/img_11.jpg','wang_tianhe/img_12.jpg',
-                    'wang_tianhe/img_13.jpg'
-                ]
-            },
-            {
-                name: '王同学',
-                course: '游戏设计',
-                grade: '',
-                desc: '这是一个以调制气泡水为主题的unity+arduino实验游戏。玩家将根据目标气泡水使用按钮来调整游戏中液体的状态和颜色，并使用内置振动传感器的杯子来摇出气泡，最后尽可能地接近目标气泡水的颜色和状态。',
-                images: [
-                    'wang_zhengya/img_01.jpg','wang_zhengya/img_02.jpg','wang_zhengya/img_03.jpg',
-                    'wang_zhengya/img_04.jpg','wang_zhengya/img_05.jpg'
-                ]
-            },
-            {
-                name: '韩同学',
-                course: '角色设计',
-                grade: '',
-                desc: '我在网上了解到一些与猎巫有关的故事，被圣女贞德的故事中迸发出的信念和勇气所打动。我想剥去厚重的史诗感，用中世纪冒险的外壳，让这种对信仰的坚持在剑与魔法的旅程中舞蹈。我想通过奔跑和探索让古老的勇气变得更加生动。',
-                images: [
-                    'han_haoyi/img_01.jpg','han_haoyi/img_02.jpg','han_haoyi/img_03.jpg',
-                    'han_haoyi/img_04.jpg','han_haoyi/img_05.jpg'
-                ]
-            },
-            {
-                name: 'J同学',
-                course: 'HNC 游戏设计',
-                grade: '预估Distinction',
-                desc: '该项目通过研究、分析、头脑风暴与原型制作，探索以太空为主题的策略与管理类游戏玩法设计可能性。',
-                images: [
-                    'james/img_01.jpg','james/img_02.jpg','james/img_03.jpg',
-                    'james/img_04.jpg','james/img_05.jpg','james/img_06.jpg',
-                    'james/img_07.jpg','james/img_08.jpg','james/img_09.jpg',
-                    'james/img_10.jpg'
-                ]
-            }
-        ];
-
-        let currentCaseIndex = 0;
-        let currentImageIndex = 0;
-        let autoPlayTimer = null;
-        const IMAGE_INTERVAL = 4000; // 每张图片展示4秒
-        const IMG_BASE = 'assets/portfolio/';
-
-        const carouselImages = document.getElementById('carouselImages');
-        const carouselIndicators = document.getElementById('carouselIndicators');
-        const caseList = document.getElementById('caseList');
-        const studentName = document.getElementById('studentName');
-        const courseType = document.getElementById('courseType');
-        const grade = document.getElementById('grade');
-        const workDesc = document.getElementById('workDesc');
-
-        // 初始化渲染
-        function initPortfolio() {
-            // 渲染轮播图片（只渲染当前案例的10张图）
-            renderCarouselImages();
-            // 渲染指示器
-            renderIndicators();
-            // 渲染右侧缩略图列表
-            renderCaseList();
-            // 显示当前案例信息
-            updateCaseInfo();
-            // 显示第一张图
-            showImage(0);
-            // 启动自动播放
-            startAutoPlay();
-        }
-
-        function renderCarouselImages() {
-            const caseData = portfolioData[currentCaseIndex];
-            carouselImages.innerHTML = caseData.images.map((img, i) =>
-                `<img src="${IMG_BASE}${img}" class="carousel-img ${i===0?'active':''}" alt="作品图片" loading="lazy">`
-            ).join('');
-        }
-
-        function renderIndicators() {
-            const caseData = portfolioData[currentCaseIndex];
-            carouselIndicators.innerHTML = caseData.images.map((_, i) =>
-                `<div class="carousel-dot ${i===0?'active':''}" data-index="${i}"></div>`
-            ).join('');
-        }
-
-        function renderCaseList() {
-            caseList.innerHTML = portfolioData.map((c, i) => `
-                <div class="case-thumb ${i===currentCaseIndex?'active':''}" data-index="${i}">
-                    <img src="${IMG_BASE}${c.images[0]}" class="case-thumb-img" alt="${c.name}">
-                    <div class="case-thumb-info">
-                        <p class="case-thumb-name">${c.name}</p>
-                        <p class="case-thumb-meta">${c.course}</p>
-                    </div>
-                </div>
-            `).join('');
-
-            // 绑定点击事件
-            caseList.querySelectorAll('.case-thumb').forEach(thumb => {
-                thumb.addEventListener('click', () => {
-                    const idx = parseInt(thumb.dataset.index);
-                    if (idx !== currentCaseIndex) {
-                        switchCase(idx);
-                    }
-                });
-            });
-        }
-
-        function updateCaseInfo() {
-            const data = portfolioData[currentCaseIndex];
-            studentName.textContent = data.name;
-            courseType.textContent = data.course;
-            grade.textContent = data.grade;
-            grade.style.display = data.grade ? '' : 'none';
-            workDesc.textContent = data.desc;
-        }
-
-        function showImage(index) {
-            const imgs = carouselImages.querySelectorAll('.carousel-img');
-            const dots = carouselIndicators.querySelectorAll('.carousel-dot');
-            imgs.forEach((img, i) => img.classList.toggle('active', i === index));
-            dots.forEach((dot, i) => dot.classList.toggle('active', i === index));
-            currentImageIndex = index;
-        }
-
-        function nextImage() {
-            const caseData = portfolioData[currentCaseIndex];
-            const next = (currentImageIndex + 1) % caseData.images.length;
-            showImage(next);
-        }
-
-        function switchCase(index) {
-            currentCaseIndex = index;
-            currentImageIndex = 0;
-            renderCarouselImages();
-            renderIndicators();
-            updateCaseInfo();
-            showImage(0);
-            updateActiveThumb();
-            resetAutoPlay();
-        }
-
-        function updateActiveThumb() {
-            caseList.querySelectorAll('.case-thumb').forEach((thumb, i) => {
-                thumb.classList.toggle('active', i === currentCaseIndex);
-            });
-        }
-
-        function startAutoPlay() {
-            stopAutoPlay();
-            autoPlayTimer = setInterval(() => {
-                const caseData = portfolioData[currentCaseIndex];
-                if (currentImageIndex < caseData.images.length - 1) {
-                    showImage(currentImageIndex + 1);
-                } else {
-                    // 当前案例图片放完，切换到下一个案例
-                    const nextCase = (currentCaseIndex + 1) % portfolioData.length;
-                    switchCase(nextCase);
-                }
-            }, IMAGE_INTERVAL);
-        }
-
-        function stopAutoPlay() {
-            if (autoPlayTimer) {
-                clearInterval(autoPlayTimer);
-                autoPlayTimer = null;
-            }
-        }
-
-        function resetAutoPlay() {
-            startAutoPlay();
-        }
-
-        // 鼠标悬停暂停自动播放
-        const carouselEl = document.querySelector('.portfolio-carousel');
-        carouselEl.addEventListener('mouseenter', stopAutoPlay);
-        carouselEl.addEventListener('mouseleave', startAutoPlay);
-
-        // 指示器点击
-        carouselIndicators.addEventListener('click', (e) => {
-            if (e.target.classList.contains('carousel-dot')) {
-                const idx = parseInt(e.target.dataset.index);
-                showImage(idx);
-                resetAutoPlay();
-            }
-        });
-
-        // 左右切换按钮点击
-        document.getElementById('carouselPrev').addEventListener('click', () => {
-            const caseData = portfolioData[currentCaseIndex];
-            const prev = currentImageIndex > 0 ? currentImageIndex - 1 : caseData.images.length - 1;
-            showImage(prev);
-            resetAutoPlay();
-        });
-        document.getElementById('carouselNext').addEventListener('click', () => {
-            const caseData = portfolioData[currentCaseIndex];
-            if (currentImageIndex < caseData.images.length - 1) {
-                showImage(currentImageIndex + 1);
-            } else {
-                const nextCase = (currentCaseIndex + 1) % portfolioData.length;
-                switchCase(nextCase);
-            }
-            resetAutoPlay();
-        });
-
-        initPortfolio();
     </script>
 </body>
 </html>
