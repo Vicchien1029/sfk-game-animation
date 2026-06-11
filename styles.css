@@ -130,17 +130,6 @@ img { display: block; max-width: 100%; }
 
 .nav-spacer {
     flex: 1;
-    position: relative;
-}
-.nav-spacer::after {
-    content: "";
-    position: absolute;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 1px;
-    height: 20px;
-    background: var(--gray-300);
 }
 
 .nav-link-accent {
