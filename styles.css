@@ -148,7 +148,7 @@ img { display: block; max-width: 100%; }
 }
 
 .nav-link {
-    padding: 8px 18px;
+    padding: 8px 12px;
     font-size: 14px;
     font-weight: 500;
     color: var(--gray-600);
