@@ -39,9 +39,10 @@
         border-radius: var(--radius-full);
         font-size: 15px;
         font-weight: 600;
-        color: var(--gray-400);
-        background: transparent;
-        border: 1px solid transparent;
+        color: var(--white);
+        background: var(--orange);
+        border: 1px solid var(--orange);
+        box-shadow: var(--shadow-orange);
         cursor: pointer;
         transition: all .3s var(--ease);
         white-space: nowrap;
@@ -49,10 +50,6 @@
         flex-shrink: 0;
       }
       .ft-tab-main:hover {
-        color: var(--white);
-        background: var(--gray-800);
-      }
-      .ft-tab-main.active {
         color: var(--white);
         background: var(--orange);
         border-color: var(--orange);
@@ -85,8 +82,6 @@
       .ft-tab-btn.active {
         color: #fff;
         background: rgba(255,255,255,.1);
-        border: 1px solid rgba(255,255,255,.2);
-        border-radius: 999px;
       }
       @media (max-width: 768px) {
         .ft-tab-main { padding: 8px 20px; font-size: 14px; }
