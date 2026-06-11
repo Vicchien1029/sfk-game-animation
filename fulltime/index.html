@@ -9,29 +9,73 @@
       content="SFK x Teesside 游戏动画 1+2 国际本科项目静态展示页，说明国内 1 年衔接英国提赛德大学大二的路径、专业方向、学习时间轴、适合学生与常见问题。"
     />
     <link rel="stylesheet" href="./styles.css" />
+    <style>
+      /* 隐藏原始 site-header */
+      .site-header { display: none !important; }
+      /* sticky 标签导航栏 */
+      .ft-tabs-bar {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        background: rgba(10,10,10,.94);
+        backdrop-filter: blur(16px);
+        border-bottom: 1px solid var(--gray-800);
+      }
+      .ft-tabs-inner {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 24px;
+        display: flex;
+        gap: 8px;
+        height: 56px;
+        align-items: center;
+        overflow-x: auto;
+        scrollbar-width: none;
+      }
+      .ft-tabs-inner::-webkit-scrollbar { display: none; }
+      .ft-tab-btn {
+        padding: 8px 22px;
+        border-radius: 999px;
+        font-size: 14px;
+        font-weight: 600;
+        color: #9ca3af;
+        background: transparent;
+        border: 1px solid transparent;
+        cursor: pointer;
+        transition: all .3s ease;
+        white-space: nowrap;
+        font-family: system-ui, -apple-system, sans-serif;
+      }
+      .ft-tab-btn:hover {
+        color: #fff;
+        background: #1f2937;
+      }
+      .ft-tab-btn.active {
+        color: #fff;
+        background: #f97316;
+        border-color: #f97316;
+        box-shadow: 0 0 12px rgba(249,115,22,.35);
+      }
+      @media (max-width: 768px) {
+        .ft-tab-btn { padding: 6px 16px; font-size: 13px; }
+      }
+    </style>
   </head>
   <body>
-    <header class="site-header" data-header>
-      <a class="brand" href="#top" aria-label="返回首页">
-        <strong>斯芬克 · 游戏动画科系</strong>
-        <span>Teesside 1+2</span>
-      </a>
-      <button class="menu-toggle" type="button" aria-label="打开导航" data-menu-toggle>
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-      <nav class="site-nav" data-nav>
-        <a href="#path">项目介绍</a>
-        <a href="#advantages">路径优势</a>
-        <a href="#majors">专业方向</a>
-        <a href="#timeline">学习路径</a>
-        <a href="#fit">适合学生</a>
-        <a href="#faq">FAQ</a>
-      </nav>
-    </header>
-
     <main id="top">
+      <!-- sticky 标签导航栏 -->
+      <div class="ft-tabs-bar">
+        <div class="ft-tabs-inner">
+          <button class="ft-tab-btn active" data-target="path">项目介绍</button>
+          <button class="ft-tab-btn" data-target="advantages">路径优势</button>
+          <button class="ft-tab-btn" data-target="teesside-section">提赛德大学</button>
+          <button class="ft-tab-btn" data-target="majors">专业方向</button>
+          <button class="ft-tab-btn" data-target="timeline">学习路径</button>
+          <button class="ft-tab-btn" data-target="fit">适合学生</button>
+          <button class="ft-tab-btn" data-target="faq">FAQ</button>
+        </div>
+      </div>
+
       <section class="hero section-dark">
         <div class="container hero-grid">
           <div class="hero-copy reveal">
@@ -141,7 +185,7 @@
         </div>
       </section>
 
-      <section class="section teesside-section section-dark">
+      <section class="section teesside-section section-dark" id="teesside-section">
         <div class="container teesside-panel reveal" data-teesside-panel>
           <div class="teesside-copy">
             <p class="eyebrow">Teesside University</p>

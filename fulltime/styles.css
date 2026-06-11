@@ -58,9 +58,7 @@ img {
 
 .site-header {
   position: fixed;
-  top: 68px;
-  left: 0;
-  right: 0;
+  inset: 0 0 auto;
   z-index: 30;
   display: flex;
   align-items: center;
@@ -142,10 +140,10 @@ img {
 }
 
 .hero {
-  min-height: 760px;
+  min-height: 700px;
   display: grid;
   align-items: center;
-  padding: 130px 0 80px;
+  padding: 80px 0 80px;
   overflow: hidden;
 }
 

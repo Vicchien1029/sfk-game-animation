@@ -290,3 +290,34 @@ renderFaq();
 setupHeader();
 setupTeessideToggle();
 setupReveal();
+setupFtTabs();
+
+function setupFtTabs() {
+  const bar = document.querySelector('.ft-tabs-bar');
+  if (!bar) return;
+  const btns = bar.querySelectorAll('.ft-tab-btn');
+  btns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const targetId = btn.dataset.target;
+      const target = document.getElementById(targetId);
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+  // 滚动时高亮当前标签
+  const sections = [];
+  btns.forEach(btn => {
+    const el = document.getElementById(btn.dataset.target);
+    if (el) sections.push({ btn, el });
+  });
+  if (sections.length === 0) return;
+  window.addEventListener('scroll', () => {
+    let current = sections[0];
+    for (const s of sections) {
+      if (s.el.getBoundingClientRect().top <= 80) current = s;
+    }
+    btns.forEach(b => b.classList.remove('active'));
+    current.btn.classList.add('active');
+  }, { passive: true });
+}
