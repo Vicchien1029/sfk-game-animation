@@ -760,7 +760,13 @@ h3 {
   border-radius: 8px;
 }
 
-.teesside-feature-grid h3,
+.teesside-feature-grid h3 {
+  width: 100%;
+  margin-left: 1em;
+  margin-right: 0;
+  text-align: left;
+}
+
 .teesside-feature-grid p {
   width: 100%;
   margin-left: 0;
