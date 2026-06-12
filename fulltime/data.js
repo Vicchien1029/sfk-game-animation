@@ -182,7 +182,8 @@ window.siteData = {
   feeComparison: [
     {
       path: "直接赴英从大一读起",
-      undergraduate: "高中阶段：作品集准备的费用与语培费用约13万起<br>本科 3 年海外阶段：约 78 万元",
+      highschool: "高中阶段：作品集准备的费用与语培费用约13万起",
+      undergraduate: "本科 3 年海外阶段：约 78 万元",
       postgraduate: "如继续英国硕士 1 年：约 26-30 万元",
       total: "约 104-108 万元",
       note: "按提赛德资料中每年约 26 万元海外学习生活成本估算"
