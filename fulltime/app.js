@@ -204,7 +204,7 @@ function renderFeeComparison() {
           (item) => `
           <article>
             <h4>${item.path}</h4>
-            ${item.highschool ? `<p>${item.highschool}</p>` : ""}
+            ${item.highschool ? `<p><strong>高中阶段：</strong>${item.highschool.replace("高中阶段：", "")}</p>` : ""}
             <p><strong>本科阶段：</strong>${item.undergraduate}</p>
             <p><strong>研究生阶段：</strong>${item.postgraduate}</p>
             <div>${item.total}</div>
