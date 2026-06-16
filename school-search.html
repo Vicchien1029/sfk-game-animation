@@ -1,307 +1,766 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>院校查找 · 斯芬克游戏动画科系</title>
   <link rel="stylesheet" href="styles.css">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
   <style>
     :root {
-      --search-bg: var(--black);
-      --search-ink: var(--white);
-      --search-muted: var(--gray-400);
-      --search-line: var(--gray-800);
-      --search-soft: var(--gray-900);
-      --search-panel: var(--dark);
-      --search-brand: var(--orange);
-      --search-brand-dim: rgba(255,79,0,.18);
-      --search-ochre: #c47a2a;
-      --search-blue: #4a7ac4;
-      --search-shadow: 0 14px 30px rgba(0,0,0,.35);
+      color-scheme: light;
+      --ink: #172033;
+      --muted: #667085;
+      --line: #d8e0ea;
+      --soft: #f3f7fa;
+      --panel: #fff;
+      --brand: #0f6f68;
+      --brand-dark: #0a4e4a;
+      --blue: #2f5f99;
+      --amber: #9a5b18;
+      --green: #227a52;
+      --shadow: 0 14px 30px rgba(17, 31, 49, .08);
     }
-
-    .search-page {
-      padding-top: 68px;
-      min-height: 100vh;
-      background: var(--search-bg);
-      color: var(--search-ink);
-      font-family: var(--font);
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: #edf2f6;
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+      letter-spacing: 0;
     }
-
-    .search-wrap {
-      width: min(1440px, calc(100vw - 32px));
+    a { color: inherit; }
+    button {
+      font: inherit;
+      letter-spacing: 0;
+    }
+    .wrap {
+      width: min(1480px, calc(100vw - 32px));
       margin: 0 auto;
     }
-
-    .search-header {
-      padding: 40px 0 20px;
+    header {
+      background: #fff;
+      border-bottom: 1px solid var(--line);
     }
-    .search-header h1 {
-      font-size: 28px;
-      font-weight: 800;
-      color: var(--white);
-      margin: 0 0 8px;
-      letter-spacing: .02em;
-    }
-    .search-header p {
-      font-size: 14px;
-      color: var(--gray-400);
-      margin: 0;
-    }
-
-    .search-main {
-      display: grid;
-      grid-template-columns: 300px minmax(0, 1fr);
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       gap: 20px;
-      padding: 0 0 48px;
+      min-height: 74px;
     }
-
-    .search-aside, .results-shell {
-      background: var(--search-panel);
-      border: 1px solid var(--search-line);
-      border-radius: var(--radius-xl);
-      box-shadow: var(--search-shadow);
-    }
-
-    .search-aside {
-      align-self: start;
-      position: sticky;
-      top: 80px;
-      padding: 20px;
-      max-height: calc(100vh - 100px);
-      overflow-y: auto;
-    }
-    .search-aside::-webkit-scrollbar { width: 4px; }
-    .search-aside::-webkit-scrollbar-track { background: transparent; }
-    .search-aside::-webkit-scrollbar-thumb { background: var(--gray-700); border-radius: 4px; }
-
-    .filter-title {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      margin-bottom: 12px;
-    }
-    .filter-title h2 {
+    h1 {
       margin: 0;
-      font-size: 16px;
-      color: var(--white);
-      font-weight: 700;
+      font-size: 25px;
+      line-height: 1.2;
     }
-    .reset {
-      height: 32px;
-      border: 1px solid var(--gray-700);
-      border-radius: var(--radius-md);
-      background: transparent;
-      color: var(--gray-400);
-      cursor: pointer;
-      font-family: var(--font);
+    .sub {
+      margin-top: 5px;
+      color: var(--muted);
       font-size: 13px;
-      padding: 0 12px;
-      transition: all .25s var(--ease);
+      line-height: 1.5;
     }
-    .reset:hover {
-      border-color: var(--orange);
-      color: var(--orange);
-    }
-
-    .filter-group {
-      margin-bottom: 16px;
-    }
-    .filter-group label {
-      display: block;
-      margin: 0 0 8px;
-      color: var(--gray-300);
-      font-size: 13px;
-      font-weight: 700;
-    }
-    .filter-group input, .filter-group select {
-      width: 100%;
-      height: 42px;
-      border: 1px solid var(--gray-700);
-      border-radius: var(--radius-md);
-      padding: 0 12px;
-      background: var(--gray-900);
-      color: var(--white);
-      font: inherit;
-      font-size: 14px;
-      transition: all .25s var(--ease);
-    }
-    .filter-group input:focus, .filter-group select:focus {
-      outline: 2px solid var(--search-brand-dim);
-      border-color: var(--orange);
-    }
-    .filter-group input::placeholder {
-      color: var(--gray-500);
-    }
-
-    .segmented {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 6px;
-      padding: 4px;
-      background: var(--search-soft);
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--search-line);
-    }
-    .segmented button {
-      min-height: 38px;
-      border: 0;
-      border-radius: var(--radius-md);
-      background: transparent;
-      color: var(--gray-400);
-      font-weight: 600;
-      cursor: pointer;
-      font-family: var(--font);
-      font-size: 13px;
-      transition: all .25s var(--ease);
-    }
-    .segmented button:hover {
-      color: var(--white);
-    }
-    .segmented button.active {
-      background: var(--orange);
-      color: #fff;
-      box-shadow: var(--shadow-orange);
-    }
-
-    .results-shell {
-      padding: 0;
-      overflow: hidden;
-    }
-
-    .results-bar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 16px 20px;
-      border-bottom: 1px solid var(--search-line);
-    }
-    .results-count {
-      font-size: 14px;
-      color: var(--gray-400);
-    }
-    .results-count strong {
-      color: var(--orange);
-      font-weight: 700;
-    }
-
-    .results {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-      gap: 14px;
-      padding: 16px;
-      max-height: calc(100vh - 200px);
-      overflow-y: auto;
-    }
-    .results::-webkit-scrollbar { width: 6px; }
-    .results::-webkit-scrollbar-track { background: transparent; }
-    .results::-webkit-scrollbar-thumb { background: var(--gray-700); border-radius: 4px; }
-
-    .course-card {
-      min-height: 260px;
-      display: flex;
-      flex-direction: column;
-      border: 1px solid var(--search-line);
-      border-radius: var(--radius-lg);
-      background: var(--search-soft);
-      overflow: hidden;
-      transition: all .3s var(--ease);
-    }
-    .course-card:hover {
-      border-color: var(--orange);
-      box-shadow: 0 0 24px rgba(255,79,0,.10);
-      transform: translateY(-2px);
-    }
-    .card-main { padding: 16px; }
-    .course-link {
-      display: inline;
-      color: var(--orange);
-      text-decoration: none;
-      border-bottom: 1px solid rgba(255,79,0,.35);
-      font-size: 17px;
-      line-height: 1.35;
-      font-weight: 700;
-      transition: all .25s var(--ease);
-    }
-    .course-link:hover {
-      border-bottom-color: var(--orange);
-    }
-    .school {
-      margin-top: 8px;
-      color: var(--gray-300);
-      font-size: 14px;
-      line-height: 1.45;
-      font-weight: 600;
-    }
-    .meta, .tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 10px;
-    }
-    .pill {
+    .plain-link {
       display: inline-flex;
       align-items: center;
-      min-height: 24px;
-      border-radius: var(--radius-full);
-      padding: 4px 10px;
-      background: rgba(140,150,170,.12);
-      color: #9aa3b2;
-      font-size: 12px;
-      font-weight: 600;
-      border: 1px solid rgba(140,150,170,.18);
-    }
-    .pill.level { background: rgba(100,130,170,.12); color: #7a9ab8; border-color: rgba(100,130,170,.18); }
-    .pill.area { background: rgba(120,150,130,.12); color: #8aaa9a; border-color: rgba(120,150,130,.18); }
-    .pill.rank { background: rgba(160,150,120,.12); color: #b0a080; border-color: rgba(160,150,120,.18); }
-    .brief {
-      margin: 12px 0 0;
-      color: var(--gray-400);
+      justify-content: center;
+      min-height: 36px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #fff;
+      color: #344054;
+      text-decoration: none;
+      padding: 7px 11px;
       font-size: 13px;
+      white-space: nowrap;
+    }
+    .role-zone {
+      background: #fff;
+      border-bottom: 1px solid var(--line);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .role-strip {
+      display: grid;
+      grid-template-columns: repeat(8, minmax(0, 1fr));
+      gap: 8px;
+      padding: 12px 0;
+    }
+    .role-tab {
+      min-height: 48px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfcfe;
+      color: var(--ink);
+      text-align: center;
+      padding: 8px 7px;
+      cursor: pointer;
+      transition: border-color .15s ease, background-color .15s ease, box-shadow .15s ease;
+    }
+    .role-tab:hover,
+    .role-tab:focus-visible,
+    .role-tab.active {
+      border-color: var(--brand);
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(15, 111, 104, .1);
+      outline: none;
+    }
+    .role-name {
+      display: block;
+      font-weight: 800;
+      font-size: 14px;
+      line-height: 1.3;
+      overflow-wrap: anywhere;
+    }
+    .role-meta {
+      display: block;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+    .role-tags {
+      display: block;
+      margin-top: 6px;
+      color: #344054;
+      font-size: 12px;
+      line-height: 1.45;
+      overflow-wrap: anywhere;
+    }
+    main {
+      padding: 18px 0 38px;
+    }
+    .workspace {
+      display: grid;
+      grid-template-columns: minmax(0, 1.03fr) minmax(420px, .97fr);
+      gap: 18px;
+      align-items: start;
+    }
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      min-width: 0;
+    }
+    .panel-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 16px 16px 12px;
+      border-bottom: 1px solid var(--line);
+    }
+    .panel-head h2 {
+      margin: 0;
+      font-size: 22px;
+      line-height: 1.25;
+    }
+    .panel-note {
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.55;
+      max-width: 760px;
+    }
+    .panel-note:empty {
+      display: none;
+    }
+    .count {
+      color: var(--muted);
+      font-size: 13px;
+      text-align: right;
+      white-space: nowrap;
+    }
+    .role-summary {
+      padding: 14px 16px 0;
+    }
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      min-height: 26px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: #f8fafc;
+      color: #344054;
+      padding: 3px 9px;
+      font-size: 12px;
+      line-height: 1.35;
+      max-width: 100%;
+    }
+    .chip.brand {
+      border-color: rgba(15, 111, 104, .24);
+      background: rgba(15, 111, 104, .08);
+      color: var(--brand);
+    }
+    .chip.blue {
+      border-color: rgba(47, 95, 153, .24);
+      background: rgba(47, 95, 153, .08);
+      color: var(--blue);
+    }
+    .chip.amber {
+      border-color: rgba(154, 91, 24, .24);
+      background: rgba(154, 91, 24, .08);
+      color: var(--amber);
+    }
+    .company-tabs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--line);
+    }
+    .company-tab {
+      min-height: 36px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #fff;
+      color: #344054;
+      padding: 6px 10px;
+      cursor: pointer;
+      max-width: 180px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .company-tab:hover,
+    .company-tab:focus-visible,
+    .company-tab.active {
+      border-color: var(--brand);
+      background: var(--brand);
+      color: #fff;
+      outline: none;
+    }
+    .company-detail {
+      padding: 16px;
+    }
+    .company-detail h3 {
+      margin: 0 0 5px;
+      font-size: 24px;
+      line-height: 1.22;
+      overflow-wrap: anywhere;
+    }
+    .en {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+      margin-bottom: 10px;
+    }
+    .desc {
+      margin: 0;
+      color: #475467;
+      font-size: 14px;
       line-height: 1.7;
     }
-    .card-foot {
-      margin-top: auto;
-      padding: 14px 16px;
-      border-top: 1px solid var(--search-line);
-      background: rgba(0,0,0,.15);
+    .detail-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 14px;
     }
-    .foot-label {
-      color: var(--gray-300);
-      font-size: 12px;
-      font-weight: 700;
+    .info-block {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 11px;
+      background: #fbfcfe;
+      min-width: 0;
     }
-    .listline {
-      margin: 6px 0 0;
-      color: var(--gray-500);
-      font-size: 12px;
+    .info-block b {
+      display: block;
+      margin-bottom: 7px;
+      font-size: 13px;
+      color: #1d2939;
+    }
+    .info-block div {
+      color: #475467;
+      font-size: 13px;
+      line-height: 1.6;
+      overflow-wrap: anywhere;
+    }
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+    .link-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 36px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      padding: 7px 11px;
+      color: #344054;
+      background: #fff;
+      text-decoration: none;
+      font-size: 13px;
+    }
+    .link-btn.primary {
+      border-color: var(--brand);
+      background: var(--brand);
+      color: #fff;
+    }
+    .course-tools {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .level-btn,
+    .region-btn {
+      min-height: 34px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #fff;
+      color: #344054;
+      padding: 6px 11px;
+      cursor: pointer;
+    }
+    .level-btn.active,
+    .region-btn.active {
+      border-color: var(--blue);
+      background: var(--blue);
+      color: #fff;
+    }
+    .region-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 12px 16px 0;
+    }
+    .region-btn {
+      min-height: 32px;
+      font-size: 13px;
+    }
+    .course-list {
+      display: grid;
+      gap: 10px;
+      padding: 16px;
+      max-height: calc(100vh - 250px);
+      overflow: auto;
+    }
+    .course-row {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+      background: #fff;
+    }
+    .course-row:hover {
+      border-color: rgba(47, 95, 153, .4);
+      box-shadow: 0 10px 22px rgba(17, 31, 49, .07);
+    }
+    .course-row a {
+      display: inline-block;
+      color: var(--blue);
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 16px;
+      line-height: 1.35;
+      overflow-wrap: anywhere;
+    }
+    .course-school {
+      margin-top: 4px;
+      color: #475467;
+      font-size: 13px;
+      line-height: 1.45;
+    }
+    .course-brief {
+      margin-top: 8px;
+      color: #667085;
+      font-size: 13px;
       line-height: 1.6;
     }
     .empty {
-      grid-column: 1 / -1;
-      padding: 60px 20px;
-      color: var(--gray-500);
+      margin: 16px;
+      padding: 34px 16px;
+      border: 1px dashed var(--line);
+      border-radius: 8px;
+      background: #fbfcfe;
+      color: var(--muted);
       text-align: center;
-      font-size: 15px;
+      line-height: 1.6;
     }
-    mark {
-      padding: 0 2px;
-      background: rgba(255,79,0,.25);
-      color: var(--white);
-      border-radius: 3px;
+    .source-note {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.55;
+    }
+    @media (max-width: 1180px) {
+      .role-strip {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+      .workspace {
+        grid-template-columns: 1fr;
+      }
+      .course-list {
+        max-height: none;
+      }
+    }
+    @media (max-width: 720px) {
+      .wrap {
+        width: min(100vw - 20px, 1480px);
+      }
+      .topbar {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 13px 0;
+      }
+      h1 {
+        font-size: 22px;
+      }
+      .role-zone {
+        position: static;
+      }
+      .role-strip {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .detail-grid {
+        grid-template-columns: 1fr;
+      }
+      .panel-head {
+        flex-direction: column;
+      }
+      .count {
+        text-align: left;
+      }
+      .company-tab {
+        max-width: 100%;
+        flex: 1 1 auto;
+      }
+      .course-tools {
+        justify-content: flex-start;
+      }
+      .region-btn {
+        flex: 1 1 auto;
+      }
     }
 
-    @media (max-width: 1024px) {
-      .search-main { grid-template-columns: 1fr; }
-      .search-aside { position: static; max-height: none; }
-      .results { max-height: none; }
+    /* Visual refresh */
+    :root {
+      color-scheme: dark;
+      --ink: #f4f7fb;
+      --muted: #9daabc;
+      --line: rgba(255, 255, 255, .13);
+      --soft: rgba(255, 255, 255, .06);
+      --panel: rgba(13, 18, 26, .94);
+      --brand: #2ed4bd;
+      --brand-dark: #0f766e;
+      --blue: #7bb7ff;
+      --amber: #f3b34c;
+      --green: #6ee7a7;
+      --shadow: 0 28px 60px rgba(0, 0, 0, .36);
     }
-    @media (max-width: 620px) {
-      .search-wrap { width: min(100vw - 20px, 1440px); }
-      .results { grid-template-columns: 1fr; }
-      .search-header h1 { font-size: 22px; }
+    body {
+      background:
+        linear-gradient(145deg, #070a0f 0%, #101018 47%, #07110f 100%);
+      color: var(--ink);
+      min-height: 100vh;
+      overflow-x: hidden;
+      padding-top: 68px;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, .035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, .035) 1px, transparent 1px);
+      background-size: 46px 46px;
+      opacity: .38;
+    }
+    .wrap {
+      width: min(1560px, calc(100vw - 40px));
+    }
+    .role-zone {
+      background: linear-gradient(180deg, rgba(7, 10, 15, .98), rgba(9, 13, 20, .9));
+      border-bottom: 1px solid rgba(255, 255, 255, .12);
+      box-shadow: 0 18px 36px rgba(0, 0, 0, .34);
+      padding: 22px 0 15px;
+      backdrop-filter: blur(14px);
+    }
+    .role-strip {
+      grid-template-columns: repeat(8, minmax(0, 1fr));
+      gap: 12px;
+      padding: 10px 0 15px;
+      overflow: visible;
+    }
+    .role-tab {
+      --accent: #2ed4bd;
+      --accent-soft: rgba(46, 212, 189, .2);
+      position: relative;
+      isolation: isolate;
+      min-height: 154px;
+      border: 1px solid rgba(255, 255, 255, .18);
+      border-radius: 8px;
+      background-image:
+        linear-gradient(180deg, rgba(0, 0, 0, .05), rgba(0, 0, 0, .78)),
+        var(--art);
+      background-size: cover;
+      background-position: center;
+      color: #fff;
+      padding: 0;
+      cursor: pointer;
+      overflow: hidden;
+      transform: skew(-7deg);
+      transform-origin: center bottom;
+      box-shadow: 0 16px 34px rgba(0, 0, 0, .34);
+      transition: transform .22s ease, border-color .22s ease, box-shadow .22s ease, filter .22s ease;
+    }
+    .role-tab::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background:
+        linear-gradient(110deg, rgba(255, 255, 255, .12), transparent 34%),
+        linear-gradient(0deg, rgba(0, 0, 0, .76), transparent 56%);
+      opacity: .92;
+    }
+    .role-tab::after {
+      content: "";
+      position: absolute;
+      left: -20px;
+      right: -20px;
+      bottom: -16px;
+      height: 66px;
+      z-index: 1;
+      background: linear-gradient(90deg, var(--accent-soft), rgba(0, 0, 0, .72));
+      border-top: 1px solid rgba(255, 255, 255, .15);
+    }
+    .role-tab:hover,
+    .role-tab:focus-visible {
+      background-color: #071019;
+      background-image:
+        linear-gradient(180deg, rgba(0, 0, 0, .02), rgba(0, 0, 0, .74)),
+        var(--art);
+      border-color: var(--accent);
+      box-shadow: 0 22px 48px rgba(0, 0, 0, .46), 0 0 0 1px var(--accent-soft);
+      filter: saturate(1.08);
+      outline: none;
+      transform: skew(-7deg) translateY(-6px) scale(1.045);
+    }
+    .role-tab.active {
+      background-color: #071019;
+      background-image:
+        linear-gradient(180deg, rgba(0, 0, 0, .02), rgba(0, 0, 0, .72)),
+        var(--art);
+      border-color: var(--accent);
+      box-shadow: 0 30px 70px rgba(0, 0, 0, .58), 0 0 0 2px var(--accent-soft), 0 0 36px var(--accent-soft);
+      filter: saturate(1.18) contrast(1.06);
+      transform: skew(-7deg) translateY(-12px) scale(1.11);
+      z-index: 4;
+    }
+    .role-name {
+      position: absolute;
+      left: 17px;
+      right: 15px;
+      bottom: 15px;
+      z-index: 2;
+      display: block;
+      color: #fff;
+      font-size: 15px;
+      font-weight: 900;
+      line-height: 1.25;
+      text-align: left;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, .7);
+      transform: skew(7deg);
+    }
+    .role-name::before {
+      content: "";
+      display: block;
+      width: 38px;
+      height: 3px;
+      margin-bottom: 8px;
+      background: var(--accent);
+      box-shadow: 0 0 16px var(--accent-soft);
+    }
+    main {
+      padding: 22px 0 48px;
+    }
+    .workspace {
+      gap: 18px;
+    }
+    .panel {
+      background: var(--panel);
+      border-color: rgba(255, 255, 255, .13);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .panel-head {
+      border-bottom-color: rgba(255, 255, 255, .12);
+      background: linear-gradient(180deg, rgba(255, 255, 255, .055), rgba(255, 255, 255, 0));
+      padding: 18px 18px 14px;
+    }
+    .panel-head h2 {
+      color: var(--ink);
+      font-size: 24px;
+      font-weight: 900;
+    }
+    .panel-note,
+    .count,
+    .en,
+    .course-brief,
+    .source-note {
+      color: var(--muted);
+    }
+    .desc,
+    .info-block div,
+    .course-school {
+      color: #c8d2df;
+    }
+    .role-summary {
+      padding: 15px 18px 0;
+    }
+    .chip {
+      border-color: rgba(255, 255, 255, .14);
+      background: rgba(255, 255, 255, .065);
+      color: #dce5f0;
+    }
+    .chip.brand {
+      border-color: rgba(46, 212, 189, .25);
+      background: rgba(46, 212, 189, .1);
+      color: #7df4df;
+    }
+    .chip.blue {
+      border-color: rgba(123, 183, 255, .24);
+      background: rgba(123, 183, 255, .1);
+      color: #aad1ff;
+    }
+    .chip.amber {
+      border-color: rgba(243, 179, 76, .24);
+      background: rgba(243, 179, 76, .1);
+      color: #ffd189;
+    }
+    .company-tabs {
+      gap: 9px;
+      padding: 15px 18px;
+      border-bottom-color: rgba(255, 255, 255, .12);
+    }
+    .company-tab,
+    .level-btn,
+    .region-btn,
+    .link-btn {
+      border-color: rgba(255, 255, 255, .15);
+      background: rgba(255, 255, 255, .065);
+      color: #dce5f0;
+    }
+    .company-tab {
+      border-radius: 6px;
+      min-height: 38px;
+    }
+    .company-tab:hover,
+    .company-tab:focus-visible,
+    .company-tab.active {
+      border-color: var(--brand);
+      background: linear-gradient(135deg, rgba(46, 212, 189, .95), rgba(15, 118, 110, .95));
+      color: #04110f;
+      box-shadow: 0 10px 22px rgba(46, 212, 189, .16);
+    }
+    .company-detail {
+      padding: 18px;
+    }
+    .company-detail h3 {
+      color: var(--ink);
+      font-size: 26px;
+      margin-top: 13px;
+    }
+    .info-block {
+      border-color: rgba(255, 255, 255, .12);
+      background: rgba(255, 255, 255, .055);
+    }
+    .info-block b {
+      color: #f0f5fa;
+    }
+    .link-btn.primary,
+    .level-btn.active,
+    .region-btn.active {
+      border-color: #7bb7ff;
+      background: #7bb7ff;
+      color: #071019;
+    }
+    .region-tabs {
+      padding: 13px 18px 0;
+    }
+    .course-list {
+      padding: 18px;
+      max-height: calc(100vh - 315px);
+      scrollbar-color: rgba(255, 255, 255, .25) transparent;
+    }
+    .course-row {
+      border-color: rgba(255, 255, 255, .12);
+      background: linear-gradient(180deg, rgba(255, 255, 255, .07), rgba(255, 255, 255, .04));
+      box-shadow: 0 12px 28px rgba(0, 0, 0, .18);
+    }
+    .course-row:hover {
+      border-color: rgba(123, 183, 255, .5);
+      box-shadow: 0 18px 36px rgba(0, 0, 0, .28);
+    }
+    .course-row a {
+      color: #a9d2ff;
+    }
+    .empty {
+      border-color: rgba(255, 255, 255, .18);
+      background: rgba(255, 255, 255, .055);
+      color: var(--muted);
+    }
+    .source-note {
+      border-top-color: rgba(255, 255, 255, .12);
+    }
+    @media (max-width: 1320px) {
+      .role-tab {
+        min-height: 132px;
+      }
+      .role-name {
+        font-size: 13px;
+      }
+    }
+    @media (max-width: 960px) {
+      .role-strip {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+    }
+    @media (max-width: 720px) {
+      .wrap {
+        width: min(100vw - 22px, 1560px);
+      }
+      .role-zone {
+        padding: 15px 0 10px;
+      }
+      .role-strip {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+      .role-tab {
+        min-height: 116px;
+      }
+      .role-tab.active {
+        transform: skew(-7deg) translateY(-5px) scale(1.035);
+      }
+      .role-name {
+        font-size: 13px;
+        left: 13px;
+        right: 13px;
+        bottom: 13px;
+      }
+      .panel-head {
+        padding: 16px;
+      }
+      .company-detail,
+      .course-list {
+        padding: 16px;
+      }
     }
   </style>
 </head>
@@ -318,16 +777,16 @@
       </a>
       <ul class="nav-links" id="navLinks">
         <li><a href="index.html" class="nav-link">主页</a></li>
-        <li><a href="index.html#cases" class="nav-link">作品案例</a></li>
+        <li><a href="#cases" class="nav-link">作品案例</a></li>
         <li><a href="school-search.html" class="nav-link active">院校查找</a></li>
-        <li><a href="index.html#professors" class="nav-link">海外教授</a></li>
-        <li><a href="index.html#programs" class="nav-link">短期项目</a></li>
-        <li><a href="index.html#data" class="nav-link">录取数据</a></li>
-        <li><a href="index.html#quick-entry" class="nav-link">快捷入口</a></li>
+        <li><a href="#professors" class="nav-link">海外教授</a></li>
+        <li><a href="#programs" class="nav-link">短期项目</a></li>
+        <li><a href="#data" class="nav-link">录取数据</a></li>
+        <li><a href="#quick-entry" class="nav-link">快捷入口</a></li>
         <li class="nav-spacer"></li>
-                <li><a href="fulltime.html" class="nav-link">全日制</a></li>
-                <li><a href="undergraduate.html" class="nav-link">本科</a></li>
-                <li><a href="#" class="nav-link" style="opacity:.4;cursor:not-allowed">研究生</a></li>
+        <li><a href="fulltime.html" class="nav-link">全日制</a></li>
+        <li><a href="undergraduate.html" class="nav-link">本科</a></li>
+        <li><a href="#" class="nav-link" style="opacity:.4;cursor:not-allowed">研究生</a></li>
       </ul>
       <button class="nav-toggle" id="navToggle" aria-label="菜单">
         <span></span><span></span><span></span>
@@ -335,199 +794,482 @@
     </div>
   </nav>
 
-  <div class="search-page">
-    <div class="search-wrap">
-      <div class="search-header">
-        <h1>院校查找</h1>
-        <p>游戏动画科系 · 课程检索工具</p>
-      </div>
+  <section class="role-zone">
+    <div class="wrap role-strip" id="roleTabs"></div>
+  </section>
 
-      <div class="search-main">
-        <aside class="search-aside">
-          <div class="filter-title">
-            <h2>筛选条件</h2>
-            <button class="reset" id="reset">重置</button>
+  <main class="wrap">
+    <section class="workspace">
+      <section class="panel" aria-label="企业信息">
+        <div class="panel-head">
+          <div>
+            <h2 id="companyTitle">相关企业</h2>
+            <div class="panel-note" id="companyNote"></div>
           </div>
+          <div class="count" id="companyCount"></div>
+        </div>
+        <div class="role-summary">
+          <div class="chips" id="roleChips"></div>
+        </div>
+        <div class="company-tabs" id="companyTabs"></div>
+        <div class="company-detail" id="companyDetail"></div>
+      </section>
 
-          <div class="filter-group">
-            <label>学习阶段</label>
-            <div class="segmented" id="levelSeg">
-              <button class="active" data-value="">全部</button>
-              <button data-value="本科">本科</button>
-              <button data-value="研究生">研究生</button>
-            </div>
+      <section class="panel" aria-label="推荐课程">
+        <div class="panel-head">
+          <div>
+            <h2 id="courseTitle">推荐课程</h2>
+            <div class="panel-note" id="courseNote"></div>
           </div>
-
-          <div class="filter-group">
-            <label for="area">申请方向</label>
-            <select id="area">
-              <option value="">游戏和动画都看</option>
-              <option>游戏</option>
-              <option>动画</option>
-            </select>
+          <div class="course-tools" id="levelSwitch">
+            <button class="level-btn active" data-level="本科">本科</button>
+            <button class="level-btn" data-level="研究生">研究生</button>
           </div>
+        </div>
+        <div class="region-tabs" id="regionSwitch"></div>
+        <div class="course-list" id="courseList"></div>
+      </section>
+    </section>
+  </main>
 
-          <div class="filter-group">
-            <label for="category">细分类型</label>
-            <select id="category">
-              <option value="">全部类型</option>
-            </select>
-          </div>
-
-          <div class="filter-group">
-            <label for="career">岗位方向</label>
-            <select id="career">
-              <option value="">全部岗位方向</option>
-            </select>
-          </div>
-
-          <div class="filter-group">
-            <label for="keyword">关键词</label>
-            <input id="keyword" placeholder="课程 / 学校 / 城市 / 职业 / 企业">
-          </div>
-
-          <div class="filter-group">
-            <label for="audience">选校偏好</label>
-            <select id="audience">
-              <option value="">全部</option>
-              <option value="偏向综合排名">偏向综合排名</option>
-              <option value="偏向专业排名">偏向专业排名</option>
-            </select>
-          </div>
-
-          <div class="filter-group">
-            <label for="region">地区</label>
-            <select id="region">
-              <option value="">全部地区</option>
-            </select>
-          </div>
-        </aside>
-
-        <section class="results-shell">
-          <div class="results-bar">
-            <div class="results-count" id="resultsCount">加载中...</div>
-          </div>
-          <div class="results" id="results"></div>
-        </section>
-      </div>
-    </div>
-  </div>
-
+  <script src="school-search-data/career-map-data.js"></script>
+  <script src="school-search-data/course-search-data.js"></script>
   <script>
-    const state = { level: "", area: "", category: "", career: "", keyword: "", audience: "", region: "" };
-    const $ = (id) => document.getElementById(id);
-    let db = null;
-
-    const esc = (s) => String(s || "").replace(/[&<>"']/g, ch => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[ch]));
-    const trim = (s, n = 260) => {
-      const text = String(s || "").replace(/\s+/g, " ").trim();
-      return text.length > n ? text.slice(0, n) + "..." : text;
+    const state = {
+      group: "",
+      companyId: "",
+      level: "本科",
+      regionGroup: "全部"
     };
-    const haystack = (course) => [
-      course.name, course.school, course.region, course.schoolType, course.brief,
-      course.categories.join(" "), course.primaryArea.join(" "), course.careerDirections.join(" "),
-      course.enterpriseMatches.join(" "), course.contextPath.join(" ")
-    ].join(" ").toLowerCase();
+    const REGION_GROUPS = [
+      { label: "全部", regions: [] },
+      { label: "美国", regions: ["美国"] },
+      { label: "英国", regions: ["英国"] },
+      { label: "加拿大", regions: ["加拿大"] },
+      { label: "澳新", regions: ["澳洲", "澳大利亚", "新西兰"] },
+      { label: "欧洲", regions: ["法国", "挪威", "瑞典", "芬兰", "丹麦", "荷兰"] },
+      { label: "亚洲", regions: ["中国香港", "新加坡", "日本", "韩国", "马来西亚", "中国澳门"] }
+    ];
+    const ROLE_VISUALS = {
+      "游戏策划与设计": {
+        art: "school-search-assets/role-cards/game-design.svg",
+        accent: "#38e8d4",
+        soft: "rgba(56, 232, 212, .22)"
+      },
+      "游戏美术": {
+        art: "school-search-assets/role-cards/game-art.svg",
+        accent: "#ffb84d",
+        soft: "rgba(255, 184, 77, .22)"
+      },
+      "游戏程序与技术": {
+        art: "school-search-assets/role-cards/game-tech.svg",
+        accent: "#7bb7ff",
+        soft: "rgba(123, 183, 255, .22)"
+      },
+      "动画前期": {
+        art: "school-search-assets/role-cards/animation-pre.svg",
+        accent: "#ff7aa8",
+        soft: "rgba(255, 122, 168, .22)"
+      },
+      "动画与 CG 制作": {
+        art: "school-search-assets/role-cards/cg-production.svg",
+        accent: "#a78bfa",
+        soft: "rgba(167, 139, 250, .24)"
+      },
+      "影视特效与虚拟制作": {
+        art: "school-search-assets/role-cards/vfx-vp.svg",
+        accent: "#6ee7a7",
+        soft: "rgba(110, 231, 167, .22)"
+      },
+      "发行与内容运营": {
+        art: "school-search-assets/role-cards/ops-content.svg",
+        accent: "#f97316",
+        soft: "rgba(249, 115, 22, .22)"
+      },
+      "制作管理与综合支持": {
+        art: "school-search-assets/role-cards/production.svg",
+        accent: "#e5e7eb",
+        soft: "rgba(229, 231, 235, .18)"
+      }
+    };
+    const $ = (id) => document.getElementById(id);
+    let careerDb = null;
+    let courseDb = null;
 
-    function fillFilters() {
-      const categories = [...new Set(db.courses.flatMap(c => c.categories))].sort();
-      const careers = [...new Set(db.courses.flatMap(c => c.careerDirections || []))].sort();
-      const regions = [...new Set(db.courses.map(c => c.region).filter(Boolean))].sort();
-      categories.forEach(c => $("category").insertAdjacentHTML("beforeend", `<option>${esc(c)}</option>`));
-      careers.forEach(c => $("career").insertAdjacentHTML("beforeend", `<option>${esc(c)}</option>`));
-      regions.forEach(r => $("region").insertAdjacentHTML("beforeend", `<option>${esc(r)}</option>`));
+    function esc(value) {
+      return String(value ?? "").replace(/[&<>"']/g, (char) => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#039;"
+      }[char]));
     }
 
-    function courseMatches(course) {
-      if (state.level && course.level !== state.level) return false;
-      if (state.area && !course.primaryArea.includes(state.area)) return false;
-      if (state.category && !course.categories.includes(state.category)) return false;
-      if (state.career && !(course.careerDirections || []).includes(state.career)) return false;
-      if (state.audience && !course.audiences.includes(state.audience)) return false;
-      if (state.region && course.region !== state.region) return false;
-      if (state.keyword && !haystack(course).includes(state.keyword.toLowerCase())) return false;
-      return true;
+    function unique(items) {
+      return [...new Set(items.filter(Boolean))];
     }
 
-    function card(course) {
-      return `<article class="course-card">
-        <div class="card-main">
-          <a class="course-link" href="${esc(course.url)}" target="_blank" rel="noreferrer">${esc(course.name)}</a>
-          <div class="school">${esc(course.school)}</div>
-          <div class="meta">
-            <span class="pill level">${esc(course.level)}</span>
-            <span class="pill">${esc(course.region)}</span>
-            ${course.primaryArea.map(x => `<span class="pill area">${esc(x)}</span>`).join("")}
-            ${course.audiences.map(x => `<span class="pill rank">${esc(x)}</span>`).join("")}
-          </div>
-          <div class="tags"><span class="pill">${esc(course.dominantCategory || course.categories[0] || "未分类")}</span>${course.categories.filter(x => x !== course.dominantCategory).map(x => `<span class="pill">${esc(x)}</span>`).join("")}</div>
-          <p class="brief">${esc(trim(course.brief))}</p>
-        </div>
-        <div class="card-foot">
-          <div class="foot-label">未来职业方向</div>
-          <div class="listline">${esc(course.careerDirections.join(" / ") || "可结合课程官网进一步判断")}</div>
-          <div class="foot-label" style="margin-top:10px;">企业岗位关联</div>
-          <div class="listline">${esc(course.enterpriseMatches.join(" / ") || "资料库暂未匹配企业")}</div>
-        </div>
-      </article>`;
+    function compact(items, limit = 4) {
+      const list = unique(items || []);
+      const shown = list.slice(0, limit).join(" / ");
+      return list.length > limit ? `${shown} / +${list.length - limit}` : shown;
     }
 
-    function render() {
-      const filtered = db.courses.filter(courseMatches);
-      $("results").innerHTML = filtered.length
-        ? filtered.slice(0, 240).map(card).join("")
-        : `<div class="empty">没有匹配课程，可以放宽一个筛选条件再看。</div>`;
-      $("resultsCount").innerHTML = filtered.length
-        ? `共找到 <strong>${filtered.length}</strong> 门课程`
-        : `共找到 <strong>0</strong> 门课程`;
+    function roleById(id) {
+      return careerDb.roles.find(role => role.id === id);
     }
 
-    function setLevel(value) {
-      state.level = value;
-      document.querySelectorAll("#levelSeg button").forEach(btn => btn.classList.toggle("active", btn.dataset.value === value));
+    function companyById(id) {
+      return careerDb.companies.find(company => company.id === id);
+    }
+
+    function courseById(id) {
+      return courseDb.courses.find(course => course.id === id);
+    }
+
+    function courseRanking(courseId) {
+      return careerDb.rankings?.courseRankings?.[courseId] || { score: 0 };
+    }
+
+    function categoryName(value) {
+      return careerDb.taxonomy.companyCategories[value] || value;
+    }
+
+    function groupDetail(group = state.group) {
+      return careerDb.taxonomy.roleGroupDetails?.[group] || {
+        description: "这个岗位类别的说明正在补充中。",
+        subroles: [],
+        courseCategories: [],
+        careerDirections: [],
+        titleKeywords: [],
+        keywords: [],
+        excludeCategories: [],
+        excludeCareerDirections: [],
+        excludeTitleKeywords: [],
+        requireTitleKeyword: false
+      };
+    }
+
+    function isUsableCourse(course) {
+      const name = String(course?.name || course?.courseName || "").trim();
+      if (!name || name.length > 140) return false;
+      return !/(please|applicants|portfolio|requirements|ielts|toefl|duolingo|submit|upload|carefully review|all students)/i.test(name);
+    }
+
+    function courseText(course) {
+      return [
+        course.name,
+        course.school,
+        course.brief,
+        (course.categories || []).join(" "),
+        (course.careerDirections || []).join(" "),
+        (course.primaryArea || []).join(" ")
+      ].join(" ").toLowerCase();
+    }
+
+    function courseMatchScore(course, detail) {
+      if (!isUsableCourse(course)) return 0;
+      const title = String(course.name || "").toLowerCase();
+      const text = courseText(course);
+      const categories = course.categories || [];
+      const careers = course.careerDirections || [];
+      const titleHits = (detail.titleKeywords || []).filter(keyword => title.includes(String(keyword).toLowerCase())).length;
+      const categoryHits = categories.filter(item => (detail.courseCategories || []).includes(item)).length;
+      const careerHits = careers.filter(item => (detail.careerDirections || []).includes(item)).length;
+      const keywordHits = (detail.keywords || []).filter(keyword => text.includes(String(keyword).toLowerCase())).length;
+
+      const excludedByCategory = categories.some(item => (detail.excludeCategories || []).includes(item));
+      const excludedByCareer = careers.some(item => (detail.excludeCareerDirections || []).includes(item));
+      const excludedByTitle = (detail.excludeTitleKeywords || []).some(keyword => title.includes(String(keyword).toLowerCase()));
+
+      if (excludedByTitle) return 0;
+      if (detail.requireTitleKeyword && titleHits === 0) return 0;
+      if ((excludedByCategory || excludedByCareer || excludedByTitle) && titleHits === 0) return 0;
+      if (titleHits === 0 && categoryHits === 0 && careerHits === 0) return 0;
+      if (keywordHits === 0 && titleHits === 0 && categoryHits < 2 && careerHits === 0) return 0;
+
+      let score = 0;
+      score += titleHits * 28;
+      score += categoryHits * 10;
+      score += careerHits * 14;
+      score += keywordHits * 4;
+      if (excludedByCategory || excludedByCareer || excludedByTitle) score -= 18;
+      return Math.max(0, score);
+    }
+
+    function rolesForGroup(group = state.group) {
+      return careerDb.roles.filter(role => role.group === group);
+    }
+
+    function companiesForGroup(group = state.group) {
+      const roleIds = rolesForGroup(group).map(role => role.id);
+      return careerDb.companies.filter(company => company.roles.some(roleId => roleIds.includes(roleId)));
+    }
+
+    function coursesForGroup(group = state.group) {
+      const roleMap = new Map();
+      const detail = groupDetail(group);
+      courseDb.courses.forEach(course => {
+        const score = courseMatchScore(course, detail);
+        if (!score) return;
+        roleMap.set(course.id, {
+          courseId: course.id,
+          courseName: course.name,
+          school: course.school,
+          level: course.level,
+          region: course.region,
+          url: course.url,
+          matchLevel: score >= 36 ? "high" : score >= 18 ? "medium" : "foundation",
+          basis: "课程方向、职业标签或课程简介与该岗位类别存在对应关系。",
+          roleNames: rolesForGroup(group).map(role => role.name),
+          score
+        });
+      });
+      const rank = { high: 0, medium: 1, foundation: 2 };
+      return [...roleMap.values()].filter(item => isUsableCourse(item)).map(item => ({
+        ...item,
+        rankScore: courseRanking(item.courseId).score || 0
+      })).sort((a, b) => {
+        const rankScoreDiff = (b.rankScore || 0) - (a.rankScore || 0);
+        if (rankScoreDiff) return rankScoreDiff;
+        const scoreDiff = (b.score || 0) - (a.score || 0);
+        if (scoreDiff) return scoreDiff;
+        const levelDiff = (rank[a.matchLevel] ?? 3) - (rank[b.matchLevel] ?? 3);
+        if (levelDiff) return levelDiff;
+        return `${a.school}${a.courseName}`.localeCompare(`${b.school}${b.courseName}`, "zh-Hans-CN");
+      });
+    }
+
+    function roleSummary(group) {
+      const roles = rolesForGroup(group);
+      const companies = companiesForGroup(group);
+      const courses = coursesForGroup(group);
+      return {
+        roleNames: roles.map(role => role.name),
+        companies: companies.length,
+        courses: courses.length
+      };
+    }
+
+    function setGroup(group) {
+      if (!group || state.group === group) return;
+      state.group = group;
+      const firstCompany = companiesForGroup(group)[0];
+      state.companyId = firstCompany ? firstCompany.id : "";
       render();
     }
 
-    $("levelSeg").addEventListener("click", (event) => {
-      if (event.target.matches("button")) setLevel(event.target.dataset.value);
-    });
-    $("area").addEventListener("change", e => { state.area = e.target.value; render(); });
-    $("category").addEventListener("change", e => { state.category = e.target.value; render(); });
-    $("career").addEventListener("change", e => { state.career = e.target.value; render(); });
-    $("keyword").addEventListener("input", e => { state.keyword = e.target.value.trim(); render(); });
-    $("audience").addEventListener("change", e => { state.audience = e.target.value; render(); });
-    $("region").addEventListener("change", e => { state.region = e.target.value; render(); });
-    $("reset").addEventListener("click", () => {
-      Object.keys(state).forEach(key => state[key] = "");
-      $("area").value = "";
-      $("category").value = "";
-      $("career").value = "";
-      $("keyword").value = "";
-      $("audience").value = "";
-      $("region").value = "";
-      setLevel("");
-    });
+    function setCompany(companyId) {
+      state.companyId = companyId;
+      renderCompanyArea();
+    }
 
-    // 移动端菜单
-    const navToggle = document.getElementById('navToggle');
-    const navLinks = document.getElementById('navLinks');
-    if (navToggle && navLinks) {
-      navToggle.addEventListener('click', () => {
-        navLinks.classList.toggle('show');
+    function setLevel(level) {
+      state.level = level;
+      renderCourseArea();
+    }
+
+    function setRegionGroup(regionGroup) {
+      state.regionGroup = regionGroup;
+      renderCourseArea();
+    }
+
+    function roleStyle(group) {
+      const visual = ROLE_VISUALS[group] || ROLE_VISUALS["游戏策划与设计"];
+      return `--art: url('${visual.art}'); --accent: ${visual.accent}; --accent-soft: ${visual.soft};`;
+    }
+
+    function renderRoleTabs() {
+      $("roleTabs").innerHTML = careerDb.taxonomy.roleGroups.map(group => {
+        const active = group === state.group ? " active" : "";
+        return `
+          <button class="role-tab${active}" data-group="${esc(group)}" style="${roleStyle(group)}">
+            <span class="role-name">${esc(group)}</span>
+          </button>
+        `;
+      }).join("");
+    }
+
+    function renderCompanyTabs(companies) {
+      if (!companies.length) {
+        $("companyTabs").innerHTML = "";
+        return;
+      }
+      $("companyTabs").innerHTML = companies.map(company => `
+        <button class="company-tab${company.id === state.companyId ? " active" : ""}" data-company="${esc(company.id)}" title="${esc(company.nameZh)}">
+          ${esc(company.nameZh)}
+        </button>
+      `).join("");
+    }
+
+    function renderCompanyDetail(company, roles) {
+      if (!company) {
+        $("companyDetail").innerHTML = `<div class="empty">这个岗位类别的企业样本还没有补充。</div>`;
+        return;
+      }
+      const groupRoleIds = roles.map(role => role.id);
+      const matchedRoles = company.roles.map(roleById).filter(role => role && groupRoleIds.includes(role.id));
+      const subroles = unique([...matchedRoles.map(role => role.name), ...(groupDetail().subroles || [])]);
+      $("companyDetail").innerHTML = `
+        <div class="chips">
+          <span class="chip brand">${esc(categoryName(company.category))}</span>
+          <span class="chip">${esc(company.city)}</span>
+          ${company.recruitmentTypes.map(type => `<span class="chip blue">${esc(type)}</span>`).join("")}
+        </div>
+        <h3>${esc(company.nameZh)}</h3>
+        <div class="en">${esc(company.nameEn)}</div>
+        <p class="desc">${esc(company.summary)}</p>
+        <div class="detail-grid">
+          <div class="info-block">
+            <b>对应岗位</b>
+            <div>${esc(compact(subroles, 18) || "待补充")}</div>
+          </div>
+          <div class="info-block">
+            <b>代表项目</b>
+            <div>${esc(compact(company.projects, 6) || "待补充")}</div>
+          </div>
+          <div class="info-block">
+            <b>业务方向</b>
+            <div>${esc(compact(company.sectors, 6) || "待补充")}</div>
+          </div>
+          <div class="info-block">
+            <b>主要城市</b>
+            <div>${esc(compact(company.officeCities, 6) || company.city || "待补充")}</div>
+          </div>
+        </div>
+        <div class="actions">
+          <a class="link-btn" href="${esc(company.website)}" target="_blank" rel="noopener noreferrer">企业官网</a>
+          <a class="link-btn primary" href="${esc(company.recruitmentUrl)}" target="_blank" rel="noopener noreferrer">招聘入口</a>
+        </div>
+      `;
+    }
+
+    function renderCompanyArea() {
+      const group = state.group;
+      const roles = rolesForGroup(group);
+      const companies = companiesForGroup(group);
+      const detail = groupDetail(group);
+      if (!state.companyId && companies[0]) state.companyId = companies[0].id;
+      if (state.companyId && !companies.some(company => company.id === state.companyId)) {
+        state.companyId = companies[0] ? companies[0].id : "";
+      }
+      const currentCompany = companyById(state.companyId);
+      $("companyTitle").textContent = group;
+      $("companyNote").textContent = detail.description;
+      $("companyCount").textContent = `${companies.length} 家企业`;
+      $("roleChips").innerHTML = roles.length
+        ? roles.map(role => `<span class="chip brand">${esc(role.name)} · ${esc(role.nameEn)}</span>`).join("")
+        : `<span class="chip amber">待补充岗位</span>`;
+      renderCompanyTabs(companies);
+      renderCompanyDetail(currentCompany, roles);
+    }
+
+    function courseRow(program) {
+      const course = courseById(program.courseId) || {};
+      const brief = course.brief || "暂无，建议点击课程名称查看课程官网";
+      return `
+        <article class="course-row">
+          <a href="${esc(program.url || course.url || "#")}" target="_blank" rel="noopener noreferrer">${esc(program.courseName || course.name)}</a>
+          <div class="course-school">${esc(program.school || course.school || "")}</div>
+          <div class="course-brief">${esc(brief)}</div>
+        </article>
+      `;
+    }
+
+    function matchesRegionGroup(program, groupLabel) {
+      if (groupLabel === "全部") return true;
+      const region = program.region || courseById(program.courseId)?.region || "";
+      const group = REGION_GROUPS.find(item => item.label === groupLabel);
+      return Boolean(group && group.regions.includes(region));
+    }
+
+    function renderRegionTabs(coursesForLevel) {
+      $("regionSwitch").innerHTML = REGION_GROUPS.map(group => {
+        const count = coursesForLevel.filter(course => matchesRegionGroup(course, group.label)).length;
+        return `
+          <button class="region-btn${group.label === state.regionGroup ? " active" : ""}" data-region-group="${esc(group.label)}">
+            ${esc(group.label)} ${esc(count)}
+          </button>
+        `;
+      }).join("");
+    }
+
+    function renderCourseArea() {
+      const allCourses = coursesForGroup(state.group);
+      const coursesForLevel = allCourses.filter(item => (item.level || courseById(item.courseId)?.level) === state.level);
+      const courses = coursesForLevel.filter(item => matchesRegionGroup(item, state.regionGroup));
+      const undergradCount = allCourses.filter(item => (item.level || courseById(item.courseId)?.level) === "本科").length;
+      const gradCount = allCourses.filter(item => (item.level || courseById(item.courseId)?.level) === "研究生").length;
+      $("courseTitle").textContent = `${state.group}推荐课程`;
+      $("courseNote").textContent = "";
+      document.querySelectorAll(".level-btn").forEach(button => {
+        const level = button.dataset.level;
+        const count = level === "本科" ? undergradCount : gradCount;
+        button.textContent = `${level} ${count}`;
+        button.classList.toggle("active", level === state.level);
+      });
+      renderRegionTabs(coursesForLevel);
+      $("courseList").innerHTML = courses.length
+        ? courses.map(courseRow).join("")
+        : `<div class="empty">这个岗位类别下暂时没有符合当前国家/地区条件的${esc(state.level)}课程。</div>`;
+    }
+
+    function render() {
+      renderRoleTabs();
+      renderCompanyArea();
+      renderCourseArea();
+    }
+
+    function bindEvents() {
+      $("roleTabs").addEventListener("mouseover", event => {
+        const tab = event.target.closest(".role-tab");
+        if (tab) setGroup(tab.dataset.group);
+      });
+      $("roleTabs").addEventListener("focusin", event => {
+        const tab = event.target.closest(".role-tab");
+        if (tab) setGroup(tab.dataset.group);
+      });
+      $("roleTabs").addEventListener("click", event => {
+        const tab = event.target.closest(".role-tab");
+        if (tab) setGroup(tab.dataset.group);
+      });
+      $("companyTabs").addEventListener("click", event => {
+        const tab = event.target.closest(".company-tab");
+        if (tab) setCompany(tab.dataset.company);
+      });
+      $("levelSwitch").addEventListener("click", event => {
+        const button = event.target.closest(".level-btn");
+        if (button) setLevel(button.dataset.level);
+      });
+      $("regionSwitch").addEventListener("click", event => {
+        const button = event.target.closest(".region-btn");
+        if (button) setRegionGroup(button.dataset.regionGroup);
       });
     }
 
-    fetch("data/course-search-data.json")
-      .then(response => response.json())
-      .then(json => {
-        db = json;
-        fillFilters();
-        render();
-      })
-      .catch(() => {
-        $("results").innerHTML = `<div class="empty">数据文件未加载。请确认 data/course-search-data.json 和本页面一起上传到网站。</div>`;
-        $("resultsCount").innerHTML = `数据加载失败`;
-      });
+    function loadData() {
+      if (window.CAREER_MAP_DATA && window.COURSE_SEARCH_DATA) {
+        return Promise.resolve([window.CAREER_MAP_DATA, window.COURSE_SEARCH_DATA]);
+      }
+      return Promise.all([
+        fetch("school-search-data/career-map-data.json").then(response => response.json()),
+        fetch("school-search-data/course-search-data.json").then(response => response.json())
+      ]);
+    }
+
+    loadData().then(([career, courses]) => {
+      careerDb = career;
+      courseDb = courses;
+      state.group = careerDb.taxonomy.roleGroups[0] || "";
+      const firstCompany = companiesForGroup(state.group)[0];
+      state.companyId = firstCompany ? firstCompany.id : "";
+      bindEvents();
+      render();
+    }).catch(() => {
+      $("roleTabs").innerHTML = `<div class="empty">数据文件加载失败，请检查 school-search-data/career-map-data.json 和 school-search-data/course-search-data.json。</div>`;
+    });
   </script>
+  <script src="main.js"></script>
 </body>
 </html>
