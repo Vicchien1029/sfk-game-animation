@@ -1270,6 +1270,35 @@
       $("roleTabs").innerHTML = `<div class="empty">数据文件加载失败，请检查 school-search-data/career-map-data.json 和 school-search-data/course-search-data.json。</div>`;
     });
   </script>
-  <script src="main.js"></script>
+  <script>
+    // 导航栏交互（school-search 页面专用）
+    document.addEventListener('DOMContentLoaded', () => {
+      const navbar = document.getElementById('navbar');
+      const toggle = document.getElementById('navToggle');
+      const navLinks = document.getElementById('navLinks');
+      const links = document.querySelectorAll('.nav-link');
+
+      // 滚动阴影
+      window.addEventListener('scroll', () => {
+        navbar.classList.toggle('scrolled', window.scrollY > 50);
+      });
+
+      // 移动端菜单
+      if (toggle) {
+        toggle.addEventListener('click', () => {
+          navLinks.classList.toggle('open');
+        });
+      }
+
+      // 点击链接关闭菜单 & 高亮
+      links.forEach(link => {
+        link.addEventListener('click', () => {
+          links.forEach(l => l.classList.remove('active'));
+          link.classList.add('active');
+          if (navLinks) navLinks.classList.remove('open');
+        });
+      });
+    });
+  </script>
 </body>
 </html>
