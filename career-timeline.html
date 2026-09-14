@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" type="image/jpeg" href="assets/game-animation-department-icon.jpg" />
 <title>SFK 游戏动画｜多学制职业规划时间线</title>
 <link rel="stylesheet" href="styles.css">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
@@ -26,7 +27,7 @@
 }
 *{box-sizing:border-box}
 html,body{margin:0;padding:0;font-family:'Noto Sans SC',-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;color:var(--ink);background:var(--bg)}
-body{min-width:1180px;padding-top:68px}
+body{min-width:1180px;padding-top:104px}
 
 .page{padding:20px 28px 42px}
 .top{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:20px}
@@ -88,32 +89,27 @@ select{width:100%;border:1px solid var(--line);background:var(--bg2);border-radi
 
 @media(max-width:1320px){.layout{grid-template-columns:1fr}.side{position:relative;top:0}}@media print{body{background:#fff}.page{padding:0}.side,.drawer{display:none!important}.layout{display:block}.timeline{box-shadow:none;border:0;border-radius:0}.programBanner{break-inside:avoid}.year{break-inside:avoid}}
 </style>
+<link rel="stylesheet" href="theme.css?v=20260822-dark-system-2">
 </head>
-<body>
+<body class="career-page">
   <!-- 导航栏 -->
   <nav class="navbar" id="navbar">
     <div class="nav-container">
       <a href="index.html" class="logo">
-        <img src="assets/logo.png" alt="Logo" class="logo-img">
-        <div class="logo-text">
-          <span class="logo-main">斯芬克 · 游戏动画科系</span>
-          <span class="logo-sub">内部资料库</span>
-        </div>
+        <img src="assets/game-animation-logo-lockup-cropped.png" alt="SFK 游戏动画科系" class="logo-lockup">
       </a>
-      <ul class="nav-links" id="navLinks">
-        <li><a href="index.html" class="nav-link">主页</a></li>
-        <li><a href="index.html#cases" class="nav-link">作品案例</a></li>
-        <li><a href="school-search.html" class="nav-link">院校查找</a></li>
-        <li><a href="index.html#professors" class="nav-link">海外教授</a></li>
-        <li><a href="index.html#programs" class="nav-link">短期项目</a></li>
-        <li><a href="index.html#data" class="nav-link">录取数据</a></li>
-        <li><a href="index.html#quick-entry" class="nav-link">快捷入口</a></li>
-        <li class="nav-spacer"></li>
-        <li><a href="fulltime.html" class="nav-link">全日制</a></li>
-        <li><a href="undergraduate.html" class="nav-link">本科</a></li>
-        <li><a href="#" class="nav-link" style="opacity:.4;cursor:not-allowed">研究生</a></li>
-      </ul>
-      <button class="nav-toggle" id="navToggle" aria-label="菜单">
+      <p class="nav-tagline">CREATIVE EDUCATION / GLOBAL PRACTICE</p>
+      <div class="nav-links" id="navLinks">
+        <ul class="nav-tier nav-tier-top" aria-label="科系快捷导航">
+          <li class="nav-tier-label" aria-hidden="true">科系导航</li>
+          <li><a href="index.html#home" class="nav-link nav-link-small">关于游戏动画科系</a></li><li><a href="index.html#offers" class="nav-link nav-link-small">Offer展示</a></li><li><a href="index.html#alumni" class="nav-link nav-link-small">校友</a></li><li><a href="index.html#professors" class="nav-link nav-link-small">师资团队</a></li><li><a href="index.html#partners" class="nav-link nav-link-small">企业合作</a></li><li><a href="school-search.html" class="nav-link nav-link-small">规划我的未来</a></li><li><a href="index.html#quick-entry" class="nav-link nav-link-small">快捷入口</a></li>
+        </ul>
+        <ul class="nav-tier nav-tier-main" aria-label="主要导航">
+          <li class="nav-tier-label" aria-hidden="true">主要内容</li>
+          <li><a href="majors/animation.html" class="nav-link">专业介绍</a></li><li><a href="index.html#programs" class="nav-link">课程</a></li><li><a href="cases.html" class="nav-link">作品案例</a></li><li><a href="fulltime.html" class="nav-link">全日制</a></li><li><a href="undergraduate.html" class="nav-link">本科</a></li><li><a href="#" class="nav-link nav-link-pending" aria-disabled="true">研究生</a></li>
+        </ul>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="打开导航菜单" aria-expanded="false" aria-controls="navLinks">
         <span></span><span></span><span></span>
       </button>
     </div>
@@ -558,7 +554,9 @@ render();
       // 移动端菜单
       if (toggle) {
         toggle.addEventListener('click', () => {
-          navLinks.classList.toggle('open');
+          const isOpen = navLinks.classList.toggle('open');
+          document.body.classList.toggle('nav-open', isOpen);
+          toggle.setAttribute('aria-expanded', String(isOpen));
         });
       }
 
@@ -568,6 +566,8 @@ render();
           links.forEach(l => l.classList.remove('active'));
           link.classList.add('active');
           if (navLinks) navLinks.classList.remove('open');
+          document.body.classList.remove('nav-open');
+          if (toggle) toggle.setAttribute('aria-expanded', 'false');
         });
       });
     });

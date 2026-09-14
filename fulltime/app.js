@@ -24,7 +24,7 @@ function renderUniversityAdvantages() {
   target.innerHTML = `
     <div class="teesside-expanded-intro">
       <figure>
-        <img src="./assets/teesside-campus.gif" alt="提赛德大学校园环境" />
+        <img src="./assets/teesside-campus.webp" alt="提赛德大学校园环境" />
       </figure>
       <div class="teesside-expanded-copy">
         <span>Teesside Advantage</span>

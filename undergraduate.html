@@ -3,25 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/jpeg" href="assets/game-animation-department-icon.jpg">
     <title>本科申请 · 斯芬克游戏动画科系</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="site-nav.css?v=20260910-shared-nav-v2">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <style>
         /* 本科页面专用样式 */
         .ug-page {
-            padding-top: 68px;
+            padding-top: 104px;
             min-height: 100vh;
             background: var(--black);
+        }
+        @media (max-width: 900px) {
+            .ug-page { padding-top: 72px; }
         }
         
         /* 顶部标签切换栏 */
         .ug-tabs-bar {
             position: sticky;
-            top: 68px;
+            top: 104px;
             z-index: 50;
             background: rgba(10,10,10,.94);
             backdrop-filter: blur(16px);
             border-bottom: 1px solid var(--gray-800);
+        }
+        @media (max-width: 900px) {
+            .ug-tabs-bar { top: 72px; }
         }
         .ug-tabs-inner {
             max-width: 1200px;
@@ -911,36 +919,11 @@
             }
         }
     </style>
+    <link rel="stylesheet" href="theme.css?v=20260822-dark-system-2">
+    <link rel="stylesheet" href="support-footer.css?v=20260910-shared-shell-v1">
 </head>
-<body>
-    <!-- 导航栏 -->
-    <nav class="navbar" id="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="logo">
-                <img src="assets/logo.png" alt="Logo" class="logo-img">
-                <div class="logo-text">
-                    <span class="logo-main">斯芬克 · 游戏动画科系</span>
-                    <span class="logo-sub">内部资料库</span>
-                </div>
-            </a>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="index.html" class="nav-link">主页</a></li>
-                <li><a href="index.html#cases" class="nav-link">作品案例</a></li>
-                <li><a href="school-search.html" class="nav-link">院校查找</a></li>
-                <li><a href="index.html#professors" class="nav-link">海外教授</a></li>
-                <li><a href="index.html#programs" class="nav-link">短期项目</a></li>
-                <li><a href="index.html#data" class="nav-link">录取数据</a></li>
-                <li><a href="index.html#quick-entry" class="nav-link">快捷入口</a></li>
-                <li class="nav-spacer"></li>
-                <li><a href="fulltime.html" class="nav-link">全日制</a></li>
-                <li><a href="undergraduate.html" class="nav-link active">本科</a></li>
-                <li><a href="#" class="nav-link" style="opacity:.4;cursor:not-allowed">研究生</a></li>
-            </ul>
-            <button class="nav-toggle" id="navToggle" aria-label="菜单">
-                <span></span><span></span><span></span>
-            </button>
-        </div>
-    </nav>
+<body class="undergraduate-page">
+    <div data-site-nav data-page="undergraduate"></div>
 
     <!-- 本科页面主体 -->
     <div class="ug-page">
@@ -1011,75 +994,6 @@
                     </div>
                 </div>
 
-                <!-- 课程板块 -->
-                <h2 class="course-section-title">课程</h2>
-                <div class="course-resource-wrap">
-                    <div class="course-group">
-                        <h3 class="course-group-title">课程</h3>
-                        <div class="course-links-row">
-                            <a href="https://yk3.gokuai.com/file/vhko6fxxgaurt0ajck27revbksd6poxk#" target="_blank" rel="noreferrer">课程手册</a>
-                            <span class="course-divider">/</span>
-                            <a href="https://yk3.gokuai.com/file/o5atk2xcikhnynxgx8929feycfsb8gtb#" target="_blank" rel="noreferrer">基础课大纲</a>
-                            <span class="course-divider">/</span>
-                            <a href="https://yk3.gokuai.com/file/9a2qrxvzdfo6qahcdvr0n7oiyk7n5xqw#" target="_blank" rel="noreferrer">基础课课件</a>
-                            <span class="course-divider">/</span>
-                            <a href="https://yk3.gokuai.com/file/48q4jj46bju7ovf5dgnl4ddlz0rh3oe6#" target="_blank" rel="noreferrer">项目课大纲</a>
-                        </div>
-                    </div>
-                    <div class="course-group">
-                        <h3 class="course-group-title">首课</h3>
-                        <div class="course-links-row">
-                            <a href="https://yk3.gokuai.com/file/vj0mxg6qjfgwr6v7h3htg4739sfu9h48#" target="_blank" rel="noreferrer">首课规划表</a>
-                            <span class="course-divider">/</span>
-                            <a href="https://yk3.gokuai.com/file/tml0k2i5cz33mozs8thuskr8dz6b6f21#" target="_blank" rel="noreferrer">首课规划案例</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 教学板块 -->
-                <h2 class="teaching-section-title">教学</h2>
-                <div class="teaching-wrap">
-                    <div class="teaching-item">
-                        <div class="teaching-label">ALevel</div>
-                        <div class="teaching-submenu">
-                            <a href="https://yk3.gokuai.com/file/8yfhvy6i12d8v9mlyhhudn5so6lmwa9g#" target="_blank" rel="noreferrer" class="teaching-link">教学</a>
-                            <a href="https://yk3.gokuai.com/file/436px3jlu3t3fdepijb70gg0b6k2ndpm#" target="_blank" rel="noreferrer" class="teaching-link">结课</a>
-                            <a href="https://yk3.gokuai.com/file/0rvdfw2j1za72j2xk1ugmoh9xohrbrnt#" target="_blank" rel="noreferrer" class="teaching-link">培训</a>
-                        </div>
-                    </div>
-                    <div class="teaching-item">
-                        <div class="teaching-label">BTEC LEVEL 3</div>
-                        <div class="teaching-submenu">
-                            <a href="https://yk3.gokuai.com/file/z4pmekaggqqpt0nyinae4bp66px0e1pk#" target="_blank" rel="noreferrer" class="teaching-link">教学</a>
-                            <a href="https://yk3.gokuai.com/file/zh9eu3n3grrvns39qgrb6a4a5mtsq7c2#" target="_blank" rel="noreferrer" class="teaching-link">结课</a>
-                            <a href="https://yk3.gokuai.com/file/b4ufclc41dbc10qhrtoun7zrjln16r1f#" target="_blank" rel="noreferrer" class="teaching-link">培训</a>
-                        </div>
-                    </div>
-                    <div class="teaching-item">
-                        <div class="teaching-label">BTEC LEVEL 4</div>
-                        <div class="teaching-submenu">
-                            <a href="https://yk3.gokuai.com/file/shl08yclcm6gaomcvfl8oif6yzmeshuo#" target="_blank" rel="noreferrer" class="teaching-link">教学</a>
-                            <a href="https://yk3.gokuai.com/file/144ra1w0ie04o1evpvq9iv7pc6gc8pkv#" target="_blank" rel="noreferrer" class="teaching-link">结课</a>
-                            <a href="https://yk3.gokuai.com/file/6jno53w82rtm8eewxwl6zsc3ies57061#" target="_blank" rel="noreferrer" class="teaching-link">培训</a>
-                        </div>
-                    </div>
-                    <div class="teaching-item">
-                        <div class="teaching-label">Alevel&BTEC双轨制</div>
-                        <div class="teaching-submenu">
-                            <a href="https://yk3.gokuai.com/file/i3gnglmjtn42cln1p6928xdqib4kdeww#" target="_blank" rel="noreferrer" class="teaching-link">教学</a>
-                            <a href="https://yk3.gokuai.com/file/89vamzuiin4knhbnz9r1el071jna2bk6#" target="_blank" rel="noreferrer" class="teaching-link">结课</a>
-                            <a href="https://yk3.gokuai.com/file/kjr9jfa3bff7809nzg48h537twieug21#" target="_blank" rel="noreferrer" class="teaching-link">培训</a>
-                        </div>
-                    </div>
-                    <div class="teaching-item">
-                        <div class="teaching-label">HNC 1+2</div>
-                        <div class="teaching-submenu">
-                            <a href="https://yk3.gokuai.com/file/ggdz1qbuz8sv8fddaseuz03e95t61kih#" target="_blank" rel="noreferrer" class="teaching-link">教学</a>
-                            <a href="https://yk3.gokuai.com/file/tj1b9z4lvrh7pp8p8sn2v2tws8hku59n#" target="_blank" rel="noreferrer" class="teaching-link">结课</a>
-                            <a href="https://yk3.gokuai.com/file/raukjeg440942opwc0fh2xaz9ke9qf7d#" target="_blank" rel="noreferrer" class="teaching-link">培训</a>
-                        </div>
-                    </div>
-                </div>
             </div>
 
             <!-- 美本及其他内容 -->
@@ -1092,6 +1006,10 @@
         </div>
     </div>
 
+    <div data-support-footer></div>
+
+    <script src="site-nav.js?v=20260910-shared-nav-v2"></script>
+    <script src="support-footer.js?v=20260914-school-order-v2"></script>
     <script>
         // 标签切换逻辑
         const tabBtns = document.querySelectorAll('.ug-tab-btn');
@@ -1108,15 +1026,6 @@
             });
         });
         
-        // 移动端菜单
-        const navToggle = document.getElementById('navToggle');
-        const navLinks = document.getElementById('navLinks');
-        if (navToggle && navLinks) {
-            navToggle.addEventListener('click', () => {
-                navLinks.classList.toggle('show');
-            });
-        }
-
         // 英国教育体系 - 展开/收起
         function toggleUkEdu() {
             const panel = document.getElementById('ukEduPanel');
@@ -1197,10 +1106,10 @@
                 grade: 'A',
                 desc: '项目以时代的女性：地位、力量与挑战为主题，研究女性从原始社会的崇高地位到封建社会的压制，再到现代社会的复杂处境，通过艺术探讨女性身份、权力与平等议题，引发公众对女性权益的思考。',
                 images: [
-                    'yu_jennifer/img_01.jpg','yu_jennifer/img_02.jpg','yu_jennifer/img_03.jpg',
-                    'yu_jennifer/img_04.jpg','yu_jennifer/img_05.jpg','yu_jennifer/img_06.jpg',
-                    'yu_jennifer/img_07.jpg','yu_jennifer/img_08.jpg','yu_jennifer/img_09.jpg',
-                    'yu_jennifer/img_10.jpg'
+                    'yu_jennifer/img_01.webp','yu_jennifer/img_02.webp','yu_jennifer/img_03.webp',
+                    'yu_jennifer/img_04.webp','yu_jennifer/img_05.webp','yu_jennifer/img_06.webp',
+                    'yu_jennifer/img_07.webp','yu_jennifer/img_08.webp','yu_jennifer/img_09.webp',
+                    'yu_jennifer/img_10.webp'
                 ]
             },
             {
@@ -1209,11 +1118,11 @@
                 grade: '预估A*',
                 desc: '机械结合力学与美学，通过零部件传递能量与运动，体现理性逻辑与感性创造的结合，是力与美的直观呈现。',
                 images: [
-                    'yu_qingyue/img_01.jpg','yu_qingyue/img_02.jpg','yu_qingyue/img_03.jpg',
-                    'yu_qingyue/img_04.jpg','yu_qingyue/img_05.jpg','yu_qingyue/img_06.jpg',
-                    'yu_qingyue/img_07.jpg','yu_qingyue/img_08.jpg','yu_qingyue/img_09.jpg',
-                    'yu_qingyue/img_10.jpg','yu_qingyue/img_11.jpg','yu_qingyue/img_12.jpg',
-                    'yu_qingyue/img_13.jpg','yu_qingyue/img_14.jpg'
+                    'yu_qingyue/img_01.webp','yu_qingyue/img_02.webp','yu_qingyue/img_03.webp',
+                    'yu_qingyue/img_04.webp','yu_qingyue/img_05.webp','yu_qingyue/img_06.webp',
+                    'yu_qingyue/img_07.webp','yu_qingyue/img_08.webp','yu_qingyue/img_09.webp',
+                    'yu_qingyue/img_10.webp','yu_qingyue/img_11.webp','yu_qingyue/img_12.webp',
+                    'yu_qingyue/img_13.webp','yu_qingyue/img_14.webp'
                 ]
             },
             {
@@ -1222,11 +1131,11 @@
                 grade: 'A',
                 desc: '通过调研多种占卜方式，尝试建立"奶茶占卜"品牌，将茶饮与视觉化占卜结合，结合雷诺曼卡牌和个人画风，创造趣味与美感兼具的体验。',
                 images: [
-                    'feng_meitong/img_01.jpg','feng_meitong/img_02.jpg','feng_meitong/img_03.jpg',
-                    'feng_meitong/img_04.jpg','feng_meitong/img_05.jpg','feng_meitong/img_06.jpg',
-                    'feng_meitong/img_07.jpg','feng_meitong/img_08.jpg','feng_meitong/img_09.jpg',
-                    'feng_meitong/img_10.jpg','feng_meitong/img_11.jpg','feng_meitong/img_12.jpg',
-                    'feng_meitong/img_13.jpg'
+                    'feng_meitong/img_01.webp','feng_meitong/img_02.webp','feng_meitong/img_03.webp',
+                    'feng_meitong/img_04.webp','feng_meitong/img_05.webp','feng_meitong/img_06.webp',
+                    'feng_meitong/img_07.webp','feng_meitong/img_08.webp','feng_meitong/img_09.webp',
+                    'feng_meitong/img_10.webp','feng_meitong/img_11.webp','feng_meitong/img_12.webp',
+                    'feng_meitong/img_13.webp'
                 ]
             },
             {
@@ -1235,10 +1144,10 @@
                 grade: 'Distinction',
                 desc: '这是一个棋盘游戏，帮助人们了解心理健康问题的经历，并鼓励那些受影响的人积极地与他们作斗争。',
                 images: [
-                    'liu_siyi/img_01.jpg','liu_siyi/img_02.jpg','liu_siyi/img_03.jpg',
-                    'liu_siyi/img_04.jpg','liu_siyi/img_05.jpg','liu_siyi/img_06.jpg',
-                    'liu_siyi/img_07.jpg','liu_siyi/img_08.jpg','liu_siyi/img_09.jpg',
-                    'liu_siyi/img_10.jpg'
+                    'liu_siyi/img_01.webp','liu_siyi/img_02.webp','liu_siyi/img_03.webp',
+                    'liu_siyi/img_04.webp','liu_siyi/img_05.webp','liu_siyi/img_06.webp',
+                    'liu_siyi/img_07.webp','liu_siyi/img_08.webp','liu_siyi/img_09.webp',
+                    'liu_siyi/img_10.webp'
                 ]
             },
             {
@@ -1247,10 +1156,10 @@
                 grade: 'Distinction',
                 desc: '项目以中国神话为主题，通过传统神话与虚构伪纪录片神话的融合，进行角色设计与世界观构建，探索神话叙事、文化想象与个人创作之间的关系。',
                 images: [
-                    'liu_haoyue/img_01.jpg','liu_haoyue/img_02.jpg','liu_haoyue/img_03.jpg',
-                    'liu_haoyue/img_04.jpg','liu_haoyue/img_05.jpg','liu_haoyue/img_06.jpg',
-                    'liu_haoyue/img_07.jpg','liu_haoyue/img_08.jpg','liu_haoyue/img_09.jpg',
-                    'liu_haoyue/img_10.jpg'
+                    'liu_haoyue/img_01.webp','liu_haoyue/img_02.webp','liu_haoyue/img_03.webp',
+                    'liu_haoyue/img_04.webp','liu_haoyue/img_05.webp','liu_haoyue/img_06.webp',
+                    'liu_haoyue/img_07.webp','liu_haoyue/img_08.webp','liu_haoyue/img_09.webp',
+                    'liu_haoyue/img_10.webp'
                 ]
             },
             {
@@ -1259,10 +1168,10 @@
                 grade: 'A',
                 desc: '项目以动物乌托邦为主题，结合野生动物观察与职业体验经历，构建一个充满协作与秩序的动物社会，通过系列绘画探索个体价值、社会分工以及人与自然的关系。',
                 images: [
-                    'lu_yuner/img_01.jpg','lu_yuner/img_02.jpg','lu_yuner/img_03.jpg',
-                    'lu_yuner/img_04.jpg','lu_yuner/img_05.jpg','lu_yuner/img_06.jpg',
-                    'lu_yuner/img_07.jpg','lu_yuner/img_08.jpg','lu_yuner/img_09.jpg',
-                    'lu_yuner/img_10.jpg','lu_yuner/img_11.jpg'
+                    'lu_yuner/img_01.webp','lu_yuner/img_02.webp','lu_yuner/img_03.webp',
+                    'lu_yuner/img_04.webp','lu_yuner/img_05.webp','lu_yuner/img_06.webp',
+                    'lu_yuner/img_07.webp','lu_yuner/img_08.webp','lu_yuner/img_09.webp',
+                    'lu_yuner/img_10.webp','lu_yuner/img_11.webp'
                 ]
             },
             {
@@ -1271,9 +1180,9 @@
                 grade: '预估A',
                 desc: '项目《废墟与伪造记忆》试图通过"影像的再构造"来探讨时间、记忆与历史的关系。在这个作品中，废墟不只是过去的遗迹，更是一种时间的物质化形态。每一张照片既记录了消逝的空间，也暗示了我们如何在影像中重塑时间。',
                 images: [
-                    'chang_yilin/img_01.jpg','chang_yilin/img_02.jpg','chang_yilin/img_03.jpg',
-                    'chang_yilin/img_04.jpg','chang_yilin/img_05.jpg','chang_yilin/img_06.jpg',
-                    'chang_yilin/img_07.jpg','chang_yilin/img_08.jpg'
+                    'chang_yilin/img_01.webp','chang_yilin/img_02.webp','chang_yilin/img_03.webp',
+                    'chang_yilin/img_04.webp','chang_yilin/img_05.webp','chang_yilin/img_06.webp',
+                    'chang_yilin/img_07.webp','chang_yilin/img_08.webp'
                 ]
             },
             {
@@ -1282,11 +1191,11 @@
                 grade: 'A',
                 desc: '项目以当代交流方式为主题，通过幽默荒诞的插画呈现表情包、符号和手势取代语言的现象，探讨信息时代沟通表达的简化、情感隔阂以及人与人之间逐渐流失的深度连接。',
                 images: [
-                    'zhang_yingqi/img_01.jpg','zhang_yingqi/img_02.jpg','zhang_yingqi/img_03.jpg',
-                    'zhang_yingqi/img_04.jpg','zhang_yingqi/img_05.jpg','zhang_yingqi/img_06.jpg',
-                    'zhang_yingqi/img_07.jpg','zhang_yingqi/img_08.jpg','zhang_yingqi/img_09.jpg',
-                    'zhang_yingqi/img_10.jpg','zhang_yingqi/img_11.jpg','zhang_yingqi/img_12.jpg',
-                    'zhang_yingqi/img_13.jpg'
+                    'zhang_yingqi/img_01.webp','zhang_yingqi/img_02.webp','zhang_yingqi/img_03.webp',
+                    'zhang_yingqi/img_04.webp','zhang_yingqi/img_05.webp','zhang_yingqi/img_06.webp',
+                    'zhang_yingqi/img_07.webp','zhang_yingqi/img_08.webp','zhang_yingqi/img_09.webp',
+                    'zhang_yingqi/img_10.webp','zhang_yingqi/img_11.webp','zhang_yingqi/img_12.webp',
+                    'zhang_yingqi/img_13.webp'
                 ]
             },
             {
@@ -1295,10 +1204,10 @@
                 grade: '',
                 desc: 'SFK游戏动画本科的基础课程旨在打牢学生的绘画与视觉表达能力，培养观察力、造型力和创作思维，为后续动画、角色设计和概念美术的专业学习打下坚实基础。',
                 images: [
-                    'zhu_yimeng/img_01.jpg','zhu_yimeng/img_02.jpg','zhu_yimeng/img_03.jpg',
-                    'zhu_yimeng/img_04.jpg','zhu_yimeng/img_05.jpg','zhu_yimeng/img_06.jpg',
-                    'zhu_yimeng/img_07.jpg','zhu_yimeng/img_08.jpg','zhu_yimeng/img_09.jpg',
-                    'zhu_yimeng/img_10.jpg'
+                    'zhu_yimeng/img_01.webp','zhu_yimeng/img_02.webp','zhu_yimeng/img_03.webp',
+                    'zhu_yimeng/img_04.webp','zhu_yimeng/img_05.webp','zhu_yimeng/img_06.webp',
+                    'zhu_yimeng/img_07.webp','zhu_yimeng/img_08.webp','zhu_yimeng/img_09.webp',
+                    'zhu_yimeng/img_10.webp'
                 ]
             },
             {
@@ -1307,9 +1216,9 @@
                 grade: '',
                 desc: '项目设定在一场宇宙灾难后，人类被缩小至原体积的百分之一。为适应充满威胁的新环境，人类借鉴昆虫结构开发生物机械技术，进入融合自然与科技的生物朋克时代。',
                 images: [
-                    'lin_peiyang/img_01.jpg','lin_peiyang/img_02.jpg','lin_peiyang/img_03.jpg',
-                    'lin_peiyang/img_04.jpg','lin_peiyang/img_05.jpg','lin_peiyang/img_06.jpg',
-                    'lin_peiyang/img_07.jpg'
+                    'lin_peiyang/img_01.webp','lin_peiyang/img_02.webp','lin_peiyang/img_03.webp',
+                    'lin_peiyang/img_04.webp','lin_peiyang/img_05.webp','lin_peiyang/img_06.webp',
+                    'lin_peiyang/img_07.webp'
                 ]
             },
             {
@@ -1318,11 +1227,11 @@
                 grade: 'Distinction',
                 desc: '该项目灵感来自西部电影《三恶三丑》。通过牛仔与动物结合构建理想西部世界，以牛仔鼠与赏金乌鸦为核心角色，并延伸黑帮鳄鱼设定。在故事板创作中借鉴《奥术》，逐步完善狂野西部叙事世界观。',
                 images: [
-                    'wang_tianhe/img_01.jpg','wang_tianhe/img_02.jpg','wang_tianhe/img_03.jpg',
-                    'wang_tianhe/img_04.jpg','wang_tianhe/img_05.jpg','wang_tianhe/img_06.jpg',
-                    'wang_tianhe/img_07.jpg','wang_tianhe/img_08.jpg','wang_tianhe/img_09.jpg',
-                    'wang_tianhe/img_10.jpg','wang_tianhe/img_11.jpg','wang_tianhe/img_12.jpg',
-                    'wang_tianhe/img_13.jpg'
+                    'wang_tianhe/img_01.webp','wang_tianhe/img_02.webp','wang_tianhe/img_03.webp',
+                    'wang_tianhe/img_04.webp','wang_tianhe/img_05.webp','wang_tianhe/img_06.webp',
+                    'wang_tianhe/img_07.webp','wang_tianhe/img_08.webp','wang_tianhe/img_09.webp',
+                    'wang_tianhe/img_10.webp','wang_tianhe/img_11.webp','wang_tianhe/img_12.webp',
+                    'wang_tianhe/img_13.webp'
                 ]
             },
             {
@@ -1331,8 +1240,8 @@
                 grade: '',
                 desc: '这是一个以调制气泡水为主题的unity+arduino实验游戏。玩家将根据目标气泡水使用按钮来调整游戏中液体的状态和颜色，并使用内置振动传感器的杯子来摇出气泡，最后尽可能地接近目标气泡水的颜色和状态。',
                 images: [
-                    'wang_zhengya/img_01.jpg','wang_zhengya/img_02.jpg','wang_zhengya/img_03.jpg',
-                    'wang_zhengya/img_04.jpg','wang_zhengya/img_05.jpg'
+                    'wang_zhengya/img_01.webp','wang_zhengya/img_02.webp','wang_zhengya/img_03.webp',
+                    'wang_zhengya/img_04.webp','wang_zhengya/img_05.webp'
                 ]
             },
             {
@@ -1341,8 +1250,8 @@
                 grade: '',
                 desc: '我在网上了解到一些与猎巫有关的故事，被圣女贞德的故事中迸发出的信念和勇气所打动。我想剥去厚重的史诗感，用中世纪冒险的外壳，让这种对信仰的坚持在剑与魔法的旅程中舞蹈。我想通过奔跑和探索让古老的勇气变得更加生动。',
                 images: [
-                    'han_haoyi/img_01.jpg','han_haoyi/img_02.jpg','han_haoyi/img_03.jpg',
-                    'han_haoyi/img_04.jpg','han_haoyi/img_05.jpg'
+                    'han_haoyi/img_01.webp','han_haoyi/img_02.webp','han_haoyi/img_03.webp',
+                    'han_haoyi/img_04.webp','han_haoyi/img_05.webp'
                 ]
             },
             {
@@ -1351,10 +1260,10 @@
                 grade: '预估Distinction',
                 desc: '该项目通过研究、分析、头脑风暴与原型制作，探索以太空为主题的策略与管理类游戏玩法设计可能性。',
                 images: [
-                    'james/img_01.jpg','james/img_02.jpg','james/img_03.jpg',
-                    'james/img_04.jpg','james/img_05.jpg','james/img_06.jpg',
-                    'james/img_07.jpg','james/img_08.jpg','james/img_09.jpg',
-                    'james/img_10.jpg'
+                    'james/img_01.webp','james/img_02.webp','james/img_03.webp',
+                    'james/img_04.webp','james/img_05.webp','james/img_06.webp',
+                    'james/img_07.webp','james/img_08.webp','james/img_09.webp',
+                    'james/img_10.webp'
                 ]
             }
         ];

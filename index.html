@@ -3,73 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/jpeg" href="assets/game-animation-department-icon.jpg">
     <title>斯芬克游戏动画科系 - 内部资料库</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=20260906-faculty-data-v1">
+    <link rel="stylesheet" href="theme.css?v=20260910-faculty-filter-align-v3">
+    <link rel="stylesheet" href="support-footer.css?v=20260910-shared-shell-v1">
+    <link rel="stylesheet" href="site-nav.css?v=20260910-shared-nav-v2">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="home-page">
     <!-- 导航栏 -->
-    <nav class="navbar" id="navbar">
-        <div class="nav-container">
-            <a href="#home" class="logo">
-                <img src="assets/logo.png" alt="Logo" class="logo-img">
-                <div class="logo-text">
-                    <span class="logo-main">斯芬克 · 游戏动画科系</span>
-                    <span class="logo-sub">内部资料库</span>
-                </div>
-            </a>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="#home" class="nav-link active" data-section="home">主页</a></li>
-                <li><a href="#cases" class="nav-link" data-section="cases">作品案例</a></li>
-                <li><a href="school-search.html" class="nav-link">院校查找</a></li>
-                <li><a href="#professors" class="nav-link" data-section="professors">海外教授</a></li>
-                <li><a href="#programs" class="nav-link" data-section="programs">短期项目</a></li>
-                <li><a href="#data" class="nav-link" data-section="data">录取数据</a></li>
-                <li><a href="#quick-entry" class="nav-link" data-section="quick-entry">快捷入口</a></li>
-                <li class="nav-spacer"></li>
-                <li><a href="fulltime.html" class="nav-link">全日制</a></li>
-                <li><a href="undergraduate.html" class="nav-link">本科</a></li>
-                <li><a href="#" class="nav-link" style="opacity:.4;cursor:not-allowed">研究生</a></li>
-            </ul>
-            <button class="nav-toggle" id="navToggle" aria-label="菜单">
-                <span></span><span></span><span></span>
-            </button>
-        </div>
-    </nav>
+    <div data-site-nav data-page="home"></div>
 
-    <!-- ==================== 主页 ==================== -->
-    <section id="home" class="hero-section">
-        <div class="hero-bg-shapes">
-            <div class="shape shape-1"></div>
-            <div class="shape shape-2"></div>
-            <div class="shape shape-3"></div>
+    <!-- ==================== 科系首页 ==================== -->
+    <section id="home" class="hero-section hero-showreel">
+        <div class="hero-media" aria-hidden="true">
+            <video class="hero-video" muted loop playsinline preload="metadata" poster="assets/showreel-hero-poster.jpg">
+                <source src="assets/showreel-hero.mp4" type="video/mp4">
+            </video>
         </div>
-        <div class="hero-container hero-single">
+        <div class="hero-shade" aria-hidden="true"></div>
+        <div class="hero-content">
+            <p class="hero-kicker">SFK GAME &amp; ANIMATION DEPARTMENT</p>
             <h1 class="hero-title">
-                <span class="hero-badge">2026 FALL · 申请季成果</span><br>
-                <span class="text-accent">1700+</span> OFFER<br>
-                <span class="text-accent">7244.7万</span> 累计奖学金
+                让想象力<br>
+                <span class="hero-title-accent">成为</span><br>
+                被世界看见的作品
             </h1>
-            <p class="hero-desc">斯芬克游戏动画科系始终把录取放在第一位，无论是在竞争激烈的藤校赛道还是众多游戏动画学生梦寐以求的梦中情校，我们都达成了对客户的承诺。</p>
-            <div class="hero-highlights">
-                <div class="highlight-item">
-                    <span class="highlight-num">100%</span>
-                    <span class="highlight-label">录取率</span>
-                </div>
-                <div class="highlight-item">
-                    <span class="highlight-num">29.2%</span>
-                    <span class="highlight-label">顶尖OFFER占有率</span>
-                </div>
+            <p class="hero-desc">从世界观、角色与叙事，到动画、游戏美术与实时交互，我们以行业标准连接创作、升学与职业方向，让每位学生建立属于自己的作品语言。</p>
+            <div class="hero-actions">
+                <a href="majors/animation.html" class="hero-cta hero-cta-primary">探索专业方向</a>
+                <a href="cases.html" class="hero-cta hero-cta-ghost">查看作品案例 <span aria-hidden="true">↗</span></a>
+            </div>
+            <div class="hero-disciplines" aria-label="科系专业方向">
+                <span>GAME DESIGN</span>
+                <span>GAME ART</span>
+                <span>CONCEPT ART</span>
+                <span>ANIMATION</span>
+                <span>VFX</span>
             </div>
         </div>
+        <a href="#cases" class="hero-scroll" aria-label="浏览学生作品视频">
+            <span>SCROLL TO EXPLORE</span>
+            <span class="hero-scroll-line" aria-hidden="true"></span>
+        </a>
     </section>
 
+    <main class="homepage-flow">
+
     <!-- 26申请季 - 院校录取亮点 -->
-    <section class="section results-section">
+    <section id="offers" class="section results-section chapter-section" data-chapter="03" data-label="OFFER HIGHLIGHTS">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">26申请季 · 院校录取亮点</h2>
+                <p class="home-section-eyebrow"><span aria-hidden="true"></span> OUR ADMISSIONS / 我们的录取</p>
+                <h2 class="section-title">26申请季成果</h2>
                 <div class="title-line"></div>
+                <p class="section-subtitle results-intro">斯芬克游戏动画科系始终把录取结果放在首位。无论是竞争激烈的综合名校赛道，还是游戏与动画学生向往的专业院校，我们都以清晰的目标和持续的专业支持回应每一份信任。26申请季，我们已收获11枚 CalArts、29枚 NYU、27枚 USC、7枚 CMU、5枚南洋理工、16枚京都精华录取，以及40+枚皇艺、240+枚伦艺录取。</p>
+                <div class="results-data-links" aria-label="详细录取数据">
+                    <a class="results-data-link" href="https://www.kdocs.cn/wo/sl/v12nBg57" target="_blank" rel="noopener noreferrer">本科录取数据</a>
+                    <a class="results-data-link" href="https://www.kdocs.cn/wo/sl/v12L4Zn2" target="_blank" rel="noopener noreferrer">研究生录取数据</a>
+                </div>
             </div>
             <!-- 维度切换按钮 -->
             <div class="results-tabs">
@@ -148,37 +141,63 @@
     </section>
 
     <!-- 主页 - 科系简介 -->
-    <section class="section dept-intro">
+    <section id="majors" class="section dept-intro chapter-section" data-chapter="02" data-label="DISCIPLINES">
         <div class="container">
+            <p class="home-section-eyebrow"><span aria-hidden="true"></span> OUR MAJORS / 我们的专业</p>
             <div class="major-cards">
-                <a href="https://yk3.gokuai.com/file/0p6wli7kg0lw7oee3fs9bwp3irqvynof#" target="_blank" class="major-card" data-major="game-design">
+                <a href="majors/animation.html" class="major-card" data-major="animation">
                     <div class="major-image">
-                        <img src="assets/game-design.png" alt="游戏设计">
+                        <img src="assets/animation-design.webp" alt="动画设计">
                     </div>
                     <div class="major-content">
-                        <h3 class="major-name">GAME DESIGN</h3>
-                        <p class="major-slogan">用艺术与规则重新定义游玩</p>
-                        <p class="major-desc">游戏设计是一种综合性的创意过程，包括规则、叙事、视觉艺术、编程和音效设计。创造引人入胜的交互体验，为玩家提供独特的互动娱乐方式和挑战。</p>
-                    </div>
-                </a>
-                <a href="https://yk3.gokuai.com/file/0p6wli7kg0lw7oee3fs9bwp3irqvynof#" target="_blank" class="major-card" data-major="animation">
-                    <div class="major-image">
-                        <img src="assets/animation-design.jpg" alt="动画设计">
-                    </div>
-                    <div class="major-content">
+                        <span class="major-index">01</span>
                         <h3 class="major-name">ANIMATION DESIGN</h3>
                         <p class="major-slogan">赋予生命与灵魂的伟大工程</p>
                         <p class="major-desc">动画设计是创造叙事的艺术，研究时间与运动，通过连续画面创造视觉魔法，为静态的图像注入生命与情感。</p>
                     </div>
                 </a>
-                <a href="https://yk3.gokuai.com/file/0p6wli7kg0lw7oee3fs9bwp3irqvynof#" target="_blank" class="major-card" data-major="game-art">
+                <a href="majors/game.html" class="major-card" data-major="game-design">
                     <div class="major-image">
-                        <img src="assets/game-art.png" alt="游戏艺术">
+                        <img src="assets/game-design.webp" alt="游戏设计">
                     </div>
                     <div class="major-content">
+                        <span class="major-index">02</span>
+                        <h3 class="major-name">GAME DESIGN</h3>
+                        <p class="major-slogan">用艺术与规则重新定义游玩</p>
+                        <p class="major-desc">游戏设计是一种综合性的创意过程，包括规则、叙事、视觉艺术、编程和音效设计。创造引人入胜的交互体验，为玩家提供独特的互动娱乐方式和挑战。</p>
+                    </div>
+                </a>
+                <a href="majors/game.html" class="major-card" data-major="game-art">
+                    <div class="major-image">
+                        <img src="assets/game-art.webp" alt="游戏艺术">
+                    </div>
+                    <div class="major-content">
+                        <span class="major-index">03</span>
                         <h3 class="major-name">GAME ART</h3>
                         <p class="major-slogan">数字造梦师</p>
                         <p class="major-desc">游戏艺术家通过创造角色，生物，建筑，环境等视觉元素为游戏世界塑造独一无二的沉浸式交互视觉体验。</p>
+                    </div>
+                </a>
+                <a href="majors/concept-art.html" class="major-card major-card-placeholder" data-major="concept-art">
+                    <div class="major-image">
+                        <img src="assets/major-illustrations-v1/concept-art/concept-art-hero-desktop.webp" alt="以幻想环境与机械探索者呈现概念艺术构建世界的过程">
+                    </div>
+                    <div class="major-content">
+                        <span class="major-index">04</span>
+                        <h3 class="major-name">CONCEPT ART</h3>
+                        <p class="major-slogan">为世界建立视觉规则</p>
+                        <p class="major-desc">从角色、场景到世界观，以研究、叙事与视觉开发塑造可信而独特的想象世界。</p>
+                    </div>
+                </a>
+                <a href="majors/visual-effects.html" class="major-card major-card-placeholder" data-major="visual-effects">
+                    <div class="major-image">
+                        <img src="assets/major-illustrations-v1/visual-effects/vfx-hero-desktop.webp" alt="数字光影与投影空间共同构成的视觉特效画面">
+                    </div>
+                    <div class="major-content">
+                        <span class="major-index">05</span>
+                        <h3 class="major-name">VISUAL EFFECTS</h3>
+                        <p class="major-slogan">让不可见的力量被看见</p>
+                        <p class="major-desc">通过粒子、流体、光影与数字合成，为影像和实时体验创造具有说服力的视觉奇观。</p>
                     </div>
                 </a>
             </div>
@@ -186,12 +205,13 @@
     </section>
 
     <!-- ==================== 作品案例 ==================== -->
-    <section id="cases" class="section cases-section">
+    <section id="cases" class="section cases-section chapter-section" data-chapter="04" data-label="SELECTED WORKS">
         <div class="container">
+            <p class="home-section-eyebrow"><span aria-hidden="true"></span> OUR WORKS / 我们的作品</p>
             <!-- 视频播放器 -->
             <div class="video-player-section">
                 <div class="video-main">
-                    <iframe id="mainVideo" src="https://player.bilibili.com/player.html?bvid=BV1MqVz6tEhE&page=1&autoplay=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+                    <iframe id="mainVideo" src="about:blank" data-video-src="https://player.bilibili.com/player.html?bvid=BV1MqVz6tEhE&page=1&autoplay=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" title="SFK 学生游戏设计作品"></iframe>
                 </div>
                 <!-- 视频切换按钮 -->
                 <div class="video-tabs">
@@ -204,93 +224,140 @@
                 </div>
             </div>
 
-            <!-- 案例入口 -->
-            <div class="cases-links">
-                <a href="https://yk3.gokuai.com/file/fp02w4sma91s36vn86g3qpodcodvh11n#" target="_blank" class="case-link">顶尖院校案例</a>
-                <span class="case-divider">/</span>
-                <a href="https://yk3.gokuai.com/file/x7bectccgjfw4mo8y6anda08oo2gf3gf#" target="_blank" class="case-link">案例库</a>
-                <span class="case-divider">/</span>
-                <a href="https://yk3.gokuai.com/file/oeqaznbryshjj6hzlbcffxlvpgnb7nwz#" target="_blank" class="case-link">独立命题案例</a>
-                <span class="case-divider">/</span>
-                <a href="https://yk3.gokuai.com/file/btqszmb1zt02lnuajp0cjaus7a7tjm7f#" target="_blank" class="case-link">就业作品案例</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- ==================== 海外教授 ==================== -->
-    <section id="professors" class="section professors-section">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">海外教授</h2>
-                <div class="title-line"></div>
-                <p class="section-subtitle">斯芬克游戏动画科系拥有最为丰富的海外教授合作资源，我们确保每一个专业细分赛道上的学生，都能获得最专业的辅导和其专业领域内深入且全面的学习体验。</p>
-            </div>
-            <div class="professors-image-wrapper">
-                <img src="assets/professors.png" alt="海外教授合集" class="professors-image">
-            </div>
-            <div class="professors-cta">
-                <a href="https://yk3.gokuai.com/file/vevhka4ejvmxpmzpyqyeercj8lst68ie#" target="_blank" class="cta-btn">
-                    教授详细介绍
+            <div class="cases-more">
+                <a href="cases.html" class="cta-btn cases-more-btn">
+                    了解更多学生案例
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- ==================== 短期项目 ==================== -->
-    <section id="programs" class="section programs-section">
+    <!-- ==================== 师资团队 ==================== -->
+    <section id="professors" class="section professors-section chapter-section" data-chapter="05" data-label="FACULTY">
+        <div class="container faculty-shell">
+            <div class="section-header faculty-header">
+                <p class="home-section-eyebrow"><span aria-hidden="true"></span> OUR TEACHERS / 我们的老师</p>
+                <h2 class="section-title">师资团队</h2>
+                <p class="section-subtitle">连接海外院校、教学研发、学术研究与行业实践，让不同阶段的学习都能获得与专业方向相对应的经验支持。</p>
+            </div>
+
+            <div class="faculty-filter" role="tablist" aria-label="师资类型筛选">
+                <button class="faculty-filter-btn active" type="button" role="tab" aria-selected="true" data-faculty-filter="all">全部</button>
+                <button class="faculty-filter-btn" type="button" role="tab" aria-selected="false" data-faculty-filter="overseas">海外教授</button>
+                <button class="faculty-filter-btn" type="button" role="tab" aria-selected="false" data-faculty-filter="research">教研导师</button>
+                <button class="faculty-filter-btn" type="button" role="tab" aria-selected="false" data-faculty-filter="academic">学术导师</button>
+                <button class="faculty-filter-btn" type="button" role="tab" aria-selected="false" data-faculty-filter="industry">业界导师</button>
+                <button class="faculty-filter-btn" type="button" role="tab" aria-selected="false" data-faculty-filter="alumni">校友导师</button>
+            </div>
+
+            <div class="faculty-grid" id="facultyGrid" aria-live="polite">
+                <article class="faculty-card" data-faculty-category="overseas">
+                    <div class="faculty-portrait"><img src="assets/faculty-placeholders/v1/faculty-01.webp" alt="AI 生成的海外教授占位肖像一" loading="lazy" decoding="async"></div>
+                    <div class="faculty-card-copy"><span class="faculty-index">01 / OVERSEAS</span><h3>海外教授 A01</h3><p>海外院校合作导师 · 资料待补充</p><span class="faculty-tag">海外教授</span></div>
+                </article>
+                <article class="faculty-card" data-faculty-category="overseas">
+                    <div class="faculty-portrait"><img src="assets/faculty-placeholders/v1/faculty-02.webp" alt="AI 生成的海外教授占位肖像二" loading="lazy" decoding="async"></div>
+                    <div class="faculty-card-copy"><span class="faculty-index">02 / OVERSEAS</span><h3>海外教授 A02</h3><p>海外院校合作导师 · 资料待补充</p><span class="faculty-tag">海外教授</span></div>
+                </article>
+                <article class="faculty-card" data-faculty-category="research">
+                    <div class="faculty-portrait"><img src="assets/faculty-placeholders/v1/faculty-03.webp" alt="AI 生成的教研导师占位肖像一" loading="lazy" decoding="async"></div>
+                    <div class="faculty-card-copy"><span class="faculty-index">03 / RESEARCH</span><h3>教研导师 R01</h3><p>课程研发与教学实践 · 资料待补充</p><span class="faculty-tag">教研导师</span></div>
+                </article>
+                <article class="faculty-card" data-faculty-category="research">
+                    <div class="faculty-portrait"><img src="assets/faculty-placeholders/v1/faculty-04.webp" alt="AI 生成的教研导师占位肖像二" loading="lazy" decoding="async"></div>
+                    <div class="faculty-card-copy"><span class="faculty-index">04 / RESEARCH</span><h3>教研导师 R02</h3><p>课程研发与教学实践 · 资料待补充</p><span class="faculty-tag">教研导师</span></div>
+                </article>
+                <article class="faculty-card" data-faculty-category="academic">
+                    <div class="faculty-portrait"><img src="assets/faculty-placeholders/v1/faculty-05.webp" alt="AI 生成的学术导师占位肖像一" loading="lazy" decoding="async"></div>
+                    <div class="faculty-card-copy"><span class="faculty-index">05 / ACADEMIC</span><h3>学术导师 S01</h3><p>学术研究与方法指导 · 资料待补充</p><span class="faculty-tag">学术导师</span></div>
+                </article>
+                <article class="faculty-card" data-faculty-category="academic">
+                    <div class="faculty-portrait"><img src="assets/faculty-placeholders/v1/faculty-06.webp" alt="AI 生成的学术导师占位肖像二" loading="lazy" decoding="async"></div>
+                    <div class="faculty-card-copy"><span class="faculty-index">06 / ACADEMIC</span><h3>学术导师 S02</h3><p>学术研究与方法指导 · 资料待补充</p><span class="faculty-tag">学术导师</span></div>
+                </article>
+                <article class="faculty-card" data-faculty-category="industry">
+                    <div class="faculty-portrait"><img src="assets/faculty-placeholders/v1/faculty-07.webp" alt="AI 生成的业界导师占位肖像一" loading="lazy" decoding="async"></div>
+                    <div class="faculty-card-copy"><span class="faculty-index">07 / INDUSTRY</span><h3>业界导师 I01</h3><p>行业项目与职业实践 · 资料待补充</p><span class="faculty-tag">业界导师</span></div>
+                </article>
+                <article class="faculty-card" data-faculty-category="industry">
+                    <div class="faculty-portrait"><img src="assets/faculty-placeholders/v1/faculty-08.webp" alt="AI 生成的业界导师占位肖像二" loading="lazy" decoding="async"></div>
+                    <div class="faculty-card-copy"><span class="faculty-index">08 / INDUSTRY</span><h3>业界导师 I02</h3><p>行业项目与职业实践 · 资料待补充</p><span class="faculty-tag">业界导师</span></div>
+                </article>
+                <article class="faculty-card" data-faculty-category="alumni">
+                    <div class="faculty-portrait"><img src="assets/faculty-placeholders/v1/faculty-09.webp" alt="AI 生成的校友导师占位肖像一" loading="lazy" decoding="async"></div>
+                    <div class="faculty-card-copy"><span class="faculty-index">09 / ALUMNI</span><h3>校友导师 L01</h3><p>升学与成长经验分享 · 资料待补充</p><span class="faculty-tag">校友导师</span></div>
+                </article>
+                <article class="faculty-card" data-faculty-category="alumni">
+                    <div class="faculty-portrait"><img src="assets/faculty-placeholders/v1/faculty-10.webp" alt="AI 生成的校友导师占位肖像二" loading="lazy" decoding="async"></div>
+                    <div class="faculty-card-copy"><span class="faculty-index">10 / ALUMNI</span><h3>校友导师 L02</h3><p>升学与成长经验分享 · 资料待补充</p><span class="faculty-tag">校友导师</span></div>
+                </article>
+            </div>
+            <div class="faculty-more-wrap">
+                <button class="faculty-more-btn" id="facultyMoreBtn" type="button" aria-expanded="false" aria-controls="facultyGrid">
+                    <span>展开查看更多导师</span><i aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== 校友 ==================== -->
+    <section id="alumni" class="section alumni-section chapter-section" data-chapter="06" data-label="ALUMNI NETWORK" hidden>
         <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">短期升学项目</h2>
-                <div class="title-line"></div>
-                <p class="section-subtitle">SFK本科与研究生冬夏校联合USC、CalArts、UAL、高布兰等世界顶尖学府教授授课，并携手业界大咖打造国际化·产业化·研究型融合学习体验，更有境外研学深入全球娱乐与艺术核心。</p>
+            <div class="section-header section-header-left">
+                <h2 class="section-title">校友</h2>
+                <p class="section-subtitle">从作品集学习到升学与职业现场，持续连接校友的经验、作品与行业观察。</p>
             </div>
-            <div class="carousel-wrapper">
-                <div class="carousel" id="posterCarousel">
-                    <div class="carousel-track" id="carouselTrack">
-                        <div class="carousel-slide"><img src="assets/poster_01.jpg" alt="教研STUDIO" draggable="false"></div>
-                        <div class="carousel-slide"><img src="assets/poster_02.jpg" alt="教研STUDIO" draggable="false"></div>
-                        <div class="carousel-slide"><img src="assets/poster_03.jpg" alt="教研STUDIO" draggable="false"></div>
-                        <div class="carousel-slide"><img src="assets/poster_04.png" alt="英国名校探访" draggable="false"></div>
-                        <div class="carousel-slide"><img src="assets/poster_05.png" alt="夏校项目" draggable="false"></div>
-                        <div class="carousel-slide"><img src="assets/poster_06.png" alt="短期项目" draggable="false"></div>
-                        <div class="carousel-slide"><img src="assets/poster_07.png" alt="短期项目" draggable="false"></div>
-                        <div class="carousel-slide"><img src="assets/poster_08.png" alt="短期项目" draggable="false"></div>
-                        <div class="carousel-slide"><img src="assets/poster_09.png" alt="短期项目" draggable="false"></div>
-                        <div class="carousel-slide"><img src="assets/poster_10.png" alt="短期项目" draggable="false"></div>
-                        <div class="carousel-slide"><img src="assets/poster_11.png" alt="短期项目" draggable="false"></div>
-                        <div class="carousel-slide"><img src="assets/poster_12.png" alt="短期项目" draggable="false"></div>
-                        <div class="carousel-slide"><img src="assets/poster_13.png" alt="短期项目" draggable="false"></div>
-                        <div class="carousel-slide"><img src="assets/poster_14.png" alt="短期项目" draggable="false"></div>
-                        <div class="carousel-slide"><img src="assets/poster_15.png" alt="短期项目" draggable="false"></div>
-                        <div class="carousel-slide"><img src="assets/poster_16.png" alt="短期项目" draggable="false"></div>
-                        <div class="carousel-slide"><img src="assets/poster_17.png" alt="短期项目" draggable="false"></div>
-                        <div class="carousel-slide"><img src="assets/poster_18.png" alt="短期项目" draggable="false"></div>
-                        <div class="carousel-slide"><img src="assets/poster_19.png" alt="短期项目" draggable="false"></div>
-                        <div class="carousel-slide"><img src="assets/poster_20.png" alt="短期项目" draggable="false"></div>
-                        <div class="carousel-slide"><img src="assets/poster_21.png" alt="短期项目" draggable="false"></div>
-                        <div class="carousel-slide"><img src="assets/poster_22.png" alt="短期项目" draggable="false"></div>
-                    </div>
-                    <button class="carousel-btn carousel-prev" id="carouselPrev" aria-label="上一张">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15,18 9,12 15,6"/></svg>
-                    </button>
-                    <button class="carousel-btn carousel-next" id="carouselNext" aria-label="下一张">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9,18 15,12 9,6"/></svg>
-                    </button>
-                </div>
-                <div class="carousel-dots" id="carouselDots"></div>
-            </div>
-            <div class="programs-cta">
-                <a href="https://doc.weixin.qq.com/smartsheet/s3_ACsAKgZAAAYCNlGR4ROizQ9qV00yd?scode=AOUAowcBAAkplruBMKACsAKgZAAAY&tab=QqpJwP&viewId=vukaF8" target="_blank" class="cta-btn">
-                    了解更多详情
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            <div class="editorial-links">
+                <a href="https://yk3.gokuai.com/file/yx8uhmhwvcgmj0kya9z0ent2ybmzsmg2#" target="_blank" class="editorial-link">
+                    <span class="editorial-index">A / 01</span>
+                    <strong>行业校友导师</strong>
+                    <span>查看参与教学与分享的校友资源</span>
+                    <span class="editorial-arrow" aria-hidden="true">↗</span>
+                </a>
+                <a href="https://yk3.gokuai.com/file/btqszmb1zt02lnuajp0cjaus7a7tjm7f#" target="_blank" class="editorial-link">
+                    <span class="editorial-index">A / 02</span>
+                    <strong>就业作品案例</strong>
+                    <span>查看面向职业方向的学生作品</span>
+                    <span class="editorial-arrow" aria-hidden="true">↗</span>
                 </a>
             </div>
+        </div>
+    </section>
+
+    <!-- ==================== 企业合作 ==================== -->
+    <section id="partners" class="section partners-section chapter-section" data-chapter="07" data-label="INDUSTRY COLLABORATION" hidden>
+        <div class="container">
+            <div class="section-header section-header-left">
+                <h2 class="section-title">企业合作</h2>
+                <p class="section-subtitle">让学生在商业实践、行业导师带训与岗位体验中，理解真实项目的标准、协作方式与交付逻辑。</p>
+            </div>
+            <div class="partner-principles">
+                <div><span>01</span><strong>真实项目</strong><p>以行业场景建立创作目标与交付意识。</p></div>
+                <div><span>02</span><strong>导师带训</strong><p>连接一线经验，理解专业岗位的工作方式。</p></div>
+                <div><span>03</span><strong>职业衔接</strong><p>把作品能力转化为更清晰的升学与就业路径。</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== 课程精选 ==================== -->
+    <section id="programs" class="section programs-section supporting-section" aria-labelledby="course-showcase-title">
+        <div class="container course-showcase">
+            <div class="course-showcase-copy">
+                <p class="course-showcase-eyebrow home-section-eyebrow"><span aria-hidden="true"></span> OUR COURSES / 我们的课程</p>
+                <h2 id="course-showcase-title">Curated Tracks for Your<br>Brilliant Future</h2>
+                <p>精心设计与准备的课程，为您开启游戏动画之路扫清障碍，选择想要发展的方向，定制一个专属于您的课程计划吧！</p>
+                <a href="courses.html" class="cta-btn course-more-btn">
+                    探索更多课程
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+            </div>
+            <div class="course-showcase-gallery" id="homeCourseGallery" aria-label="大师课、行业导师带训、商业实践、冬夏校与岗位实习课程海报滚动展示"></div>
         </div>
     </section>
 
     <!-- ==================== 短期就业项目 ==================== -->
-    <section id="job-programs" class="section programs-section">
+    <section id="job-programs" class="section programs-section supporting-section" hidden>
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title">短期就业项目</h2>
@@ -300,24 +367,24 @@
             <div class="carousel-wrapper">
                 <div class="carousel" id="jobCarousel">
                     <div class="carousel-track" id="jobTrack">
-                        <div class="carousel-slide"><img src="assets/job_poster_1.jpg" alt="短期就业项目" draggable="false"></div>
-                        <div class="carousel-slide"><img src="assets/job_poster_2.jpg" alt="短期就业项目" draggable="false"></div>
-                        <div class="carousel-slide"><img src="assets/job_poster_3.png" alt="短期就业项目" draggable="false"></div>
-                        <div class="carousel-slide"><img src="assets/job_poster_4.png" alt="短期就业项目" draggable="false"></div>
-                        <div class="carousel-slide"><img src="assets/job_poster_5.jpg" alt="短期就业项目" draggable="false"></div>
-                        <div class="carousel-slide"><img src="assets/job_poster_6.png" alt="短期就业项目" draggable="false"></div>
-                        <div class="carousel-slide"><img src="assets/job_poster_7.png" alt="短期就业项目" draggable="false"></div>
-                        <div class="carousel-slide"><img src="assets/job_poster_8.png" alt="短期就业项目" draggable="false"></div>
-                        <div class="carousel-slide"><img src="assets/job_poster_9.png" alt="短期就业项目" draggable="false"></div>
-                        <div class="carousel-slide"><img src="assets/job_poster_10.png" alt="短期就业项目" draggable="false"></div>
-                        <div class="carousel-slide"><img src="assets/job_poster_11.png" alt="短期就业项目" draggable="false"></div>
-                        <div class="carousel-slide"><img src="assets/job_poster_12.png" alt="短期就业项目" draggable="false"></div>
-                        <div class="carousel-slide"><img src="assets/job_poster_13.png" alt="短期就业项目" draggable="false"></div>
-                        <div class="carousel-slide"><img src="assets/job_poster_14.jpg" alt="短期就业项目" draggable="false"></div>
-                        <div class="carousel-slide"><img src="assets/job_poster_15.png" alt="短期就业项目" draggable="false"></div>
-                        <div class="carousel-slide"><img src="assets/job_poster_16.png" alt="短期就业项目" draggable="false"></div>
-                        <div class="carousel-slide"><img src="assets/job_poster_17.png" alt="短期就业项目" draggable="false"></div>
-                        <div class="carousel-slide"><img src="assets/job_poster_18.jpg" alt="短期就业项目" draggable="false"></div>
+                        <div class="carousel-slide"><img src="assets/job_poster_1.webp" alt="短期就业项目" draggable="false"></div>
+                        <div class="carousel-slide"><img src="assets/job_poster_2.webp" alt="短期就业项目" draggable="false"></div>
+                        <div class="carousel-slide"><img src="assets/job_poster_3.webp" alt="短期就业项目" draggable="false"></div>
+                        <div class="carousel-slide"><img src="assets/job_poster_4.webp" alt="短期就业项目" draggable="false"></div>
+                        <div class="carousel-slide"><img src="assets/job_poster_5.webp" alt="短期就业项目" draggable="false"></div>
+                        <div class="carousel-slide"><img src="assets/job_poster_6.webp" alt="短期就业项目" draggable="false"></div>
+                        <div class="carousel-slide"><img src="assets/job_poster_7.webp" alt="短期就业项目" draggable="false"></div>
+                        <div class="carousel-slide"><img src="assets/job_poster_8.webp" alt="短期就业项目" draggable="false"></div>
+                        <div class="carousel-slide"><img src="assets/job_poster_9.webp" alt="短期就业项目" draggable="false"></div>
+                        <div class="carousel-slide"><img src="assets/job_poster_10.webp" alt="短期就业项目" draggable="false"></div>
+                        <div class="carousel-slide"><img src="assets/job_poster_11.webp" alt="短期就业项目" draggable="false"></div>
+                        <div class="carousel-slide"><img src="assets/job_poster_12.webp" alt="短期就业项目" draggable="false"></div>
+                        <div class="carousel-slide"><img src="assets/job_poster_13.webp" alt="短期就业项目" draggable="false"></div>
+                        <div class="carousel-slide"><img src="assets/job_poster_14.webp" alt="短期就业项目" draggable="false"></div>
+                        <div class="carousel-slide"><img src="assets/job_poster_15.webp" alt="短期就业项目" draggable="false"></div>
+                        <div class="carousel-slide"><img src="assets/job_poster_16.webp" alt="短期就业项目" draggable="false"></div>
+                        <div class="carousel-slide"><img src="assets/job_poster_17.webp" alt="短期就业项目" draggable="false"></div>
+                        <div class="carousel-slide"><img src="assets/job_poster_18.webp" alt="短期就业项目" draggable="false"></div>
                     </div>
                     <button class="carousel-btn carousel-prev" id="jobPrev" aria-label="上一张">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15,18 9,12 15,6"/></svg>
@@ -338,7 +405,7 @@
     </section>
 
     <!-- ==================== 历年录取数据 ==================== -->
-    <section id="data" class="section data-section">
+    <section id="data" class="section data-section supporting-section" hidden>
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title">历年录取数据</h2>
@@ -421,118 +488,19 @@
         </div>
     </section>
 
-    <!-- ==================== 快捷入口 ==================== -->
-    <section id="quick-entry" class="section quick-entry-section">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">快捷入口</h2>
-                <div class="title-line"></div>
-            </div>
-            <div class="quick-entry-grid">
+    </main>
 
-                <!-- 导师 -->
-                <div class="quick-entry-card">
-                    <div class="quick-entry-header">
-                        <svg class="quick-entry-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                        <h3 class="quick-entry-category">导师</h3>
-                    </div>
-                    <div class="quick-entry-links">
-                        <a href="https://yk3.gokuai.com/file/v23n795sn5oocowvv3h7ad42y7h2ulxa#" target="_blank" class="quick-entry-link">导师目录</a>
-                        <a href="https://yk3.gokuai.com/file/yx8uhmhwvcgmj0kya9z0ent2ybmzsmg2#" target="_blank" class="quick-entry-link">行业校友导师</a>
-                    </div>
-                </div>
-
-                <!-- 产品与课程 -->
-                <div class="quick-entry-card">
-                    <div class="quick-entry-header">
-                        <svg class="quick-entry-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-                        <h3 class="quick-entry-category">产品与课程</h3>
-                    </div>
-                    <div class="quick-entry-links">
-                        <a href="https://yk3.gokuai.com/file/e528cxkvef3t277mnjs37bm9yna681x5#" target="_blank" class="quick-entry-link">产品报价单</a>
-                        <a href="https://yk3.gokuai.com/file/7r8qt162stpzdjfzp776icfxw64so361#" target="_blank" class="quick-entry-link">课程手册</a>
-                        <a href="https://yk3.gokuai.com/file/7mza3ca1vj22nblsm5olopard8ru9ddn#" target="_blank" class="quick-entry-link">基础课</a>
-                        <a href="https://yk3.gokuai.com/file/0lbgzt1razoosgs24yxzhgtoax02imtc#" target="_blank" class="quick-entry-link">项目课</a>
-                    </div>
-                </div>
-
-                <!-- 服务 -->
-                <div class="quick-entry-card">
-                    <div class="quick-entry-header">
-                        <svg class="quick-entry-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                        <h3 class="quick-entry-category">服务</h3>
-                    </div>
-                    <div class="quick-entry-links">
-                        <a href="https://yk3.gokuai.com/file/x9hnsbt6fara9whj9h0t8taytawfwy03#" target="_blank" class="quick-entry-link">科系优势</a>
-                        <a href="https://yk3.gokuai.com/file/ip22znltw5ni1k5a2qxrmkfcagf1epei#" target="_blank" class="quick-entry-link">22次背后的力量</a>
-                        <a href="career-timeline.html" class="quick-entry-link">学业规划</a>
-                    </div>
-                </div>
-
-                <!-- 院校解析 -->
-                <div class="quick-entry-card">
-                    <div class="quick-entry-header">
-                        <svg class="quick-entry-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
-                        <h3 class="quick-entry-category">院校解析</h3>
-                    </div>
-                    <div class="quick-entry-links">
-                        <a href="https://yk3.gokuai.com/file/y4d6ibpty73021ulrdc43diuy1mqvcmu#" target="_blank" class="quick-entry-link">院校解读</a>
-                        <a href="https://mubu.com/colla/3ITHl3wrw5N" target="_blank" class="quick-entry-link">本科院校地图</a>
-                        <a href="https://mubu.com/colla/5GiY0Mt3_lN" target="_blank" class="quick-entry-link">研究生院校地图</a>
-                    </div>
-                </div>
-
-                <!-- 行业解析 -->
-                <div class="quick-entry-card">
-                    <div class="quick-entry-header">
-                        <svg class="quick-entry-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
-                        <h3 class="quick-entry-category">行业解析</h3>
-                    </div>
-                    <div class="quick-entry-links">
-                        <a href="https://yk3.gokuai.com/file/v5qi1lh4n3l2nt6xeurb1pmhkwl9wbiw#" target="_blank" class="quick-entry-link">游戏动画工作岗位</a>
-                        <a href="https://mubu.com/doc/5THOUqO5mwT" target="_blank" class="quick-entry-link">游戏动画企业分析</a>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- 页脚 -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-top">
-                <div class="footer-brand">
-                    <img src="assets/logo.png" alt="Logo" class="footer-logo-img">
-                    <div>
-                        <span class="footer-name">斯芬克 · 游戏动画科系</span>
-                        <p class="footer-desc">内部资料库系统 · 仅供内部使用</p>
-                    </div>
-                </div>
-                <div class="footer-links">
-                    <div class="qr-trigger">
-                        <span class="qr-link">联系我</span>
-                        <div class="qr-popup">
-                            <img src="assets/qr-contact.png" alt="SFK游戏动画管理员">
-                        </div>
-                    </div>
-                    <div class="qr-trigger">
-                        <span class="qr-link">关注我</span>
-                        <div class="qr-popup">
-                            <img src="assets/qr-follow.png" alt="SFK游戏动画中心">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 新东方斯芬克国际艺术教育 · 保留所有权利</p>
-            </div>
-        </div>
-    </footer>
+    <div data-support-footer></div>
 
     <!-- 返回顶部 -->
-    <button class="back-to-top" id="backToTop" aria-label="返回顶部">↑</button>
+    <button class="back-to-top" id="backToTop" aria-label="返回顶部">
+        <span></span><span></span>
+    </button>
 
-    <script src="script.js"></script>
+    <script src="site-nav.js?v=20260910-shared-nav-v2"></script>
+    <script src="support-footer.js?v=20260914-school-order-v2"></script>
+    <script src="faculty-data.js?v=20260910-japan-faculty-v4"></script>
+    <script src="courses-data.js?v=20260914-course-posters-v2"></script>
+    <script src="script.js?v=20260910-amelia-name-v2"></script>
 </body>
 </html>

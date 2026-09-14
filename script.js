@@ -4,18 +4,235 @@
 // ============================================
 
 document.addEventListener('DOMContentLoaded', () => {
+    initHomepageFlow();
     initNavbar();
     initScrollReveal();
     initCounterAnimation();
     initCaseTabs();
-    initDataTabs();
     initResultsTabs();
+    renderFacultyData();
+    initFacultyFilter();
     initBackToTop();
     initExternalLinks();
-    initPosterCarousel();
-    initJobCarousel();
+    initHomeCourseShowcase();
+    initNativeViewportVideos();
     initVideoAutoplay();
 });
+
+/* ---------- 仅在可视区域播放视频 ---------- */
+function initNativeViewportVideos() {
+    const videos = document.querySelectorAll('.hero-video');
+    videos.forEach(video => {
+        let isVisible = false;
+
+        const syncPlayback = () => {
+            if (isVisible && !document.hidden) {
+                const playPromise = video.play();
+                if (playPromise && typeof playPromise.catch === 'function') {
+                    playPromise.catch(() => {});
+                }
+            } else {
+                video.pause();
+            }
+        };
+
+        const observer = new IntersectionObserver(([entry]) => {
+            isVisible = entry.isIntersecting && entry.intersectionRatio >= 0.15;
+            syncPlayback();
+        }, { threshold: [0, 0.15, 0.5] });
+
+        observer.observe(video);
+        document.addEventListener('visibilitychange', syncPlayback);
+    });
+}
+
+function createViewportIframePlayer(frame, target) {
+    if (!frame || !target) return null;
+
+    let desiredSrc = frame.dataset.videoSrc || '';
+    let isVisible = false;
+    const blankSrc = 'about:blank';
+
+    const unload = () => {
+        if (!frame.src.endsWith(blankSrc)) frame.src = blankSrc;
+    };
+
+    const load = () => {
+        if (!desiredSrc || document.hidden || !isVisible) return;
+        if (frame.src !== desiredSrc) frame.src = desiredSrc;
+    };
+
+    const sync = () => {
+        if (isVisible && !document.hidden) load();
+        else unload();
+    };
+
+    const observer = new IntersectionObserver(([entry]) => {
+        isVisible = entry.isIntersecting && entry.intersectionRatio >= 0.15;
+        sync();
+    }, { threshold: [0, 0.15, 0.5] });
+
+    observer.observe(target);
+    document.addEventListener('visibilitychange', sync);
+
+    return {
+        setSource(src) {
+            desiredSrc = src;
+            frame.dataset.videoSrc = src;
+            if (isVisible && !document.hidden) frame.src = src;
+            else unload();
+        },
+        isVisible: () => isVisible
+    };
+}
+
+window.createViewportIframePlayer = createViewportIframePlayer;
+
+/* ---------- 首页章节顺序 ---------- */
+function initHomepageFlow() {
+    const flow = document.querySelector('.homepage-flow');
+    if (!flow) return;
+
+    const orderedSections = [
+        'majors', 'programs',
+        'offers',
+        'cases', 'professors', 'alumni',
+        'partners',
+        'quick-entry'
+    ];
+
+    orderedSections.forEach(id => {
+        const section = document.getElementById(id);
+        if (section) flow.appendChild(section);
+    });
+}
+
+/* ---------- 师资团队筛选 ---------- */
+function renderFacultyData() {
+    const grid = document.getElementById('facultyGrid');
+    const data = Array.isArray(window.facultyData) ? window.facultyData : [];
+    if (!grid || !data.length) return;
+
+    const categoryOrder = ['overseas', 'research', 'academic', 'industry', 'alumni'];
+    const groups = categoryOrder.map(category => data.filter(mentor => mentor.category === category));
+    const displayData = groups.flat();
+    const escapeText = value => String(value ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    const mentorAliases = {
+        industry: ['Angela', 'KG', 'Mason'],
+        alumni: ['Amelia', 'Cherry', 'Jerry', 'Max', 'Li', 'Harry', '小兔', 'Yuki']
+    };
+    const displayName = mentor => {
+        if (mentor.category === 'overseas') return `${mentor.name.replace(/\.$/, '')}教授`;
+        if (mentor.category === 'research' || mentor.category === 'academic') return `${mentor.name}老师`;
+        const sequence = Number.parseInt(mentor.index, 10) - 1;
+        const alias = mentorAliases[mentor.category]?.[sequence] || mentor.name;
+        return `${alias}老师`;
+    };
+    const displayFocus = mentor => {
+        if (mentor.category !== 'academic') return mentor.focus;
+        return String(mentor.focus ?? '')
+            .replace(/^[^·]+·\s*/, '')
+            .replace(/^(?:本科|研究生|本研)\s*[-—]\s*/, '');
+    };
+    const displayIndex = mentor => String(mentor.index ?? '').replace(/^\d+\s*\/\s*/, '');
+
+    grid.innerHTML = displayData.map(mentor => `
+        <article class="faculty-card" data-faculty-category="${escapeText(mentor.category)}">
+            <div class="faculty-portrait">
+                <img src="${escapeText(mentor.photo)}" alt="${escapeText(displayName(mentor))}照片" loading="lazy" decoding="async">
+            </div>
+            <div class="faculty-card-copy">
+                <span class="faculty-index">${escapeText(displayIndex(mentor))}</span>
+                <h3>${escapeText(displayName(mentor))}</h3>
+                <p class="faculty-affiliation">${escapeText(mentor.affiliation)}</p>
+                <p class="faculty-focus">${escapeText(displayFocus(mentor))}</p>
+                <span class="faculty-tag">${escapeText(mentor.label)}</span>
+            </div>
+        </article>
+    `).join('');
+}
+
+function initFacultyFilter() {
+    const filters = Array.from(document.querySelectorAll('[data-faculty-filter]'));
+    const cards = Array.from(document.querySelectorAll('[data-faculty-category]'));
+    const moreButton = document.getElementById('facultyMoreBtn');
+    if (!filters.length || !cards.length) return;
+
+    let activeFilter = 'all';
+    let isExpanded = false;
+    const getRowLimit = () => {
+        if (window.matchMedia('(max-width: 330px)').matches) return 3;
+        if (window.matchMedia('(max-width: 680px)').matches) return 6;
+        if (window.matchMedia('(max-width: 820px)').matches) return 9;
+        if (window.matchMedia('(max-width: 1100px)').matches) return 12;
+        return 18;
+    };
+
+    const applyFilter = (filter) => {
+        activeFilter = filter;
+        filters.forEach(button => {
+            const isActive = button.dataset.facultyFilter === filter;
+            button.classList.toggle('active', isActive);
+            button.setAttribute('aria-selected', String(isActive));
+            button.tabIndex = isActive ? 0 : -1;
+        });
+
+        const matchingCards = cards.filter(card => filter === 'all' || card.dataset.facultyCategory === filter);
+        const limit = getRowLimit();
+        matchingCards.forEach((card, index) => {
+            const shouldShow = isExpanded || index < limit;
+            card.hidden = !shouldShow;
+            if (shouldShow) card.style.animationDelay = `${Math.min(index, 5) * 35}ms`;
+        });
+        cards.filter(card => !matchingCards.includes(card)).forEach(card => { card.hidden = true; });
+
+        if (moreButton) {
+            const canExpand = matchingCards.length > limit;
+            moreButton.closest('.faculty-more-wrap').hidden = !canExpand;
+            moreButton.setAttribute('aria-expanded', String(isExpanded));
+            moreButton.querySelector('span').textContent = isExpanded ? '收起导师列表' : '展开查看更多导师';
+            moreButton.classList.toggle('is-expanded', isExpanded);
+        }
+    };
+
+    filters.forEach((button, index) => {
+        button.addEventListener('click', () => {
+            isExpanded = false;
+            applyFilter(button.dataset.facultyFilter);
+        });
+        button.addEventListener('keydown', (event) => {
+            let nextIndex = index;
+            if (event.key === 'ArrowRight') nextIndex = (index + 1) % filters.length;
+            else if (event.key === 'ArrowLeft') nextIndex = (index - 1 + filters.length) % filters.length;
+            else if (event.key === 'Home') nextIndex = 0;
+            else if (event.key === 'End') nextIndex = filters.length - 1;
+            else return;
+
+            event.preventDefault();
+            filters[nextIndex].focus();
+            isExpanded = false;
+            applyFilter(filters[nextIndex].dataset.facultyFilter);
+        });
+    });
+
+    moreButton?.addEventListener('click', () => {
+        isExpanded = !isExpanded;
+        applyFilter(activeFilter);
+    });
+
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+        window.clearTimeout(resizeTimer);
+        resizeTimer = window.setTimeout(() => applyFilter(activeFilter), 120);
+    });
+
+    applyFilter('all');
+}
 
 /* ---------- 导航栏 ---------- */
 function initNavbar() {
@@ -31,16 +248,35 @@ function initNavbar() {
 
     // 移动端菜单
     toggle.addEventListener('click', () => {
-        navLinks.classList.toggle('open');
+        const isOpen = navLinks.classList.toggle('open');
+        document.body.classList.toggle('nav-open', isOpen);
+        toggle.setAttribute('aria-expanded', String(isOpen));
+        toggle.setAttribute('aria-label', isOpen ? '关闭导航菜单' : '打开导航菜单');
     });
 
     // 点击链接关闭菜单 & 高亮
     links.forEach(link => {
-        link.addEventListener('click', () => {
+        link.addEventListener('click', (event) => {
+            if (link.getAttribute('aria-disabled') === 'true') {
+                event.preventDefault();
+                return;
+            }
             links.forEach(l => l.classList.remove('active'));
             link.classList.add('active');
             navLinks.classList.remove('open');
+            document.body.classList.remove('nav-open');
+            toggle.setAttribute('aria-expanded', 'false');
+            toggle.setAttribute('aria-label', '打开导航菜单');
         });
+    });
+
+    document.addEventListener('keydown', (event) => {
+        if (event.key !== 'Escape' || !navLinks.classList.contains('open')) return;
+        navLinks.classList.remove('open');
+        document.body.classList.remove('nav-open');
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.setAttribute('aria-label', '打开导航菜单');
+        toggle.focus();
     });
 
     // 滚动时自动高亮导航
@@ -196,10 +432,18 @@ function initDataTabs() {
 /* ---------- 返回顶部 ---------- */
 function initBackToTop() {
     const btn = document.getElementById('backToTop');
+    let isReturning = false;
     window.addEventListener('scroll', () => {
+        if (isReturning) {
+            btn.classList.remove('visible');
+            if (window.scrollY <= 20) isReturning = false;
+            return;
+        }
         btn.classList.toggle('visible', window.scrollY > 500);
     });
     btn.addEventListener('click', () => {
+        isReturning = true;
+        btn.classList.remove('visible');
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 }
@@ -376,14 +620,94 @@ function initCarousel({ trackId, dotsId, prevId, nextId, carouselId }) {
     startAutoplay();
 }
 
-/* ---------- 海报轮播 (Coverflow) ---------- */
-function initPosterCarousel() {
-    initCarousel({
-        trackId: 'carouselTrack',
-        dotsId: 'carouselDots',
-        prevId: 'carouselPrev',
-        nextId: 'carouselNext',
-        carouselId: 'posterCarousel'
+/* ---------- 首页课程精选：复用课程页海报数据 ---------- */
+function initHomeCourseShowcase() {
+    const gallery = document.getElementById('homeCourseGallery');
+    const courses = Array.isArray(window.SFK_COURSE_POSTERS) ? window.SFK_COURSE_POSTERS : [];
+    if (!gallery || courses.length === 0) return;
+
+    const columns = [
+        {
+            label: '大师课与行业导师带训',
+            duration: 38,
+            groups: [
+                course => course.category === 'masterclass',
+                course => course.category === 'internship' && course.subtype === 'mentor-training'
+            ]
+        },
+        {
+            label: '商业实践与冬夏校',
+            duration: 41,
+            groups: [
+                course => course.category === 'commercial',
+                course => course.category === 'winter-school'
+            ]
+        },
+        {
+            label: '岗位实习',
+            duration: 39,
+            groups: [
+                course => course.category === 'internship' && course.subtype === 'position-internship'
+            ]
+        }
+    ];
+
+    const canvas = document.createElement('div');
+    canvas.className = 'course-showcase-canvas';
+    gallery.replaceChildren(canvas);
+
+    const createPoster = (course, duplicate = false) => {
+        const poster = document.createElement('div');
+        poster.className = 'course-stream-card';
+        if (duplicate) poster.setAttribute('aria-hidden', 'true');
+
+        const image = document.createElement('img');
+        image.src = course.image;
+        image.alt = duplicate ? '' : course.title;
+        image.loading = 'lazy';
+        image.decoding = 'async';
+        poster.appendChild(image);
+        return poster;
+    };
+
+    const sortAvailableFirst = list => [...list]
+        .sort((a, b) => Number(b.status === 'open') - Number(a.status === 'open'));
+
+    const interleaveGroups = groups => {
+        const itemsPerGroup = groups.length === 1 ? 7 : 4;
+        const pools = groups.map(match => sortAvailableFirst(courses.filter(match)).slice(0, itemsPerGroup));
+        return Array.from({ length: Math.max(...pools.map(pool => pool.length)) }, (_, index) =>
+            pools.map(pool => pool[index]).filter(Boolean)
+        ).flat().slice(0, 7);
+    };
+
+    columns.forEach((columnData, columnIndex) => {
+        const columnCourses = interleaveGroups(columnData.groups);
+        if (columnCourses.length === 0) return;
+
+        const column = document.createElement('div');
+        column.className = 'course-stream-column';
+        column.style.setProperty('--course-duration', `${columnData.duration}s`);
+        column.style.setProperty('--course-delay', `${columnIndex * -8}s`);
+        column.setAttribute('role', 'group');
+        column.setAttribute('aria-label', `${columnData.label}课程海报`);
+
+        const stream = document.createElement('div');
+        stream.className = 'course-stream';
+        const primarySet = document.createElement('div');
+        primarySet.className = 'course-stream-set';
+        const duplicateSet = document.createElement('div');
+        duplicateSet.className = 'course-stream-set';
+        duplicateSet.setAttribute('aria-hidden', 'true');
+
+        columnCourses.forEach(course => {
+            primarySet.appendChild(createPoster(course));
+            duplicateSet.appendChild(createPoster(course, true));
+        });
+
+        stream.append(primarySet, duplicateSet);
+        column.appendChild(stream);
+        canvas.appendChild(column);
     });
 }
 
@@ -405,7 +729,8 @@ function initVideoAutoplay() {
     
     if (!mainVideo || videoTabs.length === 0) return;
     
-    let hasAutoPlayed = false;
+    const playerSection = mainVideo.closest('.video-player-section') || document.getElementById('cases');
+    const viewportPlayer = createViewportIframePlayer(mainVideo, playerSection);
     
     // 视频切换功能
     videoTabs.forEach(tab => {
@@ -417,29 +742,9 @@ function initVideoAutoplay() {
             tab.classList.add('active');
             
             // 切换视频
-            mainVideo.src = `https://player.bilibili.com/player.html?bvid=${bvid}&page=1&autoplay=1`;
+            viewportPlayer.setSource(`https://player.bilibili.com/player.html?bvid=${bvid}&page=1&autoplay=1`);
         });
     });
-    
-    // 自动播放（首次进入视口）
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting && !hasAutoPlayed) {
-                hasAutoPlayed = true;
-                const activeTab = document.querySelector('.video-tab.active');
-                if (activeTab) {
-                    const bvid = activeTab.dataset.bvid;
-                    mainVideo.src = `https://player.bilibili.com/player.html?bvid=${bvid}&page=1&autoplay=1`;
-                }
-                observer.disconnect();
-            }
-        });
-    }, { threshold: 0.3 });
-    
-    const casesSection = document.getElementById('cases');
-    if (casesSection) {
-        observer.observe(casesSection);
-    }
 }
 
 console.log('🎮 斯芬克游戏动画科系资料库已加载');

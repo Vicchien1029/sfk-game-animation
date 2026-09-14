@@ -1,0 +1,8 @@
+# Local QA captures and temporary working files are not deployment inputs.
+*-qa.png
+tmp/
+undergraduate_backup.html
+
+# Operating-system metadata.
+Thumbs.db
+.DS_Store
