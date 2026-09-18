@@ -64,6 +64,15 @@ window.SFK_COURSE_POSTERS = [
   },
   {
     "category": "winter-school",
+    "title": "机核 × CMU 游戏研究生夏校",
+    "period": "2026.08.03—08.12",
+    "status": "closed",
+    "subtype": "summer-camp",
+    "source": "机核xCMU游戏研究生夏校.png",
+    "image": "assets/courses-v2/cards/winter-school-020.webp"
+  },
+  {
+    "category": "winter-school",
     "title": "ACCD 概念艺术本科创作营",
     "period": "2026 SUMMER",
     "status": "closed",
@@ -169,6 +178,42 @@ window.SFK_COURSE_POSTERS = [
     "subtype": "overseas-study",
     "source": "全球访校.png",
     "image": "assets/courses-v2/cards/winter-school-016.webp"
+  },
+  {
+    "category": "winter-school",
+    "title": "次元对话·动画无界国际顶尖动画创作营",
+    "period": "2026.01.27—02.05",
+    "status": "closed",
+    "subtype": "winter-camp",
+    "source": "次元对话，动画无界-国际顶尖动画创作营.png",
+    "image": "assets/courses-v2/cards/winter-school-021.webp"
+  },
+  {
+    "category": "winter-school",
+    "title": "东方幻兽·末那手办文创研修班",
+    "period": "2026.01.22—01.31",
+    "status": "closed",
+    "subtype": "winter-camp",
+    "source": "东方幻兽-末那手办文创研修班.jpg",
+    "image": "assets/courses-v2/cards/winter-school-022.webp"
+  },
+  {
+    "category": "winter-school",
+    "title": "USC × CIGA 独立游戏创作挑战营",
+    "period": "2026.01.26—02.04",
+    "status": "closed",
+    "subtype": "winter-camp",
+    "source": "独立游戏创作挑战营.webp",
+    "image": "assets/courses-v2/cards/winter-school-023.webp"
+  },
+  {
+    "category": "winter-school",
+    "title": "UAL 实验影像动画创作营",
+    "period": "2026.01.27—02.05",
+    "status": "closed",
+    "subtype": "winter-camp",
+    "source": "UAL实验影像动画.png",
+    "image": "assets/courses-v2/cards/winter-school-024.webp"
   },
   {
     "category": "commercial",

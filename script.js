@@ -126,6 +126,13 @@ function renderFacultyData() {
         industry: ['Angela', 'KG', 'Mason'],
         alumni: ['Amelia', 'Cherry', 'Jerry', 'Max', 'Li', 'Harry', '小兔', 'Yuki']
     };
+    const facultyPhotoLinks = {
+        academic: 'https://yk3.gokuai.com/file/v23n795sn5oocowvv3h7ad42y7h2ulxa#',
+        overseas: 'https://yk3.gokuai.com/file/vevhka4ejvmxpmzpyqyeercj8lst68ie#',
+        industry: 'https://yk3.gokuai.com/file/yx8uhmhwvcgmj0kya9z0ent2ybmzsmg2#',
+        alumni: 'https://yk3.gokuai.com/file/yx8uhmhwvcgmj0kya9z0ent2ybmzsmg2#',
+        research: 'https://yk3.gokuai.com/file/2365pxthjdr37cg5jcu7nrtf4dvsnlz4#'
+    };
     const displayName = mentor => {
         if (mentor.category === 'overseas') return `${mentor.name.replace(/\.$/, '')}教授`;
         if (mentor.category === 'research' || mentor.category === 'academic') return `${mentor.name}老师`;
@@ -143,9 +150,9 @@ function renderFacultyData() {
 
     grid.innerHTML = displayData.map(mentor => `
         <article class="faculty-card" data-faculty-category="${escapeText(mentor.category)}">
-            <div class="faculty-portrait">
+            <a class="faculty-portrait faculty-portrait-link" href="${escapeText(facultyPhotoLinks[mentor.category])}" target="_blank" rel="noopener noreferrer" aria-label="查看${escapeText(mentor.label)}资料：${escapeText(displayName(mentor))}">
                 <img src="${escapeText(mentor.photo)}" alt="${escapeText(displayName(mentor))}照片" loading="lazy" decoding="async">
-            </div>
+            </a>
             <div class="faculty-card-copy">
                 <span class="faculty-index">${escapeText(displayIndex(mentor))}</span>
                 <h3>${escapeText(displayName(mentor))}</h3>

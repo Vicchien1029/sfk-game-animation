@@ -86,6 +86,9 @@
   list-style: none;
 }
 
+.navbar .nav-tier[hidden],
+.navbar .nav-tier li[hidden] { display: none !important; }
+
 .navbar .nav-tier-top { order: 2; flex: 0 1 360px; gap: 8px; }
 .navbar .nav-tier-main { order: 1; flex: 1 1 680px; gap: 0; }
 
@@ -142,6 +145,67 @@
   cursor: not-allowed;
   transform: none;
 }
+
+.navbar .nav-account {
+  position: absolute;
+  right: clamp(30px, 8vw, 150px);
+  bottom: 42px;
+  z-index: 1;
+  order: 3;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.navbar .nav-account[hidden] {
+  display: none !important;
+}
+
+.navbar .nav-account-person {
+  display: flex;
+  align-items: baseline;
+  white-space: nowrap;
+}
+
+.navbar .nav-account-name {
+  max-width: 16em;
+  overflow: hidden;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: .02em;
+  text-decoration: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.navbar .nav-account-name[hidden] { display: none !important; }
+.navbar .nav-account-name-link:hover { color: #ff4f00; }
+.navbar .nav-account-name-link:focus-visible,
+.navbar .nav-account-logout:focus-visible {
+  outline: 2px solid #ff4f00;
+  outline-offset: 5px;
+}
+
+.navbar .nav-account-role {
+  color: #777;
+  font-size: 13px;
+  letter-spacing: .02em;
+}
+
+.navbar .nav-account-logout {
+  color: #aaa;
+  background: transparent;
+  border: 0;
+  padding: 4px 0;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  cursor: pointer;
+}
+
+.navbar .nav-account-logout:hover { color: #fff; }
 
 .navbar .nav-toggle {
   position: relative;
@@ -206,6 +270,13 @@ body.nav-open { overflow: hidden; }
   }
   .navbar .nav-link-small { padding: 5px 0; font-size: 17px; }
   .navbar .nav-tagline { display: none; }
+  .navbar .nav-account {
+    position: static;
+    align-self: flex-end;
+    flex-shrink: 0;
+    margin-top: 24px;
+    gap: 24px;
+  }
 }
 
 @media (max-width: 768px) {

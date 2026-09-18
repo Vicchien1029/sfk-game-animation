@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/jpeg" href="assets/game-animation-department-icon.jpg">
+  <title>登录｜SFK 游戏动画科系内部资料库</title>
+  <link rel="stylesheet" href="styles.css?v=20260916-auth-v2">
+  <link rel="stylesheet" href="theme.css?v=20260916-auth-v2">
+  <link rel="stylesheet" href="auth.css?v=20260917-login-orange-v2">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body class="auth-page">
+  <main class="auth-split">
+    <div class="auth-backdrop" aria-hidden="true">
+      <video class="auth-backdrop-video" autoplay muted loop playsinline preload="metadata" poster="assets/showreel-hero-poster.jpg">
+        <source src="assets/showreel-hero.mp4" type="video/mp4">
+      </video>
+    </div>
+    <section class="auth-stage" aria-labelledby="auth-home-title">
+      <div class="auth-stage-copy">
+        <p class="hero-kicker">SFK GAME &amp; ANIMATION DEPARTMENT</p>
+        <h1 class="hero-title" id="auth-home-title">让想象力<br><span class="hero-title-accent">成为</span><br>被世界看见的作品</h1>
+        <p class="hero-desc">从世界观、角色与叙事，到动画、游戏美术与实时交互，我们以行业标准连接创作、升学与职业方向，让每位学生建立属于自己的作品语言。</p>
+        <div class="hero-disciplines" aria-label="科系专业方向">
+          <span>GAME DESIGN</span><span>GAME ART</span><span>CONCEPT ART</span><span>ANIMATION</span><span>VFX</span>
+        </div>
+      </div>
+    </section>
+    <section class="auth-panel" aria-labelledby="auth-login-title">
+      <div class="auth-panel-inner">
+      <div class="auth-brand">
+        <img src="assets/game-animation-logo-lockup-cropped.png" alt="SFK 游戏动画科系">
+        <span>STAFF ACCESS</span>
+      </div>
+      <h2 id="auth-login-title">登录资料库</h2>
+      <p class="auth-lead">联系管理员获取网站登录权限</p>
+      <form class="auth-form" id="loginForm">
+        <label class="auth-field">
+          <span>账号或邮箱</span>
+          <input id="username" name="username" type="text" autocomplete="username" required maxlength="80">
+        </label>
+        <label class="auth-field">
+          <span>密码</span>
+          <input id="password" name="password" type="password" autocomplete="current-password" required maxlength="64">
+        </label>
+        <p class="auth-error" id="loginError" role="alert"></p>
+        <div class="auth-form-actions">
+          <button class="auth-submit" type="submit">
+            <span>登录</span>
+            <svg width="18" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 3 9 9-9 9"/></svg>
+          </button>
+          <button class="auth-forgot" id="forgotPassword" type="button">忘记密码？</button>
+        </div>
+      </form>
+      </div>
+    </section>
+  </main>
+  <script src="site-navigation.js?v=20260917-navigation-v2"></script>
+  <script src="auth-login.js?v=20260917-navigation-v2"></script>
+</body>
+</html>

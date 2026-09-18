@@ -2,6 +2,12 @@
 *-qa.png
 tmp/
 undergraduate_backup.html
+node_modules/
+skills-lock.json
+server/data/
+backups/
+.env
+.env.*
 
 # Operating-system metadata.
 Thumbs.db

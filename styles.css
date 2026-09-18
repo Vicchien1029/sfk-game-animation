@@ -1316,6 +1316,16 @@ section[id] {
     background: #111;
 }
 
+.faculty-portrait-link {
+    display: block;
+    cursor: pointer;
+}
+
+.faculty-portrait-link:focus-visible {
+    outline: 2px solid var(--orange);
+    outline-offset: 3px;
+}
+
 .faculty-portrait::after {
     content: '';
     position: absolute;

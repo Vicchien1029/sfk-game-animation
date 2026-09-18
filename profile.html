@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/jpeg" href="assets/game-animation-department-icon.jpg">
+  <title>个人资料｜SFK 游戏动画科系</title>
+  <link rel="stylesheet" href="styles.css?v=20260916-auth-v2">
+  <link rel="stylesheet" href="theme.css?v=20260916-auth-v2">
+  <link rel="stylesheet" href="site-nav.css?v=20260917-account-inline-v1">
+  <link rel="stylesheet" href="support-footer.css?v=20260910-shared-shell-v1">
+  <link rel="stylesheet" href="auth.css?v=20260917-profile-v1">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body class="home-page admin-page">
+  <div data-site-nav></div>
+  <main class="profile-shell">
+    <p class="auth-kicker">PERSONAL ACCOUNT</p>
+    <h1>个人资料</h1>
+    <p class="profile-intro"><span id="profileName">—</span><span class="profile-separator"> / </span><span id="profileRole">—</span></p>
+    <a class="profile-manage" id="profileManageLink" href="admin.html" hidden>进入权限管理 <span aria-hidden="true">→</span></a>
+    <form class="auth-form profile-form" id="passwordForm">
+      <h2>修改登录密码</h2>
+      <label class="auth-field"><span>当前密码</span><input name="currentPassword" type="password" autocomplete="current-password" required></label>
+      <label class="auth-field"><span>新密码（8–64 位）</span><input name="newPassword" type="password" autocomplete="new-password" minlength="8" maxlength="64" required></label>
+      <label class="auth-field"><span>确认新密码</span><input name="confirmPassword" type="password" autocomplete="new-password" minlength="8" maxlength="64" required></label>
+      <button class="auth-submit" type="submit">保存新密码 <span aria-hidden="true">→</span></button>
+      <p class="auth-error" id="profileStatus" role="status"></p>
+    </form>
+  </main>
+  <div data-support-footer></div>
+  <script src="site-navigation.js?v=20260917-navigation-v2"></script>
+  <script src="site-nav.js?v=20260917-account-inline-v1"></script>
+  <script src="support-footer.js?v=20260914-school-order-v2"></script>
+  <script src="auth-profile.js?v=20260917-profile-v1"></script>
+</body>
+</html>

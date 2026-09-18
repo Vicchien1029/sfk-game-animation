@@ -1,0 +1,6 @@
+{
+  "envId": "cb-env-dengxuewe-122-d6a6f250b1b",
+  "cloudrun": {
+    "name": "game-animation"
+  }
+}

@@ -1,27 +1,10 @@
 (() => {
-  const navGroups = {
-    department: [
-      { id: 'home', label: '关于游戏动画科系', href: 'index.html#home' },
-      { id: 'offers', label: 'Offer展示', href: 'index.html#offers' },
-      { id: 'alumni', label: '校友', href: 'index.html#alumni', disabled: true, title: '校友模块暂未开放' },
-      { id: 'professors', label: '师资团队', href: 'index.html#professors' },
-      { id: 'partners', label: '企业合作', href: 'index.html#partners', disabled: true, title: '企业合作模块暂未开放' },
-      { id: 'planning', label: '规划我的未来', href: 'school-search.html' },
-      { id: 'quick-entry', label: '快捷入口', href: 'index.html#quick-entry' }
-    ],
-    primary: [
-      { id: 'majors', label: '专业介绍', href: 'majors/animation.html' },
-      { id: 'courses', label: '课程', href: 'courses.html' },
-      { id: 'cases', label: '作品案例', href: 'cases.html' },
-      { id: 'fulltime', label: '全日制', href: 'fulltime.html' },
-      { id: 'undergraduate', label: '本科', href: 'undergraduate.html' },
-      { id: 'graduate', label: '研究生', href: '#', disabled: true, title: '研究生页面尚未上线' }
-    ]
-  };
+  const navGroups = window.SFK_SITE_NAVIGATION;
+  if (!navGroups) throw new Error('site-navigation.js must load before site-nav.js');
 
   const local = (base, path) => path === '#' ? '#' : `${base}${path}`;
 
-  const navLink = (item, base, current, small = false) => {
+  const navLink = (item, base, current, small = false, permission = '') => {
     const active = item.id === current;
     const isHomepageSection = current === 'home' && base === '' && item.href.startsWith('index.html#');
     const href = item.disabled ? '#' : isHomepageSection ? item.href.replace('index.html', '') : local(base, item.href);
@@ -31,17 +14,17 @@
       ? ` aria-disabled="true" title="${item.title}"`
       : active ? ' aria-current="page"' : '';
     const section = isHomepageSection ? ` data-section="${item.id}"` : '';
-    return `<li><a href="${href}" class="${classes}"${section}${state}>${item.label}</a></li>`;
+    return `<li data-nav-permission="${permission}" hidden><a href="${href}" class="${classes}"${section}${state}>${item.label}</a></li>`;
   };
 
   const renderNavTiers = (base = '', current = '') => `
     <ul class="nav-tier nav-tier-top" aria-label="科系快捷导航">
       <li class="nav-tier-label" aria-hidden="true">科系导航</li>
-      ${navGroups.department.map(item => navLink(item, base, current, true)).join('')}
+      ${navGroups.department.map(item => navLink(item, base, current, true, 'view_department')).join('')}
     </ul>
     <ul class="nav-tier nav-tier-main" aria-label="主要导航">
       <li class="nav-tier-label" aria-hidden="true">主要内容</li>
-      ${navGroups.primary.map(item => navLink(item, base, current)).join('')}
+      ${navGroups.primary.map(item => navLink(item, base, current, false, `view_${item.id}`)).join('')}
     </ul>`;
 
   const renderNavbar = (base = '', current = '') => `
@@ -51,7 +34,16 @@
           <img src="${local(base, 'assets/game-animation-logo-lockup-cropped.png')}" alt="SFK 游戏动画科系" class="logo-lockup">
         </a>
         <p class="nav-tagline">CREATIVE EDUCATION / GLOBAL PRACTICE</p>
-        <div class="nav-links" id="navLinks">${renderNavTiers(base, current)}</div>
+        <div class="nav-links" id="navLinks">
+          ${renderNavTiers(base, current)}
+          <div class="nav-account" data-auth-slot hidden>
+            <div class="nav-account-person">
+              <a class="nav-account-name nav-account-name-link" hidden href="${local(base, 'admin.html')}"></a>
+              <span class="nav-account-role"></span>
+            </div>
+            <button type="button" class="nav-account-logout">登出</button>
+          </div>
+        </div>
         <button class="nav-toggle" id="navToggle" type="button" aria-label="打开导航菜单" aria-expanded="false" aria-controls="navLinks"><span></span><span></span><span></span></button>
       </div>
     </nav>`;
@@ -95,6 +87,43 @@
     });
   };
 
+  const bindAccount = (navbar, base = '') => {
+    const slot = navbar.querySelector('[data-auth-slot]');
+    if (!slot) return;
+    const nameLink = slot.querySelector('.nav-account-name-link');
+    const roleNode = slot.querySelector('.nav-account-role');
+    const logoutBtn = slot.querySelector('.nav-account-logout');
+    fetch(`${base}api/auth/me`, { credentials: 'same-origin', headers: { Accept: 'application/json' } })
+      .then(response => response.ok ? response.json() : null)
+      .then(payload => {
+        const user = payload && payload.user;
+        if (!user) return;
+        const permissions = user.permissions || {};
+        navbar.querySelectorAll('[data-nav-permission]').forEach(item => {
+          item.hidden = !(user.isSystemAdmin || permissions[item.dataset.navPermission]);
+        });
+        navbar.querySelectorAll('.nav-tier').forEach(tier => {
+          tier.hidden = !Array.from(tier.querySelectorAll('[data-nav-permission]')).some(item => !item.hidden);
+        });
+        if (!permissions.view_department && !user.isSystemAdmin) {
+          const firstLink = navbar.querySelector('[data-nav-permission]:not([hidden]) a:not([aria-disabled="true"])');
+          navbar.querySelector('.logo').href = firstLink?.href || `${base}admin.html`;
+        }
+        slot.hidden = false;
+        const name = user.displayName || user.username;
+        nameLink.textContent = name;
+        nameLink.href = `${base}${user.isSystemAdmin || user.roleKey === 'research_mentor' ? 'admin.html' : 'profile.html'}`;
+        nameLink.hidden = false;
+        roleNode.textContent = '，' + (user.roleName || '普通用户');
+      })
+      .catch(() => {});
+
+    logoutBtn?.addEventListener('click', async () => {
+      await fetch(`${base}api/auth/logout`, { method: 'POST', credentials: 'same-origin' });
+      window.location.replace(`${base}login.html`);
+    });
+  };
+
   const mountNavbar = (host, base = '', current = '') => {
     if (!host) return null;
     const marker = document.createElement('div');
@@ -102,6 +131,7 @@
     const navbar = marker.firstElementChild;
     host.replaceWith(navbar);
     bindNavbar(navbar);
+    bindAccount(navbar, base);
     return navbar;
   };
 

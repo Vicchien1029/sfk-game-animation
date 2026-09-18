@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/jpeg" href="assets/game-animation-department-icon.jpg">
+  <title>权限管理｜SFK 游戏动画科系</title>
+  <link rel="stylesheet" href="styles.css?v=20260916-auth-v2">
+  <link rel="stylesheet" href="theme.css?v=20260916-auth-v2">
+  <link rel="stylesheet" href="support-footer.css?v=20260910-shared-shell-v1">
+  <link rel="stylesheet" href="site-nav.css?v=20260917-account-inline-v1">
+  <link rel="stylesheet" href="auth.css?v=20260918-user-filters-v1">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body class="home-page admin-page">
+  <div data-site-nav data-page="planning"></div>
+  <main class="admin-shell">
+    <header class="admin-hero">
+      <div>
+        <p class="auth-kicker">ACCESS LEDGER</p>
+        <h1 id="adminTitle">权限管理</h1>
+        <p id="adminLead">按科系内容和管理职责配置角色；主要内容可分别授权或全选。</p>
+      </div>
+      <p id="adminStatus" class="admin-toast" role="status"></p>
+    </header>
+
+    <section class="admin-ledger admin-ledger-roles" id="roleSection" hidden>
+      <div class="admin-ledger-head">
+        <div>
+          <p class="admin-section-kicker">01 / ROLES</p>
+          <h2>角色列表</h2>
+        </div>
+        <div class="admin-ledger-tools">
+          <button class="admin-btn-ghost admin-add-role" type="button" id="addRoleButton" aria-controls="roleEditor" aria-expanded="false" hidden>＋ 新增角色</button>
+          <span class="admin-ledger-count" id="roleCount">00</span>
+        </div>
+      </div>
+      <div class="admin-role-layout" id="roleLayout">
+        <div class="admin-role-list admin-table-wrap">
+          <table class="admin-table" id="roleTable">
+            <thead>
+              <tr>
+                <th>角色</th>
+                <th>说明</th>
+                <th>权限</th>
+                <th>操作</th>
+              </tr>
+            </thead>
+            <tbody id="roleList"></tbody>
+          </table>
+        </div>
+        <aside class="admin-role-editor" id="roleEditor" aria-label="角色编辑" aria-hidden="true" inert>
+          <div class="admin-role-editor-head">
+            <div>
+              <p class="admin-section-kicker">ROLE EDITOR</p>
+              <h3 id="roleEditorTitle">新增角色</h3>
+            </div>
+            <button class="admin-role-close" id="closeRoleEditor" type="button" aria-label="关闭角色编辑窗口">×</button>
+          </div>
+          <form class="admin-create-row" id="roleForm">
+            <div class="admin-create-grid admin-create-grid-role">
+              <label class="admin-field"><span>角色名称</span><input name="name" required maxlength="20" placeholder="例如：课程顾问"></label>
+              <label class="admin-field"><span>说明</span><input name="description" maxlength="80" placeholder="这个角色在内部如何使用"></label>
+              <div class="admin-checkboxes" id="rolePermissions"></div>
+              <div class="admin-role-editor-actions">
+                <button class="admin-btn-ghost" type="button" id="cancelRoleEditor">取消</button>
+                <button class="admin-btn" type="submit" id="roleSubmit">添加角色</button>
+              </div>
+            </div>
+          </form>
+        </aside>
+      </div>
+    </section>
+
+    <section class="admin-ledger admin-ledger-people">
+      <div class="admin-ledger-head">
+        <div>
+          <p class="admin-section-kicker">02 / PEOPLE</p>
+          <h2>人员列表</h2>
+        </div>
+        <span class="admin-ledger-count" id="userCount">00</span>
+      </div>
+      <form class="admin-create-row admin-create-row-top" id="userForm" hidden>
+        <p class="admin-section-kicker">新增人员</p>
+        <div class="admin-create-grid admin-create-grid-user">
+          <label class="admin-field"><span>姓名</span><input name="displayName" required maxlength="40" placeholder="真实姓名"></label>
+          <label class="admin-field"><span>校区</span><input name="campus" required maxlength="40" placeholder="所属校区"></label>
+          <label class="admin-field"><span>部门</span><input name="department" required maxlength="60" placeholder="所属部门"></label>
+          <label class="admin-field"><span>邮箱</span><input name="email" type="email" required maxlength="80" placeholder="name@example.com" autocomplete="off"></label>
+          <label class="admin-field"><span>登录密码</span><input name="password" type="password" required minlength="8" maxlength="64" autocomplete="new-password"></label>
+          <label class="admin-field"><span>角色</span><select name="roleId" id="userRoleSelect" required></select></label>
+          <button class="admin-btn" type="submit">添加人员</button>
+        </div>
+      </form>
+      <form class="admin-bulk-import" id="bulkImportForm" hidden>
+        <div>
+          <p class="admin-section-kicker">批量导入人员</p>
+          <p class="admin-bulk-hint">上传 .xlsx 或 UTF-8 CSV；列名为“姓名、校区、部门、邮箱、初始密码、角色”。Excel 中请将密码列设为文本，角色须与角色列表名称一致。全部校验通过后才会创建账号，每次最多 200 人。</p>
+        </div>
+        <div class="admin-bulk-actions">
+          <label class="admin-field admin-bulk-file"><span>选择表格</span><input name="file" type="file" accept=".xlsx,.csv" required></label>
+          <button class="admin-btn" type="submit">导入账号</button>
+          <button class="admin-btn-ghost" id="downloadImportTemplate" type="button">下载 CSV 模板</button>
+        </div>
+        <div class="admin-bulk-result" id="bulkImportResult" role="status" aria-live="polite"></div>
+      </form>
+      <div class="admin-user-filters" id="userFilters" aria-label="筛选人员" hidden>
+        <label class="admin-field"><span>校区</span><select id="userFilterCampus"><option value="">全部校区</option></select></label>
+        <label class="admin-field"><span>部门</span><select id="userFilterDepartment"><option value="">全部部门</option></select></label>
+        <label class="admin-field"><span>角色</span><select id="userFilterRole"><option value="">全部角色</option></select></label>
+        <button class="admin-btn-ghost admin-filter-reset" id="resetUserFilters" type="button">清除筛选</button>
+        <span class="admin-filter-summary" id="userFilterSummary" role="status" aria-live="polite"></span>
+      </div>
+      <div class="admin-table-wrap">
+        <table class="admin-table" id="userTable">
+          <thead>
+            <tr>
+              <th>姓名</th>
+              <th>校区</th>
+              <th>部门</th>
+              <th>邮箱</th>
+              <th>登录密码</th>
+              <th>角色</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody id="userList"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+  <dialog class="admin-delete-dialog" id="deleteRoleDialog" aria-labelledby="deleteRoleTitle">
+    <form id="deleteRoleForm">
+      <p class="admin-section-kicker">CONFIRM DELETION</p>
+      <h2 id="deleteRoleTitle">删除角色</h2>
+      <p class="admin-delete-copy">即将删除角色“<strong id="deleteRoleName"></strong>”。请先输入当前登录管理员的密码。此操作不可撤销。</p>
+      <label class="admin-field"><span>管理员密码</span><input name="password" type="password" autocomplete="current-password" required></label>
+      <p class="auth-error" id="deleteRoleError" role="alert"></p>
+      <div class="admin-delete-actions">
+        <button class="admin-btn-ghost" id="cancelDeleteRole" type="button">取消</button>
+        <button class="admin-btn-danger" id="confirmDeleteRole" type="submit">确认删除</button>
+      </div>
+    </form>
+  </dialog>
+  <dialog class="admin-delete-dialog" id="deleteUserDialog" aria-labelledby="deleteUserTitle">
+    <form id="deleteUserForm">
+      <p class="admin-section-kicker">CONFIRM DELETION</p>
+      <h2 id="deleteUserTitle">删除人员账号</h2>
+      <p class="admin-delete-copy">即将永久删除“<strong id="deleteUserName"></strong>”的账号。删除后无法恢复，该人员也将无法继续登录。请先输入当前系统管理员的密码。</p>
+      <label class="admin-field"><span>管理员密码</span><input name="password" type="password" autocomplete="current-password" required></label>
+      <p class="auth-error" id="deleteUserError" role="alert"></p>
+      <div class="admin-delete-actions">
+        <button class="admin-btn-ghost" id="cancelDeleteUser" type="button">取消</button>
+        <button class="admin-btn-danger" id="confirmDeleteUser" type="submit">确认删除</button>
+      </div>
+    </form>
+  </dialog>
+  <div data-support-footer></div>
+  <script src="site-navigation.js?v=20260917-navigation-v2"></script>
+  <script src="site-nav.js?v=20260917-account-inline-v1"></script>
+  <script src="support-footer.js?v=20260914-school-order-v2"></script>
+  <script src="auth-admin.js?v=20260918-user-delete-v1"></script>
+</body>
+</html>
